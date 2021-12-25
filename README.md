@@ -1,2 +1,2 @@
 # ecommerce-mobile-version
-A React Native e commerce mobile app
+A React Native e-commerce mobile app
