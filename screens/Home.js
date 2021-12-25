@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import Search from '../components/home/Search'
+import ProductCards from '../components/home/ProductCards';
 import { View, TextInput, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { useFonts, Inter_900Black, Inter_800ExtraBold } from '@expo-google-fonts/inter';
 import AppLoading from 'expo-app-loading';
@@ -36,6 +37,7 @@ else {
     return (
         <View style={styles.screen}>
             <Search />
+            <ProductCards/>
         </View>
     )
 }
@@ -43,7 +45,7 @@ else {
 
 const styles = StyleSheet.create({
     screen: {
-        // flex: 1,
+        flex: 1,
         // justifyContent: 'space-between',
         // marginTop: Constants.statusBarHeight,
         // backgroundColor: 'blue',
