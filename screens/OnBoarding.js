@@ -1,18 +1,19 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Inter_900Black, Inter_800ExtraBold } from '@expo-google-fonts/inter';
 import Constants from 'expo-constants';
 import { LinearGradient } from 'expo-linear-gradient';
 import colors from '../constants/colors';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export default function OnBoarding(props) {
     let [fontsLoaded] = useFonts({
         Inter_900Black,
         Inter_800ExtraBold,
-        'Lato-Black': require('../assets/fonts/Lato-Black.ttf')
+        'Lato-Black': require('../assets/fonts/Lato-Regular.ttf'),
+        'italic': require('../assets/fonts/Lato-LightItalic.ttf')
     });
 
     if (!fontsLoaded) {
@@ -29,13 +30,16 @@ export default function OnBoarding(props) {
                         <Text style={styles.text} numberOfLines={1} adjustsFontSizeToFit={true}>Gadget</Text>
                     </View>
                 </View>
+                <View style={{ alignItems: 'center', top: -60, zIndex: 99 }}>
+                    <Image source={require('../assets/images/ecommerce.png')} style={{ width: width, height: width / 1.1 }} resizeMode={'contain'} />
+                </View>
                 <LinearGradient
-                    colors={['rgb(255,76,59)', 'rgb(255,72,18)', 'rgb(255,74,46)']}
-                    style={{ position: 'absolute', width, height: 300, alignItems: 'center', bottom: 57, left: 0, right: 0 }}
+                    colors={[colors.primary, '#3d39e6', '#3d39e6', colors.primary]}
+                    style={{ position: 'absolute', width, height: 180, alignItems: 'center', bottom: 60, left: 0, right: 0 }}
                 />
                 <View>
-                    <TouchableOpacity style={styles.button} >
-                        <Text style={{ color: colors.primary, fontSize: 18, fontFamily: 'Lato-Black' }}>
+                    <TouchableOpacity style={styles.button}>
+                        <Text style={{ color: colors.primary, fontSize: 17.5, fontFamily: 'Lato-Black' }}>
                             Get Started
                         </Text>
                     </TouchableOpacity>
@@ -50,7 +54,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
         marginTop: Constants.statusBarHeight,
-        backgroundColor: 'blue',
+        backgroundColor: colors.primary,
         padding: 42
     },
     circle: {
