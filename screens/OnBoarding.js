@@ -4,13 +4,15 @@ import AppLoading from 'expo-app-loading';
 import { useFonts, Inter_900Black, Inter_800ExtraBold } from '@expo-google-fonts/inter';
 import Constants from 'expo-constants';
 import { LinearGradient } from 'expo-linear-gradient';
+import colors from '../constants/colors';
 
 const { width } = Dimensions.get('window');
 
 export default function OnBoarding(props) {
     let [fontsLoaded] = useFonts({
         Inter_900Black,
-        Inter_800ExtraBold
+        Inter_800ExtraBold,
+        'Lato-Black': require('../assets/fonts/Lato-Black.ttf')
     });
 
     if (!fontsLoaded) {
@@ -33,7 +35,7 @@ export default function OnBoarding(props) {
                 />
                 <View>
                     <TouchableOpacity style={styles.button} >
-                        <Text style={{ color: 'rgb(255,75,58)' }}>
+                        <Text style={{ color: colors.primary, fontSize: 18, fontFamily: 'Lato-Black' }}>
                             Get Started
                         </Text>
                     </TouchableOpacity>
