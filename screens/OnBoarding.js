@@ -21,10 +21,10 @@ export default function OnBoarding(props) {
                 <View>
                     <View style={styles.circle} />
                     <View>
-                        <Text style={styles.text} numberOfLines={1} adjustsFontSizeToFit={true}>Food For</Text>
+                        <Text style={styles.text} numberOfLines={1} adjustsFontSizeToFit={true}>Find Your</Text>
                     </View>
                     <View style={{ top: -25 }}>
-                        <Text style={styles.text} numberOfLines={1} adjustsFontSizeToFit={true}>Everyone</Text>
+                        <Text style={styles.text} numberOfLines={1} adjustsFontSizeToFit={true}>Gadget</Text>
                     </View>
                 </View>
                 <LinearGradient
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
         marginTop: Constants.statusBarHeight,
-        backgroundColor: 'rgb(255,75,58)',
+        backgroundColor: 'blue',
         padding: 42
     },
     circle: {
