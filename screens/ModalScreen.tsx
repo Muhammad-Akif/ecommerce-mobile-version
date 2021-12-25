@@ -1,10 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
+import { useEffect } from 'react';
 import { Platform, StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
 export default function ModalScreen() {
+  useEffect(() => {
+    fetch("https://edamam-food-and-grocery-database.p.rapidapi.com/parser?ingr=apple", {
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-host": "edamam-food-and-grocery-database.p.rapidapi.com",
+        "x-rapidapi-key": "9a454e9993mshb17ac85352f8c7fp1d0607jsnc6ef1c23345a"
+      }
+    })
+      .then(response => {
+        console.log(response.json());
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  })
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Modal</Text>
