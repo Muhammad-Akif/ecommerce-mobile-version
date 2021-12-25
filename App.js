@@ -1,16 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Constants from 'expo-constants';
-import OnBoarding from './screens/OnBoarding';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import RootStackNavigator from './navigators/RootStackNavigator';
 
-export default OnBoarding;
+export default App = () => {
+  return (
+    <NavigationContainer>
+      <RootStackNavigator />
+    </NavigationContainer>
+  )
+}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    // justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight
-  },
-});

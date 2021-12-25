@@ -13,7 +13,8 @@ export default function OnBoarding(props) {
         Inter_900Black,
         Inter_800ExtraBold,
         'Lato-Black': require('../assets/fonts/Lato-Regular.ttf'),
-        'italic': require('../assets/fonts/Lato-LightItalic.ttf')
+        'italic': require('../assets/fonts/Lato-LightItalic.ttf'),
+        'bold': require('../assets/fonts/Lato-Bold.ttf')
     });
 
     if (!fontsLoaded) {
@@ -21,25 +22,27 @@ export default function OnBoarding(props) {
     } else {
         return (
             <View style={styles.screen}>
-                <View>
-                    <View style={styles.circle} />
+                <View style={{ flex: 1 }}>
                     <View>
-                        <Text style={styles.text} numberOfLines={1} adjustsFontSizeToFit={true}>Find Your</Text>
+                        <View style={styles.circle} />
+                        <View>
+                            <Text style={styles.text} numberOfLines={1} adjustsFontSizeToFit={true}>Find Your</Text>
+                        </View>
+                        <View style={{ top: -25 }}>
+                            <Text style={styles.text} numberOfLines={1} adjustsFontSizeToFit={true}>Gadget</Text>
+                        </View>
                     </View>
-                    <View style={{ top: -25 }}>
-                        <Text style={styles.text} numberOfLines={1} adjustsFontSizeToFit={true}>Gadget</Text>
+                    <View style={{ alignItems: 'center', top: -30, zIndex: 99 }}>
+                        <Image source={require('../assets/images/ecommerce.png')} style={{ width: width, height: width / 1.1 }} resizeMode={'contain'} />
                     </View>
-                </View>
-                <View style={{ alignItems: 'center', top: -60, zIndex: 99 }}>
-                    <Image source={require('../assets/images/ecommerce.png')} style={{ width: width, height: width / 1.1 }} resizeMode={'contain'} />
                 </View>
                 <LinearGradient
                     colors={[colors.primary, '#3d39e6', '#3d39e6', colors.primary]}
-                    style={{ position: 'absolute', width, height: 180, alignItems: 'center', bottom: 60, left: 0, right: 0 }}
+                    style={{ position: 'absolute', width, height: 180, alignItems: 'center', bottom: 55, left: 0, right: 0 }}
                 />
-                <View>
+                <View style={{ flex: 1, justifyContent: 'flex-end' }}>
                     <TouchableOpacity style={styles.button}>
-                        <Text style={{ color: colors.primary, fontSize: 17.5, fontFamily: 'Lato-Black' }}>
+                        <Text style={{ color: colors.primary, fontSize: 17.5, fontFamily: 'bold' }}>
                             Get Started
                         </Text>
                     </TouchableOpacity>
