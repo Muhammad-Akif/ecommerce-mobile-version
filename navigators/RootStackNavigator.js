@@ -13,11 +13,10 @@ export default function RootStackNavigator() {
             <RootStack.Group screenOptions={{ headerShown: false }}>
                 <RootStack.Screen name="Index" component={OnBoarding} />
                 <RootStack.Screen name="Auth" component={Auth} />
-                <RootStack.Screen name="Signup" component={Signup} options={{headerShown: true, title: 'Sign Up'}}/>
+                <RootStack.Screen name="Signup" component={Signup} options={{ headerShown: true, title: 'Sign Up' }} />
             </RootStack.Group>
             <RootStack.Group screenOptions={{ presentation: 'modal', headerShown: false, animation: 'slide_from_bottom' }}>
                 <RootStack.Screen name="Login" component={LoginModal} />
-                {/* <RootStack.Screen name="Signup" component={} /> */}
             </RootStack.Group>
         </RootStack.Navigator>
     );

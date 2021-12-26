@@ -5,6 +5,7 @@ import Button from '../../components/Button';
 import colors from '../../constants/colors';
 
 const LoginModal = props => {
+    const fromAdmin = props?.route?.params?.fromAdmin;
     const [selected, setSelected] = useState('no');
     const onBlur = () => {
         setSelected('no');
@@ -23,12 +24,16 @@ const LoginModal = props => {
                 <Image style={{ width: '50%' }} resizeMode={'contain'} />
                 <View style={{ marginBottom: 10 }}>
                     <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'black' }}>
-                        Welcome back
+                        {
+                            fromAdmin ? 'Welcome Admin' : 'Welcome back'
+                        }
                     </Text>
                 </View>
                 <View style={{ marginBottom: 30 }}>
                     <Text style={{ letterSpacing: -0.2, fontSize: 14, color: 'grey' }} adjustsFontSizeToFit={true} numberOfLines={1}>
-                        Sign in to e-commerce to pick up exactly where you left off.
+                        {
+                            fromAdmin ? 'Sign in back in order to handle different e-commerce items.' : 'Sign in to e-commerce to pick up exactly where you left off.'
+                        }
                     </Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
@@ -76,11 +81,21 @@ const LoginModal = props => {
 
                 <Button normalText title={'Continue'} style={{ marginBottom: 20, borderRadius: 8 }} />
 
-                <TouchableOpacity style={{ marginBottom: 24, alignItems: 'flex-end' }} onPress={() => props.navigation.navigate('Signup')}>
-                    <Text style={{ color: colors.primary, fontWeight: 'bold' }}>
-                        Create Account
-                    </Text>
-                </TouchableOpacity>
+                {
+                    !fromAdmin ? (
+                        <TouchableOpacity style={{ marginBottom: 24, alignItems: 'flex-end' }} onPress={() => props.navigation.navigate('Signup')}>
+                            <Text style={{ color: colors.primary, fontWeight: 'bold' }}>
+                                Create Account
+                            </Text>
+                        </TouchableOpacity>
+                    ) : (
+                        <View style={{ marginBottom: 24, alignItems: 'center', marginLeft: 8 }}>
+                            <Text style={{ color: colors.primary, fontFamily: 'italic' }}>
+                                Admin! we need your help...
+                            </Text>
+                        </View>
+                    )
+                }
 
             </ScrollView>
         </View>
