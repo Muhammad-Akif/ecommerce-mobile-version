@@ -1,7 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import OnBoarding from '../screens/OnBoarding';
-import AuthTopTab from './AuthTopTabNavigator';
+import Login from '../screens/Auth/Login';
 
 const RootStack = createNativeStackNavigator();
 
@@ -10,7 +10,7 @@ export default function RootStackNavigator() {
         <RootStack.Navigator>
             <RootStack.Group screenOptions={{headerShown: false}}>
                 <RootStack.Screen name="Index" component={OnBoarding} />
-                <RootStack.Screen name="Auth" component={AuthTopTab} />
+                <RootStack.Screen name="Auth" component={Login} />
             </RootStack.Group>
             {/* <RootStack.Group screenOptions={{ presentation: 'modal' }}>
                 <RootStack.Screen name="MyModal" component={} />

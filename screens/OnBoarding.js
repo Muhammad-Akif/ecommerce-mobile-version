@@ -18,7 +18,9 @@ export default function OnBoarding(props) {
         'bold': require('../assets/fonts/Lato-Bold.ttf'),
         'stylish': require('../assets/fonts/DroidSerif-Bold.ttf'),
         'stylish2': require('../assets/fonts/stylish.ttf'),
-        'stylish3': require('../assets/fonts/DescMenu.ttf')
+        'stylish3': require('../assets/fonts/DescMenu.ttf'),
+        'text-bold': require('../assets/fonts/Dosis-Bold.ttf'),
+        'extra-bold': require('../assets/fonts/Dosis-ExtraBold.ttf'),
     });
 
     if (!fontsLoaded) {

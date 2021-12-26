@@ -1,78 +1,55 @@
-import React, { useState } from 'react';
-import { Text, View, StyleSheet, TextInput, Dimensions, KeyboardAvoidingView } from 'react-native';
+import React from 'react';
+import { Text, View, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Button from '../../components/Button';
-import colors from '../../constants/colors';
-// import { useDispatch } from "react-redux";
-// import { authenticate } from '../../redux/actions';
-const { width } = Dimensions.get('window');
+import Steps from '../../components/Steps';
+import Constants from 'expo-constants';
 
 const Login = props => {
-    // const dispatch = useDispatch();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-            style={styles.screen}
-        >
-            <View style={styles.firstRow}>
-                <View style={{ flex: 1 }}>
-                    <View style={{ height: 25 }}>
-                        <Text style={styles.inputLableColor}>
-                            Email address
-                        </Text>
-                    </View>
-                    <View>
-                        <TextInput onChangeText={setEmail.bind(null)} style={{ width: '100%', borderBottomColor: 'rgb(121,121,121)', borderBottomWidth: 1, height: 29 }} />
-                    </View>
-                </View>
-                <View style={{ flex: 2.3 }}>
-                    <View style={{ height: 25 }}>
-                        <Text style={styles.inputLableColor}>
-                            Password
-                        </Text>
-                    </View>
-                    <View>
-                        <TextInput onChangeText={setPassword.bind(null)} style={{ width: '100%', borderBottomColor: 'rgb(121,121,121)', borderBottomWidth: 1, height: 29 }} />
-                    </View>
-                    <View style={{ marginTop: 29 }}>
-
-                        <Text style={{ color: 'rgb(250,74,12)', fontWeight: 'bold', fontSize: 15 }}>
-                            Forgot Passcode?
-                        </Text>
-                    </View>
-                </View>
+        <View style={{ flex: 1 }}>
+            <View style={{ height: 55, alignItems: 'center', justifyContent: 'center', marginTop: Constants.statusBarHeight + 10 }}>
+                <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', width: 70, height: 55 }} onPress={() => props.navigation.goBack()}>
+                    <Icon name={'ios-arrow-up-outline'} size={20} color={'#969292'} />
+                    <Text style={{ color: '#a6a1a1', fontSize: 14.5, letterSpacing: -0.3 }}>
+                        Go back
+                    </Text>
+                </TouchableOpacity>
             </View>
-            <View style={styles.lastRow}>
-                {/* <Button label={'Login'} onPress={() => dispatch(authenticate(email, password))} /> */}
-            </View>
+            <ScrollView contentContainerStyle={{ flex: 1, justifyContent: 'flex-start', marginTop: 35, marginHorizontal: 20 }}>
+                <Image />
+                <View style={{ marginVertical: 10 }}>
+                    <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'black' }}>
+                        Use your search skills
+                    </Text>
+                </View>
+                <View style={{ marginBottom: 50 }}>
+                    <Text style={{ letterSpacing: -0.2, fontSize: 14, color: 'grey' }} adjustsFontSizeToFit={true} numberOfLines={1}>
+                        We'll get you the products. We'll make shopping easy.
+                    </Text>
+                </View>
 
-        </KeyboardAvoidingView>
+                <Steps
+                    icon={'ios-document-outline'}
+                    title={'Complete your Profile'}
+                    description={'Tell about your stiches history and skills to global audience and start earning more.'}
+                />
+                <Steps
+                    icon={'paper-plane-outline'}
+                    title={'Deliver your stiched work'}
+                    description={"We'll deliver offline after you have done with the client's order."}
+                />
+                <Steps
+                    icon={'cloud-done-outline'}
+                    title={'Get paid'}
+                    description={"Get your payment through easypaisa or door to door. It's that simple."}
+                />
 
+                <Button label={'Continue'} style={{ marginTop: 40 }} onPress={() => props.navigation.navigate('SignupModel', { fromSeller: true })} />
+
+            </ScrollView>
+        </View>
     );
 }
 
 export default Login;
-
-const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        backgroundColor: colors.secondary,
-        justifyContent: 'space-between',
-    },
-    firstRow: {
-        flex: 3.5,
-        paddingHorizontal: width / 12,
-        paddingTop: 50,
-        justifyContent: 'flex-start'
-    },
-    lastRow: {
-        flex: 1,
-        paddingHorizontal: width / 12
-    },
-    inputLableColor: {
-        color: 'rgb(145,145,145)',
-        marginBottom: 10
-    }
-});
-
