@@ -44,7 +44,7 @@ export default function OnBoarding(props) {
                     style={{ position: 'absolute', width, height: 180, alignItems: 'center', bottom: 55, left: 0, right: 0 }}
                 />
                 <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-                    <Button title="Get Started" />
+                    <Button title="Get Started" onPress={() => props.navigation.navigate('Auth')}/>
                 </View>
             </View>
         );
