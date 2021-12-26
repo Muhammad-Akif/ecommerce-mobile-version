@@ -4,8 +4,8 @@ import colors from '../constants/colors';
 
 const Button = props => {
     return (
-        <TouchableOpacity style={{ ...styles.button, ...props.style, backgroundColor: props.whiteTheme ? colors.primary : colors.secondary }} onPress={props.onPress}>
-            <Text style={{ ...styles.text, color: props.whiteTheme ? colors.secondary : colors.primary }}>
+        <TouchableOpacity style={{ ...styles.button, ...props.style, backgroundColor: props.whiteTheme ? colors.secondary : colors.primary }} onPress={props.onPress}>
+            <Text style={{ ...styles.text, color: props.whiteTheme ? colors.primary : colors.secondary }}>
                 {props.title}
             </Text>
         </TouchableOpacity>
