@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
 import AppLoading from 'expo-app-loading';
-import { useFonts, Inter_900Black, Inter_800ExtraBold } from '@expo-google-fonts/inter';
+import { useFonts, Inter_900Black, Inter_800ExtraBold, } from '@expo-google-fonts/inter';
 import Constants from 'expo-constants';
 import { LinearGradient } from 'expo-linear-gradient';
 import colors from '../constants/colors';
+import Button from '../components/Button';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default function OnBoarding(props) {
     let [fontsLoaded] = useFonts({
@@ -14,7 +15,10 @@ export default function OnBoarding(props) {
         Inter_800ExtraBold,
         'Lato-Black': require('../assets/fonts/Lato-Regular.ttf'),
         'italic': require('../assets/fonts/Lato-LightItalic.ttf'),
-        'bold': require('../assets/fonts/Lato-Bold.ttf')
+        'bold': require('../assets/fonts/Lato-Bold.ttf'),
+        'stylish': require('../assets/fonts/DroidSerif-Bold.ttf'),
+        'stylish2': require('../assets/fonts/stylish.ttf'),
+        'stylish3': require('../assets/fonts/DescMenu.ttf')
     });
 
     if (!fontsLoaded) {
@@ -23,16 +27,15 @@ export default function OnBoarding(props) {
         return (
             <View style={styles.screen}>
                 <View style={{ flex: 1 }}>
+                    <View style={styles.circle} />
                     <View>
-                        <View style={styles.circle} />
-                        <View>
-                            <Text style={styles.text} numberOfLines={1} adjustsFontSizeToFit={true}>Find Your</Text>
-                        </View>
-                        <View style={{ top: -25 }}>
-                            <Text style={styles.text} numberOfLines={1} adjustsFontSizeToFit={true}>Gadget</Text>
-                        </View>
+                        <Text style={styles.text} numberOfLines={1} adjustsFontSizeToFit={true}>Find Your</Text>
                     </View>
-                    <View style={{ alignItems: 'center', top: -30, zIndex: 99 }}>
+                    <View style={{ top: -25 }}>
+                        <Text style={styles.text} numberOfLines={1} adjustsFontSizeToFit={true}>Gadget</Text>
+                    </View>
+
+                    <View style={{ alignItems: 'center', top: -27, zIndex: 99 }}>
                         <Image source={require('../assets/images/ecommerce.png')} style={{ width: width, height: width / 1.1 }} resizeMode={'contain'} />
                     </View>
                 </View>
@@ -41,11 +44,7 @@ export default function OnBoarding(props) {
                     style={{ position: 'absolute', width, height: 180, alignItems: 'center', bottom: 55, left: 0, right: 0 }}
                 />
                 <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={{ color: colors.primary, fontSize: 17.5, fontFamily: 'bold' }}>
-                            Get Started
-                        </Text>
-                    </TouchableOpacity>
+                    <Button title="Get Started" />
                 </View>
             </View>
         );
@@ -69,14 +68,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 60,
-        fontFamily: 'Inter_800ExtraBold',
+        fontFamily: 'Inter_900Black',
         color: 'white'
-    },
-    button: {
-        backgroundColor: 'white',
-        height: 50,
-        borderRadius: 20,
-        justifyContent: 'center',
-        alignItems: 'center'
     }
 })
