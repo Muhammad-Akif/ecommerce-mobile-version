@@ -1,26 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import {
-  SafeAreaView,
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  ScrollView,
-} from 'react-native';
+import React from 'react';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import { SafeAreaView, Text, View, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 
-import { Card } from 'react-native-elements';
-
-const App = () => {
+const App = ({ data }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.titleStyle}>Get 20% off in yout First Shop at Store</Text>
+      {/* <Text style={styles.titleStyle}>Get 20% off in yout First Shop at Store</Text> */}
       <ScrollView>
-        <View style={{ marginTop: 25 }}>
-          <SingleRow />
-          <SingleRow />
-          <SingleRow />
-          <SingleRow />
-          <SingleRow />
+        <View style={{ marginTop: 10 }}>
+          <SingleRow data={data} />
+          <SingleRow data={data} />
+          <SingleRow data={data} />
+          <SingleRow data={data} />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -28,111 +19,63 @@ const App = () => {
 };
 export default App;
 
-const SingleRow = () => {
-  const slides = [
-    {
-      key: '11 MB',
-      text: 'FREE ',
-      title: 'Mobile ',
-      uri:
-        'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-      backgroundColor: '#20d2bb',
-    },
-    {
-      key: '52 MB',
-      title: 'Flight ',
-      uri:
-        'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-      backgroundColor: '#febe29',
-    },
-    {
-      key: '14 MB',
-      text: 'FREE',
-      title: 'Great ',
-
-      uri:
-        'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-
-      backgroundColor: '#22bcb5',
-    },
-    {
-      key: '45 MB',
-      title: 'Best ',
-
-      uri:
-        'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-
-      backgroundColor: '#3395ff',
-    },
-    {
-      key: '33 MB',
-      title: 'Bus ',
-      text: 'FREE',
-
-      uri:
-        'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-
-      backgroundColor: '#f6437b',
-    },
-    {
-      key: '77 MB',
-      title: 'Train ',
-
-      uri:
-        'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-
-      backgroundColor: '#febe29',
-    },
-  ];
-
-  const onPressLearnMore = () => {
-    alert('Hello');
-  };
-
+const SingleRow = ({ data }) => {
+  const price = parseInt(Math.random() * (1000 - 200) + 200);
+  const prePrice = price - parseInt(Math.random() * (100 - 80) + 80)
   return (
-    <View>
-      <Card containerStyle={styles.cardStyle}>
-        <View style={styles.cardHeadingStyle}>
-          <Text style={styles.cardHeadingTextStyle}>Recommended for You</Text>
-          <Text style={{ color: '#228B22' }} onPress={() => alert('MORE')}>
-            MORE
-          </Text>
-        </View>
-        <View style={{ flexDirection: 'row', width: '100%' }}>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            {slides.map((item, key) => (
-              <View style={{ margin: 5 }}>
-                <Image
-                  source={{
-                    uri: item.uri,
-                  }}
-                  style={{ width: 70, height: 70, margin: 10 }}
-                />
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
+    <View style={styles.cardStyle}>
+      <View style={styles.cardHeadingStyle}>
+        <Text style={styles.cardHeadingTextStyle}>Featured Products</Text>
+        <Text style={{ color: 'green' }} onPress={() => alert('MORE')}>
+          View all &nbsp;
+          <Icon name="arrow-right" size={10} color="grey" />
+        </Text>
+      </View>
+      <View style={{ flexDirection: 'row', width: '100%' }}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          {data?.hints?.map((item) => (
+            <View key={item.food.foodId} style={styles.card}>
+              <TouchableOpacity
+                style={styles.button2}
+              >
+                <Text style={{ color: 'green',fontSize: 12 }}>20% OFF</Text>
+              </TouchableOpacity>
+              <Image
+                source={{
+                  uri: item.food.image,
+                }}
+                style={{ width: 110, height: 70, margin: 10 }}
+              />
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}>
+                <Text
+                  style={{ color: '#494949', fontWeight: '200' }}
+                  onPress={() => {
+                    alert('Title ' + item.title + ' Clicked');
                   }}>
-                  <Text
-                    style={{ color: '#494949', fontWeight: '200' }}
-                    onPress={() => {
-                      alert('Title ' + item.title + ' Clicked');
-                    }}>
-                    {item.title}
-                  </Text>
-                  <Text style={{ color: '#228B22' }}>&#8942;</Text>
-                </View>
-                <View style={styles.childViewTextStyle}>
-                  <Text style={{ color: '#606070', fontWeight: '200' }}>
-                    {item.key}
-                  </Text>
-                  <Text style={{ color: '#228B22' }}>{item.text}</Text>
-                </View>
+                  {item.food.label}
+                </Text>
+                {/* <Text style={{ color: '#228B22' }}>&#8942;</Text> */}
               </View>
-            ))}
-          </ScrollView>
-        </View>
-      </Card>
+              <View style={styles.childViewTextStyle}>
+                <Text style={{ color: '#606070', fontWeight: '200' }}>
+                  {item.food.categoryLabel}
+                </Text>
+              </View>
+              <Text style={{ color: '#5956E9', fontWeight: '200' }}>Rs. {price} <Text style={{ textDecorationLine: 'line-through',color: '#000' }}>Rs. {prePrice}</Text> </Text>
+              
+              <TouchableOpacity
+                style={styles.button}
+              >
+                <Text style={{ color: '#5956E9' }}>Add to cart</Text>
+              </TouchableOpacity>
+            </View>
+          ))}
+        </ScrollView>
+      </View>
     </View>
   );
 };
@@ -155,12 +98,43 @@ const styles = StyleSheet.create({
     marginRight: 0,
     marginTop: 0,
   },
+  card: {
+    margin: 5,
+    padding: 8,
+    borderWidth: 1,
+    borderColor: "#5956E9",
+    width: 150,
+    paddingBottom: 0
+  },
+  button: {
+    backgroundColor: 'white',
+    height: 35,
+    borderRadius: 5,
+    borderWidth: 1,
+    marginTop: 5,
+    borderColor: "gray",
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  button2: {
+    backgroundColor: 'white',
+    height: 20,
+    width: 60,
+    borderRadius: 5,
+    borderWidth: 1,
+    marginTop: 5,
+    borderColor: "gray",
+    alignSelf: 'flex-end',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   cardHeadingStyle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   cardHeadingTextStyle: {
     color: '#606070',
+    fontSize: 16,
     fontWeight: 'bold',
   },
   childViewTextStyle: {

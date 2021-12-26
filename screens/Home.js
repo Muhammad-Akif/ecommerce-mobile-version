@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Search from '../components/home/Search'
 import ProductCards from '../components/home/ProductCards';
 import { View, TextInput, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
@@ -9,10 +9,13 @@ import AppLoading from 'expo-app-loading';
 
 const { width } = Dimensions.get('window');
 export default function Home() {
+
     let [fontsLoaded] = useFonts({
         Inter_900Black,
         Inter_800ExtraBold
     });
+
+    const [data, setData] = useState({})
 
 
     useEffect( async () => {
@@ -23,8 +26,8 @@ export default function Home() {
                 "x-rapidapi-key": "c21f427b09msh296727ad4bf3af7p1dfe3djsned4f6f14e075"
             }
         })
-        const data = await responce.json();
-        console.log("resultsss ===> ", data);
+        const results = await responce.json();
+        setData(results);
     }, [])
 
 
@@ -37,7 +40,7 @@ else {
     return (
         <View style={styles.screen}>
             <Search />
-            <ProductCards/>
+            <ProductCards data={data}/>
         </View>
     )
 }
@@ -48,7 +51,7 @@ const styles = StyleSheet.create({
         flex: 1,
         // justifyContent: 'space-between',
         // marginTop: Constants.statusBarHeight,
-        // backgroundColor: 'blue',
+        backgroundColor: '#fff',
         // padding: 42
     },
     text: {

@@ -32,7 +32,16 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         padding: 5,
         margin: 10,
-        borderRadius: 5
+        borderRadius: 5,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 7,
+        },
+        shadowOpacity: 0.43,
+        shadowRadius: 9.51,
+
+        elevation: 15,
     },
     focusSearch: {
         flexDirection: "row",
@@ -42,6 +51,15 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 1,
         borderColor: "#5956E9",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 7,
+        },
+        shadowOpacity: 0.43,
+        shadowRadius: 9.51,
+
+        elevation: 15,
     },
     inputText: {
         backgroundColor: '#fff',
