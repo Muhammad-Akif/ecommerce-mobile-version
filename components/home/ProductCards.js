@@ -20,6 +20,7 @@ const App = ({ data }) => {
 export default App;
 
 const SingleRow = ({ data }) => {
+
   const price = parseInt(Math.random() * (1000 - 200) + 200);
   const prePrice = price - parseInt(Math.random() * (100 - 80) + 80)
   return (
@@ -38,13 +39,13 @@ const SingleRow = ({ data }) => {
               <TouchableOpacity
                 style={styles.button2}
               >
-                <Text style={{ color: 'green',fontSize: 12 }}>20% OFF</Text>
+                <Text style={{ color: 'green', fontSize: 12 }}>20% OFF</Text>
               </TouchableOpacity>
               <Image
                 source={{
                   uri: item.food.image,
                 }}
-                style={{ width: 110, height: 70, margin: 10 }}
+                style={styles.productImage}
               />
               <View
                 style={{
@@ -65,8 +66,8 @@ const SingleRow = ({ data }) => {
                   {item.food.categoryLabel}
                 </Text>
               </View>
-              <Text style={{ color: '#5956E9', fontWeight: '200' }}>Rs. {price} <Text style={{ textDecorationLine: 'line-through',color: '#000' }}>Rs. {prePrice}</Text> </Text>
-              
+              <Text style={{ color: '#5956E9', fontWeight: '200' }}>Rs. {price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {prePrice}</Text> </Text>
+
               <TouchableOpacity
                 style={styles.button}
               >
@@ -92,19 +93,28 @@ const styles = StyleSheet.create({
     backgroundColor: '#307ecc',
   },
   cardStyle: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#fff',
     padding: 10,
     marginLeft: 0,
     marginRight: 0,
     marginTop: 0,
   },
   card: {
-    margin: 5,
-    padding: 8,
-    borderWidth: 1,
-    borderColor: "#5956E9",
+    marginVertical: 10,
+    marginHorizontal: 5,
+    backgroundColor: '#fff',
+    paddingHorizontal: 8,
+    paddingTop: 2,
+    elevation: 5,
     width: 150,
+    borderRadius: 15,
+
     paddingBottom: 0
+  },
+  productImage: {
+    width: '100%',
+    height: 120,
+    marginVertical: 10
   },
   button: {
     backgroundColor: 'white',
@@ -114,6 +124,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderColor: "gray",
     justifyContent: 'center',
+    fontFamily: 'Inter_800ExtraBold',
     alignItems: 'center'
   },
   button2: {
@@ -121,6 +132,7 @@ const styles = StyleSheet.create({
     height: 20,
     width: 60,
     borderRadius: 5,
+    fontFamily: 'Inter_800ExtraBold',
     borderWidth: 1,
     marginTop: 5,
     borderColor: "gray",
