@@ -1,9 +1,9 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import OnBoarding from '../screens/OnBoarding';
-import Login from '../screens/Auth/Login';
+import Auth from '../screens/Auth/Auth';
 import LoginModal from '../screens/Auth/LoginModal';
-import SignupModel from '../screens/Auth/SignupModal';
+import Signup from '../screens/Auth/Signup';
 
 const RootStack = createNativeStackNavigator();
 
@@ -12,11 +12,12 @@ export default function RootStackNavigator() {
         <RootStack.Navigator>
             <RootStack.Group screenOptions={{ headerShown: false }}>
                 <RootStack.Screen name="Index" component={OnBoarding} />
-                <RootStack.Screen name="Auth" component={Login} />
+                <RootStack.Screen name="Auth" component={Auth} />
+                <RootStack.Screen name="Signup" component={Signup} options={{headerShown: true, title: 'Sign Up'}}/>
             </RootStack.Group>
             <RootStack.Group screenOptions={{ presentation: 'modal', headerShown: false, animation: 'slide_from_bottom' }}>
                 <RootStack.Screen name="Login" component={LoginModal} />
-                <RootStack.Screen name="Sogin" component={SignupModel} />
+                {/* <RootStack.Screen name="Signup" component={} /> */}
             </RootStack.Group>
         </RootStack.Navigator>
     );

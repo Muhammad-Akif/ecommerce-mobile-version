@@ -28,7 +28,7 @@ const LoginModal = props => {
                 </View>
                 <View style={{ marginBottom: 30 }}>
                     <Text style={{ letterSpacing: -0.2, fontSize: 14, color: 'grey' }} adjustsFontSizeToFit={true} numberOfLines={1}>
-                        Sign in to Shop n Stich to pick up exactly where you left off.
+                        Sign in to e-commerce to pick up exactly where you left off.
                     </Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
@@ -74,9 +74,9 @@ const LoginModal = props => {
                     />
                 </View>
 
-                <Button title={'Continue'} style={{ marginBottom: 20, borderRadius: 8 }} />
+                <Button normalText title={'Continue'} style={{ marginBottom: 20, borderRadius: 8 }} />
 
-                <TouchableOpacity style={{ marginBottom: 24, alignItems: 'flex-end' }} onPress={() => props.navigation.navigate('Forgot Password')}>
+                <TouchableOpacity style={{ marginBottom: 24, alignItems: 'flex-end' }} onPress={() => props.navigation.navigate('Signup')}>
                     <Text style={{ color: colors.primary, fontWeight: 'bold' }}>
                         Create Account
                     </Text>
