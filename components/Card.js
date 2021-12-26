@@ -11,7 +11,7 @@ const Card = props => { //text | image
                 <Image source={props.image} style={{ width: '100%', height: '70%' }} resizeMode={'contain'} />
             </View>
             <View style={{ flex: 0.2, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 16, letterSpacing: 0.3, top: -1, color: 'grey', fontFamily: 'italic' }} numberOfLines={1} adjustsFontSizeToFit={true}>
+                <Text style={{ fontSize: 16, letterSpacing: 0.3, top: -1, color: 'black', fontFamily: 'italic' }} numberOfLines={1} adjustsFontSizeToFit={true}>
                     {props.text}
                 </Text>
             </View>

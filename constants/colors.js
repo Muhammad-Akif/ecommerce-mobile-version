@@ -1,4 +1,5 @@
 export default {
     primary: '#5956E9', //blue
-    secondary: '#fff' // white
+    secondary: '#fff', // white
+    offWhite: '#FAF9F6'
 }

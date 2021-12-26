@@ -17,7 +17,7 @@ export default Button;
 const styles = StyleSheet.create({
     button: {
         backgroundColor: colors.secondary,
-        height: 50,
+        height: 46,
         borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center'
