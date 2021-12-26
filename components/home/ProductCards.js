@@ -7,7 +7,7 @@ const App = ({ data }) => {
     <SafeAreaView style={styles.container}>
       {/* <Text style={styles.titleStyle}>Get 20% off in yout First Shop at Store</Text> */}
       <ScrollView>
-        <View style={{ marginTop: 10 }}>
+        <View>
           <SingleRow data={data} />
           <SingleRow data={data} />
           <SingleRow data={data} />
@@ -94,14 +94,12 @@ const styles = StyleSheet.create({
   },
   cardStyle: {
     backgroundColor: '#fff',
-    padding: 10,
-    marginLeft: 0,
-    marginRight: 0,
+    paddingVertical: 10,
     marginTop: 0,
   },
   card: {
     marginVertical: 10,
-    marginHorizontal: 5,
+    marginLeft: 15,
     backgroundColor: '#fff',
     paddingHorizontal: 8,
     paddingTop: 2,
@@ -141,6 +139,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   cardHeadingStyle: {
+    paddingHorizontal: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

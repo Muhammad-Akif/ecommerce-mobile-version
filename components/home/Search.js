@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         backgroundColor: '#fff',
         padding: 5,
-        margin: 10,
+        marginHorizontal: 10,
+        marginTop: 10,
         borderRadius: 5,
         shadowColor: "#000",
         shadowOffset: {
@@ -46,8 +47,9 @@ const styles = StyleSheet.create({
     focusSearch: {
         flexDirection: "row",
         backgroundColor: '#fff',
-        padding: 5,
-        margin: 10,
+        padding: 4,
+        marginHorizontal: 10,
+        marginTop: 10,
         borderRadius: 5,
         borderWidth: 1,
         borderColor: "#5956E9",
