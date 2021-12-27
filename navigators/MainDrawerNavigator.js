@@ -29,6 +29,7 @@ function CustomDrawerContent(props) {
 
             <DrawerItem
                 label={`Sign-out`} onPress={() => {
+                    props.navigation.replace('Index')
                 }}
                 style={{ bottom: 40 }}
 

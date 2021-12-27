@@ -10,7 +10,7 @@ const Card = ({ data }) => {
     <View style={styles.cardStyle}>
       <View style={styles.cardHeadingStyle}>
         <Text style={styles.cardHeadingTextStyle}>Featured Products</Text>
-        <Text style={{ color: 'green' }} onPress={() => alert('MORE')}>
+        <Text style={{ color: 'green' }}>
           View all &nbsp;
           <Icon name="arrow-right" size={10} color="grey" />
         </Text>
@@ -26,7 +26,7 @@ const Card = ({ data }) => {
               </TouchableOpacity>
               <Image source={{ uri: item.food.image }} style={styles.productImage} />
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text style={{ color: '#494949', fontWeight: '200', fontFamily: 'text-bold' }} onPress={() => { alert('Title ' + item.food.label + ' Clicked') }} adjustsFontSizeToFit={true} numberOfLines={1}>
+                <Text style={{ color: '#494949', fontWeight: '200', fontFamily: 'text-bold', fontSize: 16.5 }} adjustsFontSizeToFit={true} numberOfLines={1}>
                   {item.food.label}
                 </Text>
               </View>
@@ -67,23 +67,23 @@ export default ProductCard;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.secondary,
   },
   titleStyle: {
     padding: 16,
     fontSize: 16,
-    color: 'white',
+    color: colors.secondary,
     backgroundColor: '#307ecc',
   },
   cardStyle: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.secondary,
     paddingVertical: 10,
     marginTop: 0
   },
   card: {
     marginVertical: 10,
     marginLeft: 15,
-    backgroundColor: '#fff',
+    backgroundColor: colors.secondary,
     paddingHorizontal: 8,
     paddingTop: 2,
     elevation: 5,
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   button: {
-    backgroundColor: 'white',
+    backgroundColor: colors.secondary,
     height: 30,
     borderRadius: 5,
     borderWidth: 0.8,
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   button2: {
-    backgroundColor: 'white',
+    backgroundColor: colors.secondary,
     height: 20,
     width: 60,
     borderRadius: 5,
