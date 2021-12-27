@@ -18,6 +18,8 @@ import { useSelector } from 'react-redux';
 
 const { width } = Dimensions.get('window');
 import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+import ManageRates from '../screens/admin/manage rates/ManageRates';
+import ManageOrders from '../screens/admin/manage orders/ManageOrders';
 function CustomDrawerContent(props) {
     return (
         <>
@@ -108,13 +110,21 @@ export default function MainDrawerNavigator() {
                         <Drawer.Screen name="Home" component={AdminHome} options={({ navigation }) => ({
                             drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />
                         })} />
-                        <Drawer.Screen name="Manage Rates" component={Home} options={({ navigation }) => ({
-                            drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />,
-                            headerRight: () => <HeaderButton cart navigation={navigation} />
+                        <Drawer.Screen name="Manage Rates" component={ManageRates} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-settings'} />,
+                            headerLeft: () => <HeaderButton navigation={navigation} />,
+                            headerStatusBarHeight: 59,
+                            headerTitle: '',
+                            headerLeftContainerStyle: { paddingLeft: 15 },
+                            headerStyle: { borderBottomWidth: 0, elevation: 0, backgroundColor: colors.offWhite },
                         })} />
-                        <Drawer.Screen name="Manage Orders" component={Home} options={({ navigation }) => ({
-                            drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />,
-                            headerRight: () => <HeaderButton cart navigation={navigation} />
+                        <Drawer.Screen name="Manage Orders" component={ManageOrders} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-newspaper'} />,
+                            headerLeft: () => <HeaderButton navigation={navigation} />,
+                            headerStatusBarHeight: 59,
+                            headerTitle: '',
+                            headerLeftContainerStyle: { paddingLeft: 15 },
+                            headerStyle: { borderBottomWidth: 0, elevation: 0, backgroundColor: colors.offWhite },
                         })} />
                     </>
                 )

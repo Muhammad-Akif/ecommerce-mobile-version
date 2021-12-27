@@ -30,12 +30,12 @@ export default function Home() {
         <View style={styles.screen}>
             <Search />
             {
-                !isDataFetched ? (
+                isDataFetched ? (
+                    <ProductCard data={data} />
+                ) : (
                     <View style={styles.center}>
                         <ActivityIndicator size={30} color={colors.primary} />
                     </View>
-                ) : (
-                    <ProductCard data={data} />
                 )
             }
         </View>
