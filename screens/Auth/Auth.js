@@ -1,10 +1,8 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import Button from '../../components/Button';
-import Steps from '../../components/Steps';
+import { Text, View, Image, ScrollView } from 'react-native';
+import Steps from '../../components/UI/Steps';
 import Constants from 'expo-constants';
-import Card from '../../components/Card';
+import Card from '../../components/UI/Card';
 
 const Login = props => {
     return (

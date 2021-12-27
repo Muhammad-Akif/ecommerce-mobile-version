@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View, TextInput, Alert } from 'react-native';
-import Button from '../../components/Button';
+import Button from '../../components/UI/Button';
 import colors from '../../constants/colors';
 
 

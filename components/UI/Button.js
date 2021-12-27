@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
-import colors from '../constants/colors';
+import colors from '../../constants/colors';
 
 const Button = props => { // normalText | whiteTheme
     const style = props.normalText ? { fontWeight: 'bold', fontSize: 15, fontFamily: undefined } : {}

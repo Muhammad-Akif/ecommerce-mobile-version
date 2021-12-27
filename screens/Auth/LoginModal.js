@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Button from '../../components/Button';
+import Button from '../../components/UI/Button';
 import colors from '../../constants/colors';
 
 const LoginModal = props => {

@@ -10,23 +10,21 @@ import Home from '../screens/user/Home';
 import colors from '../constants/colors';
 const { width } = Dimensions.get('window');
 import { Ionicons, MaterialCommunityIcons, FontAwesome, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+import Orders from '../screens/user/Orders';
 
 function CustomDrawerContent(props) {
     return (
         <>
             <DrawerContentScrollView {...props}>
                 <View style={{ flex: 1, marginTop: 75 }}>
-                    {/* <View style={{ position: 'absolute', width: 40, height: 40, borderRadius: 20, borderWidth: 8, borderColor: colors.secondary, opacity: 0.1, top: -70, right: 30 }} /> */}
-                    <View style={{ position: 'absolute', width: 30, height: 30, borderRadius: 6, borderWidth: 8, borderColor: colors.secondary, opacity: 0.1, top: -60, left: 30, transform: [{ rotate: '25deg' }] }} />
-                    <View style={{ position: 'absolute', width: 30, height: 30, borderRadius: 6, borderWidth: 8, borderColor: colors.secondary, opacity: 0.1, top: -60, left: '82%', transform: [{ rotate: '25deg' }] }} />
-                    <View style={{ position: 'absolute', width: 30, height: 30, borderRadius: 6, borderWidth: 8, borderColor: colors.secondary, opacity: 0.1, top: -60, left: '46%', transform: [{ rotate: '25deg' }] }} />
+                    <View style={{ position: 'absolute', width: 100, height: 100, borderRadius: 50, backgroundColor: colors.secondary, opacity: 0.1, top: -130, right: 20 }} />
+                    <View style={{ position: 'absolute', width: 30, height: 30, borderRadius: 6, borderWidth: 8, borderColor: colors.secondary, opacity: 0.1, top: -50, left: '36%', transform: [{ rotate: '25deg' }] }} />
                     <DrawerItemList {...props} />
                 </View>
             </DrawerContentScrollView>
 
             <DrawerItem
                 label={`Sign-out`} onPress={() => {
-
                 }}
                 style={{ bottom: 40 }}
 
@@ -67,7 +65,7 @@ export default function MainDrawerNavigator() {
         >
             {/* User Screens */}
             <Drawer.Screen name="Home" component={Home} options={{ drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} /> }} />
-            <Drawer.Screen name="Orders" component={Home} options={{ drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-newspaper'} /> }} />
+            <Drawer.Screen name="Orders" component={Orders} options={{ drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-newspaper'} /> }} />
             {/* Admin Screens */}
         </Drawer.Navigator>
     );
