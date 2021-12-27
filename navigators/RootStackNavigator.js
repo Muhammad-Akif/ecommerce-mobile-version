@@ -1,9 +1,9 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import OnBoarding from '../screens/OnBoarding';
-import Auth from '../screens/Auth/Auth';
-import LoginModal from '../screens/Auth/LoginModal';
-import Signup from '../screens/Auth/Signup';
+import Auth from '../screens/auth/Auth';
+import LoginModal from '../screens/auth/LoginModal';
+import Signup from '../screens/auth/Signup';
 import MainDrawerNavigator from './MainDrawerNavigator';
 
 const RootStack = createNativeStackNavigator();
