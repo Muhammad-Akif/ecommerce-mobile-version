@@ -21,6 +21,7 @@ const MealItem = props => {
                 <Text style={styles.text}>{props.price}$</Text>
                 <Badge text={props.category.toUpperCase()} />
             </View>
+            <View style={styles.circle} />
             <TouchableOpacity style={styles.star} onPress={setFavorite.bind(null, !favorite)}>
                 <Ionicons name={favorite ? 'md-star' : 'md-star-outline'} size={26} color={colors.secondary} />
             </TouchableOpacity>
@@ -77,5 +78,15 @@ const styles = StyleSheet.create({
         fontSize: 22,
         color: 'white',
         textAlign: 'center'
+    },
+    circle: {
+        position: 'absolute',
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        backgroundColor: 'black',
+        opacity: 0.5,
+        top: -54,
+        right: -38
     }
 });
