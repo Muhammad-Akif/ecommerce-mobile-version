@@ -9,7 +9,7 @@ import {
 import Home from '../screens/user/home/Home';
 import colors from '../constants/colors';
 const { width } = Dimensions.get('window');
-import { Ionicons, MaterialCommunityIcons, FontAwesome, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import Orders from '../screens/user/orders/Orders';
 import Filters from '../screens/user/filter/Filter';
 import Favorites from '../screens/user/favorites/Favorites';
@@ -35,7 +35,7 @@ function CustomDrawerContent(props) {
                 activeTintColor={colors.primary}
                 activeBackgroundColor={'white'}
                 inactiveTintColor={'white'}
-                icon={({ focused, size }) => {
+                icon={({ size }) => {
                     return <MaterialIcons
                         style={{ left: width / 5 }}
                         name="arrow-right-alt"
@@ -67,7 +67,11 @@ export default function MainDrawerNavigator() {
             }}
             drawerContent={props => <CustomDrawerContent {...props} />}
         >
-            <Drawer.Screen name="Home" component={Home} options={{ drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} /> }} />
+            {/* User Screen */}
+            <Drawer.Screen name="Home" component={Home} options={({ navigation }) => ({
+                drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />,
+                headerRight: () => <HeaderButton cart navigation={navigation} />
+            })} />
             <Drawer.Screen name="Filter" component={Filters} options={({ navigation }) => ({
                 drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-funnel-sharp'} />,
                 headerLeft: () => <HeaderButton navigation={navigation} />,
