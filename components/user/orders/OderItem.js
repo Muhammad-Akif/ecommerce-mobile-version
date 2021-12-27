@@ -30,7 +30,7 @@ const OrderItem = props => { // inprogress
             }} /> */}
             <Button
                 normalText
-                textStyle={{ fontWeight: 'normal' }}
+                textStyle={{ fontWeight: 'normal', fontSize: 13 }}
                 style={{ width: '35%', height: 30 }}
                 title={isShowDetail ? 'HIDE DETAILS' : 'SHOW DETAILS'}
                 onPress={() => setIsShowDetail(prevState => !prevState)}
