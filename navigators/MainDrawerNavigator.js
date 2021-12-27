@@ -86,6 +86,7 @@ export default function MainDrawerNavigator() {
                         <Drawer.Screen name="Orders" component={Orders} options={({ navigation }) => ({
                             drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-newspaper'} />,
                             headerLeft: () => <HeaderButton navigation={navigation} />,
+                            headerStyle: { backgroundColor: colors.secondary }
                         })} />
                         <Drawer.Screen name="Favorites" component={Favorites} options={({ navigation }) => ({
                             drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-star'} />,

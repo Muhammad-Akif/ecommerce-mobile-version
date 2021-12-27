@@ -14,7 +14,7 @@ function OrdersTopTabNavigator() {
             initialLayout={{ width }}
             screenOptions={{
                 tabBarLabelStyle: { fontWeight: 'bold', textTransform: 'none' },
-                tabBarStyle: { borderBottomLeftRadius: 20, borderBottomRightRadius: 20 },
+                tabBarStyle: { borderBottomLeftRadius: 20, borderBottomRightRadius: 20, backgroundColor: colors.secondary },
                 tabBarIndicatorStyle: { width: width / 3, backgroundColor: colors.primary, left: width / 12 }
             }}
         >
