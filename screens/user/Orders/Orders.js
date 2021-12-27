@@ -1,7 +1,6 @@
 import React from 'react';
-import { Text, View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import OrdersTopTabNavigator from '../../../navigators/OrdersTopTabNavigator';
-// import OrderItem from '../../components/user/orders/OrderItem';
 
 const Orders = props => {
 
