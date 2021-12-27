@@ -66,8 +66,10 @@ export default function MainDrawerNavigator() {
         >
             {/* User Screens */}
             <Drawer.Screen name="Home" component={Home} options={{ drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} /> }} />
-            <Drawer.Screen name="Orders" component={Orders} options={{ drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-newspaper'} /> }} />
             <Drawer.Screen name="Filter" component={Filters} options={{ drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-funnel-sharp'} /> }} />
+            <Drawer.Screen name="Orders" component={Orders} options={{ drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-newspaper'} /> }} />
+            <Drawer.Screen name="Favorites" component={Filters} options={{ drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-star'} /> }} />
+            <Drawer.Screen name="Offers and Deals" component={Filters} options={{ drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-star'} /> }} />
             {/* Admin Screens */}
         </Drawer.Navigator>
     );
