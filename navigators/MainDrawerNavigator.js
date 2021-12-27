@@ -7,9 +7,8 @@ import {
     DrawerItem
 } from '@react-navigation/drawer';
 import Home from '../screens/user/home/Home';
+import AdminHome from '../screens/admin/home/Home';
 import colors from '../constants/colors';
-const { width } = Dimensions.get('window');
-import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import Orders from '../screens/user/orders/Orders';
 import Filters from '../screens/user/filter/Filter';
 import Favorites from '../screens/user/favorites/Favorites';
@@ -17,6 +16,8 @@ import OffersAndDeals from '../screens/user/offers and deals/OfferAndDeals';
 import HeaderButton from '../components/UI/HeaderButton';
 import { useSelector } from 'react-redux';
 
+const { width } = Dimensions.get('window');
+import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 function CustomDrawerContent(props) {
     return (
         <>
@@ -102,13 +103,22 @@ export default function MainDrawerNavigator() {
                         })} />
                     </>
                 ) : (
-                    <Drawer.Screen name="Home" component={Home} options={({ navigation }) => ({
-                        drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />,
-                        headerRight: () => <HeaderButton cart navigation={navigation} />
-                    })} />
+                    <>
+                        {/* Admin Screens */}
+                        <Drawer.Screen name="Home" component={AdminHome} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />
+                        })} />
+                        <Drawer.Screen name="Manage Rates" component={Home} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />,
+                            headerRight: () => <HeaderButton cart navigation={navigation} />
+                        })} />
+                        <Drawer.Screen name="Manage Orders" component={Home} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />,
+                            headerRight: () => <HeaderButton cart navigation={navigation} />
+                        })} />
+                    </>
                 )
             }
-            {/* Admin Screens */}
         </Drawer.Navigator>
     );
 }

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Search from '../../../components/user/home/Search'
 import ProductCard from '../../../components/user/home/ProductCards';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ActivityIndicator } from 'react-native';
+import colors from '../../../constants/colors';
 
 export default function Home() {
 
-    const [data, setData] = useState({})
+    const [data, setData] = useState([]);
+    const [isDataFetched, setIsDataFetched] = useState(false);
 
-    useEffect(async () => {
+    const fetchData = async () => {
         const responce = await fetch(`https://edamam-food-and-grocery-database.p.rapidapi.com/parser?ingr=apple`, {
             method: 'GET',
             headers: {
@@ -17,12 +19,25 @@ export default function Home() {
         })
         const results = await responce.json();
         setData(results);
+        setIsDataFetched(true);
+    }
+
+    useEffect(() => {
+        fetchData();
     }, [])
 
     return (
         <View style={styles.screen}>
             <Search />
-            <ProductCard data={data} />
+            {
+                !isDataFetched ? (
+                    <View style={styles.center}>
+                        <ActivityIndicator size={30} color={colors.primary} />
+                    </View>
+                ) : (
+                    <ProductCard data={data} />
+                )
+            }
         </View>
     )
 
@@ -42,6 +57,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         height: 50,
         borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    center: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     }
