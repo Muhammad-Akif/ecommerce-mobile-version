@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import colors from '../../../constants/colors';
+import Button from '../../UI/Button';
 import CartItem from './CartItem';
 
 const OrderItem = props => { // inprogress
@@ -10,7 +11,7 @@ const OrderItem = props => { // inprogress
     return (
         <View style={styles.item}>
             <View style={styles.firstRow}>
-                <View style={{flex: 1}}>
+                <View style={{ flex: 1 }}>
                     <Text style={styles.totalAmount} adjustsFontSizeToFit={true} numberOfLines={1}>${props.amount.toFixed(2)}</Text>
                 </View>
                 <View style={{ backgroundColor: colors.lightGrey, top: -1, width: 70, height: 15, alignItems: 'center', justifyContent: 'center', borderRadius: 4 }}>
@@ -20,13 +21,20 @@ const OrderItem = props => { // inprogress
                         }
                     </Text>
                 </View>
-                <View style={{flex: 1, alignItems: 'flex-end'}}>
+                <View style={{ flex: 1, alignItems: 'flex-end' }}>
                     <Text style={styles.date} adjustsFontSizeToFit={true} numberOfLines={1}>{props.date}</Text>
                 </View>
             </View>
-            <Button color={colors.primary} title={isShowDetail ? 'Hide Details' : 'Show Details'} onPress={() => {
+            {/* <Button color={colors.primary} title={isShowDetail ? 'Hide Details' : 'Show Details'} onPress={() => {
                 setIsShowDetail(prevState => !prevState);
-            }} />
+            }} /> */}
+            <Button
+                normalText
+                textStyle={{ fontWeight: 'normal' }}
+                style={{ width: '35%', height: 30 }}
+                title={isShowDetail ? 'HIDE DETAILS' : 'SHOW DETAILS'}
+                onPress={() => setIsShowDetail(prevState => !prevState)}
+            />
 
             {isShowDetail && <View style={styles.detailSection}>
                 {props.items.map(order =>
