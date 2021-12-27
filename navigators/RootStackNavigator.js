@@ -4,6 +4,7 @@ import OnBoarding from '../screens/OnBoarding';
 import Auth from '../screens/Auth/Auth';
 import LoginModal from '../screens/Auth/LoginModal';
 import Signup from '../screens/Auth/Signup';
+import MainDrawerNavigator from './MainDrawerNavigator';
 
 const RootStack = createNativeStackNavigator();
 
@@ -14,6 +15,7 @@ export default function RootStackNavigator() {
                 <RootStack.Screen name="Index" component={OnBoarding} />
                 <RootStack.Screen name="Auth" component={Auth} />
                 <RootStack.Screen name="Signup" component={Signup} options={{ headerShown: true, title: 'Sign Up' }} />
+                <RootStack.Screen name="MainNavigator" component={MainDrawerNavigator} />
             </RootStack.Group>
             <RootStack.Group screenOptions={{ presentation: 'modal', headerShown: false, animation: 'slide_from_bottom' }}>
                 <RootStack.Screen name="Login" component={LoginModal} />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Search from '../components/home/Search'
-import ProductCards from '../components/home/ProductCards';
+import ProductCard from '../components/home/ProductCards';
 import { View, StyleSheet } from 'react-native';
 
 export default function Home() {
@@ -22,7 +22,7 @@ export default function Home() {
     return (
         <View style={styles.screen}>
             <Search />
-            <ProductCards data={data} />
+            <ProductCard data={data} />
         </View>
     )
 

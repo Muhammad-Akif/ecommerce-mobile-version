@@ -79,7 +79,10 @@ const LoginModal = props => {
                     />
                 </View>
 
-                <Button normalText title={'Continue'} style={{ marginBottom: 20, borderRadius: 8 }} />
+                <Button normalText title={'Continue'} style={{ marginBottom: 20, borderRadius: 8 }} onPress={() => {
+                    props.navigation.popToTop();
+                    props.navigation.replace('MainNavigator')
+                }} />
 
                 {
                     !fromAdmin ? (

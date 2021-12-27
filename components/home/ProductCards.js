@@ -2,24 +2,7 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { SafeAreaView, Text, View, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 
-const App = ({ data }) => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <View>
-          <SingleRow data={data} />
-          <SingleRow data={data} />
-          <SingleRow data={data} />
-          <SingleRow data={data} />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
-export default App;
-
-const SingleRow = ({ data }) => {
-
+const Card = ({ data }) => {
   const price = parseInt(Math.random() * (1000 - 200) + 200);
   const prePrice = price - parseInt(Math.random() * (100 - 80) + 80)
   return (
@@ -33,8 +16,8 @@ const SingleRow = ({ data }) => {
       </View>
       <View style={{ flexDirection: 'row', width: '100%' }}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          {data?.hints?.map((item) => (
-            <View key={item.food.foodId} style={styles.card}>
+          {data?.hints?.map((item, index) => (
+            <View key={item.food.foodId + index} style={styles.card}>
               <TouchableOpacity
                 style={styles.button2}
               >
@@ -78,6 +61,23 @@ const SingleRow = ({ data }) => {
     </View>
   );
 };
+
+const ProductCard = ({ data }) => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <View>
+          <Card data={data} />
+          <Card data={data} />
+          <Card data={data} />
+          <Card data={data} />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+export default ProductCard;
+
 
 const styles = StyleSheet.create({
   container: {
