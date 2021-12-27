@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-const CartItem = props => {
+const OrderItem = props => {
     return (
         <View style={styles.item}>
             <View style={styles.titleQuantity}>
@@ -23,15 +23,14 @@ const CartItem = props => {
     );
 }
 
-export default CartItem;
+export default OrderItem;
 
 const styles = StyleSheet.create({
     item: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingHorizontal: 10,
-        marginHorizontal: 20,
-        // backgroundColor: 'green'
+        marginHorizontal: 20
     },
     titleQuantity: {
         flexDirection: 'row',
@@ -48,11 +47,11 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginRight: 4
     },
-    mainText: { //amount and title
+    mainText: { 
         fontFamily: 'open-sans-bold',
         fontSize: 16
     },
     deleteButton: {
         marginLeft: 20
     }
-});
+})

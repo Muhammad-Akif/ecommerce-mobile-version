@@ -21,6 +21,8 @@ export default function OnBoarding(props) {
         'stylish3': require('../assets/fonts/DescMenu.ttf'),
         'text-bold': require('../assets/fonts/Dosis-Bold.ttf'),
         'extra-bold': require('../assets/fonts/Dosis-ExtraBold.ttf'),
+        'open-sans': require('../assets/fonts/open-sans.ttf'),
+        'open-sans-bold': require('../assets/fonts/OpenSans-Bold.ttf'),
     });
 
     if (!fontsLoaded) {

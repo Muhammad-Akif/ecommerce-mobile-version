@@ -6,11 +6,11 @@ import {
     DrawerItemList,
     DrawerItem
 } from '@react-navigation/drawer';
-import Home from '../screens/user/Home';
+import Home from '../screens/user/Home/Home';
 import colors from '../constants/colors';
 const { width } = Dimensions.get('window');
 import { Ionicons, MaterialCommunityIcons, FontAwesome, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
-import Orders from '../screens/user/Orders';
+import Orders from '../screens/user/Orders/Orders';
 
 function CustomDrawerContent(props) {
     return (
