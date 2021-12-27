@@ -25,9 +25,6 @@ const OrderItem = props => { // inprogress
                     <Text style={styles.date} adjustsFontSizeToFit={true} numberOfLines={1}>{props.date}</Text>
                 </View>
             </View>
-            {/* <Button color={colors.primary} title={isShowDetail ? 'Hide Details' : 'Show Details'} onPress={() => {
-                setIsShowDetail(prevState => !prevState);
-            }} /> */}
             <Button
                 normalText
                 textStyle={{ fontWeight: 'normal', fontSize: 13 }}

@@ -130,9 +130,9 @@ const styles = StyleSheet.create({
     width: 60,
     borderRadius: 5,
     fontFamily: 'Inter_800ExtraBold',
-    borderWidth: 1,
+    borderWidth: 0.4,
     marginTop: 5,
-    borderColor: "gray",
+    borderColor: "green",
     alignSelf: 'flex-end',
     justifyContent: 'center',
     alignItems: 'center'
