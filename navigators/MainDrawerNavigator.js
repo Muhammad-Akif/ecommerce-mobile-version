@@ -6,11 +6,12 @@ import {
     DrawerItemList,
     DrawerItem
 } from '@react-navigation/drawer';
-import Home from '../screens/user/Home/Home';
+import Home from '../screens/user/home/Home';
 import colors from '../constants/colors';
 const { width } = Dimensions.get('window');
 import { Ionicons, MaterialCommunityIcons, FontAwesome, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
-import Orders from '../screens/user/Orders/Orders';
+import Orders from '../screens/user/orders/Orders';
+import Filters from '../screens/user/filter/Filter';
 
 function CustomDrawerContent(props) {
     return (
@@ -66,6 +67,7 @@ export default function MainDrawerNavigator() {
             {/* User Screens */}
             <Drawer.Screen name="Home" component={Home} options={{ drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} /> }} />
             <Drawer.Screen name="Orders" component={Orders} options={{ drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-newspaper'} /> }} />
+            <Drawer.Screen name="Filter" component={Filters} options={{ drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-funnel-sharp'} /> }} />
             {/* Admin Screens */}
         </Drawer.Navigator>
     );

@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Dimensions } from 'react-native';
+import { Dimensions } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import Completed from '../screens/user/Orders/Completed';
-import Inprogress from '../screens/user/Orders/Inprogress';
+import Completed from '../screens/user/orders/Completed';
+import Inprogress from '../screens/user/orders/Inprogress';
 import colors from '../constants/colors';
 
 const Tab = createMaterialTopTabNavigator();
