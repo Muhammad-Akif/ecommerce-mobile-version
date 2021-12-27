@@ -15,6 +15,7 @@ import Filters from '../screens/user/filter/Filter';
 import Favorites from '../screens/user/favorites/Favorites';
 import OffersAndDeals from '../screens/user/offers and deals/OfferAndDeals';
 import HeaderButton from '../components/UI/HeaderButton';
+import { useSelector } from 'react-redux';
 
 function CustomDrawerContent(props) {
     return (
@@ -53,6 +54,7 @@ function CustomDrawerContent(props) {
 const Drawer = createDrawerNavigator();
 
 export default function MainDrawerNavigator() {
+    const isUser = useSelector(state => state.auth.isUser);
     return (
         <Drawer.Navigator
             initialRouteName="Home"
@@ -69,31 +71,42 @@ export default function MainDrawerNavigator() {
             drawerContent={props => <CustomDrawerContent {...props} />}
         >
             {/* User Screen */}
-            <Drawer.Screen name="Home" component={Home} options={({ navigation }) => ({
-                drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />,
-                headerRight: () => <HeaderButton cart navigation={navigation} />
-            })} />
-            <Drawer.Screen name="Filter" component={Filters} options={({ navigation }) => ({
-                drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-funnel-sharp'} />,
-                headerLeft: () => <HeaderButton navigation={navigation} />,
-                headerStyle: { backgroundColor: colors.offWhite }
-            })} />
-            <Drawer.Screen name="Orders" component={Orders} options={({ navigation }) => ({
-                drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-newspaper'} />,
-                headerLeft: () => <HeaderButton navigation={navigation} />,
-            })} />
-            <Drawer.Screen name="Favorites" component={Favorites} options={({ navigation }) => ({
-                drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-star'} />,
-                headerLeft: () => <HeaderButton navigation={navigation} />,
-            })} />
-            <Drawer.Screen name="Offers and Deals" component={OffersAndDeals} options={({ navigation }) => ({
-                drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'infinite'} />,
-                headerLeft: () => <HeaderButton navigation={navigation} />,
-                headerStatusBarHeight: 59,
-                headerTitle: '',
-                headerLeftContainerStyle: { paddingLeft: 15 },
-                headerStyle: { borderBottomWidth: 0, elevation: 0, backgroundColor: colors.offWhite },
-            })} />
+            {
+                isUser ? (
+                    <>
+                        <Drawer.Screen name="Home" component={Home} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />,
+                            headerRight: () => <HeaderButton cart navigation={navigation} />
+                        })} />
+                        <Drawer.Screen name="Filter" component={Filters} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-funnel-sharp'} />,
+                            headerLeft: () => <HeaderButton navigation={navigation} />,
+                            headerStyle: { backgroundColor: colors.offWhite }
+                        })} />
+                        <Drawer.Screen name="Orders" component={Orders} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-newspaper'} />,
+                            headerLeft: () => <HeaderButton navigation={navigation} />,
+                        })} />
+                        <Drawer.Screen name="Favorites" component={Favorites} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-star'} />,
+                            headerLeft: () => <HeaderButton navigation={navigation} />,
+                        })} />
+                        <Drawer.Screen name="Offers and Deals" component={OffersAndDeals} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'infinite'} />,
+                            headerLeft: () => <HeaderButton navigation={navigation} />,
+                            headerStatusBarHeight: 59,
+                            headerTitle: '',
+                            headerLeftContainerStyle: { paddingLeft: 15 },
+                            headerStyle: { borderBottomWidth: 0, elevation: 0, backgroundColor: colors.offWhite },
+                        })} />
+                    </>
+                ) : (
+                    <Drawer.Screen name="Home" component={Home} options={({ navigation }) => ({
+                        drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />,
+                        headerRight: () => <HeaderButton cart navigation={navigation} />
+                    })} />
+                )
+            }
             {/* Admin Screens */}
         </Drawer.Navigator>
     );
