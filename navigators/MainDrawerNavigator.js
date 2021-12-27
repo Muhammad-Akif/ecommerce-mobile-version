@@ -12,6 +12,7 @@ const { width } = Dimensions.get('window');
 import { Ionicons, MaterialCommunityIcons, FontAwesome, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import Orders from '../screens/user/orders/Orders';
 import Filters from '../screens/user/filter/Filter';
+import Favorites from '../screens/user/favorites/Favorites';
 
 function CustomDrawerContent(props) {
     return (
@@ -68,7 +69,7 @@ export default function MainDrawerNavigator() {
             <Drawer.Screen name="Home" component={Home} options={{ drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} /> }} />
             <Drawer.Screen name="Filter" component={Filters} options={{ drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-funnel-sharp'} /> }} />
             <Drawer.Screen name="Orders" component={Orders} options={{ drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-newspaper'} /> }} />
-            <Drawer.Screen name="Favorites" component={Filters} options={{ drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-star'} /> }} />
+            <Drawer.Screen name="Favorites" component={Favorites} options={{ drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-star'} /> }} />
             <Drawer.Screen name="Offers and Deals" component={Filters} options={{ drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-star'} /> }} />
             {/* Admin Screens */}
         </Drawer.Navigator>

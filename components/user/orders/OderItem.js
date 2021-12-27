@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import colors from '../../../constants/colors';
+import Badge from '../../UI/Badge';
 import Button from '../../UI/Button';
 import CartItem from './CartItem';
 
@@ -14,13 +15,7 @@ const OrderItem = props => { // inprogress
                 <View style={{ flex: 1 }}>
                     <Text style={styles.totalAmount} adjustsFontSizeToFit={true} numberOfLines={1}>${props.amount.toFixed(2)}</Text>
                 </View>
-                <View style={{ backgroundColor: colors.lightGrey, top: -1, width: 70, height: 15, alignItems: 'center', justifyContent: 'center', borderRadius: 4 }}>
-                    <Text style={{ fontSize: 10, fontFamily: 'bold', color: 'grey' }} adjustsFontSizeToFit={true} numberOfLines={1}>
-                        {
-                            props.inprogress ? 'IN PROGRESS' : 'COMPLETED'
-                        }
-                    </Text>
-                </View>
+                <Badge text={props.inprogress ? 'IN PROGRESS' : 'COMPLETED'} />
                 <View style={{ flex: 1, alignItems: 'flex-end' }}>
                     <Text style={styles.date} adjustsFontSizeToFit={true} numberOfLines={1}>{props.date}</Text>
                 </View>
