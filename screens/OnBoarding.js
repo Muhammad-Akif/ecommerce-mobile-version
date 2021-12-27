@@ -23,6 +23,7 @@ export default function OnBoarding(props) {
         'extra-bold': require('../assets/fonts/Dosis-ExtraBold.ttf'),
         'open-sans': require('../assets/fonts/open-sans.ttf'),
         'open-sans-bold': require('../assets/fonts/OpenSans-Bold.ttf'),
+        'light': require('../assets/fonts/Lato-Light.ttf'),
     });
 
     if (!fontsLoaded) {

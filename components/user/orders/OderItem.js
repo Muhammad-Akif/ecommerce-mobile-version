@@ -3,15 +3,26 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 import colors from '../../../constants/colors';
 import CartItem from './CartItem';
 
-const OrderItem = props => {
+const OrderItem = props => { // inprogress
 
     const [isShowDetail, setIsShowDetail] = useState(false)
 
     return (
         <View style={styles.item}>
             <View style={styles.firstRow}>
-                <Text style={styles.totalAmount}>${props.amount.toFixed(2)}</Text>
-                <Text style={styles.date}>{props.date}</Text>
+                <View style={{flex: 1}}>
+                    <Text style={styles.totalAmount} adjustsFontSizeToFit={true} numberOfLines={1}>${props.amount.toFixed(2)}</Text>
+                </View>
+                <View style={{ backgroundColor: colors.lightGrey, top: -1, width: 70, height: 15, alignItems: 'center', justifyContent: 'center', borderRadius: 4 }}>
+                    <Text style={{ fontSize: 10, fontFamily: 'bold', color: 'grey' }} adjustsFontSizeToFit={true} numberOfLines={1}>
+                        {
+                            props.inprogress ? 'IN PROGRESS' : 'COMPLETED'
+                        }
+                    </Text>
+                </View>
+                <View style={{flex: 1, alignItems: 'flex-end'}}>
+                    <Text style={styles.date} adjustsFontSizeToFit={true} numberOfLines={1}>{props.date}</Text>
+                </View>
             </View>
             <Button color={colors.primary} title={isShowDetail ? 'Hide Details' : 'Show Details'} onPress={() => {
                 setIsShowDetail(prevState => !prevState);

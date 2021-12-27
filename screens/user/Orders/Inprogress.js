@@ -7,6 +7,7 @@ const Inprogress = props => {
         <View style={style.screen}>
             <ScrollView>
                 <OrderItem
+                    inprogress
                     amount={4220}
                     date={'23 Aug'}
                     items={[
@@ -18,6 +19,7 @@ const Inprogress = props => {
                     ]}
                 />
                 <OrderItem
+                    inprogress
                     amount={430}
                     date={'12 Nov'}
                     items={[
