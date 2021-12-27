@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import {
     createDrawerNavigator,
     DrawerContentScrollView,
