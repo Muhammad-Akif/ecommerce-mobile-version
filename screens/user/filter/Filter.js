@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import FilterSwitch from '../../../components/user/filter/FilterSwitch';
+import colors from '../../../constants/colors';
 
 const Filters = props => {
 
@@ -37,7 +38,8 @@ export default Filters;
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: colors.secondary
     },
     title: {
         fontFamily: 'extra-bold',
