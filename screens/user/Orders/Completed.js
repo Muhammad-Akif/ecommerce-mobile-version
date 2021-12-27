@@ -21,7 +21,7 @@ const Completed = props => {
                     amount={430}
                     date={'12 Nov'}
                     items={[
-                        { productId: 2323, quantity: 23, productTitle: 'Hi', sum: 23 }
+                        { productId: 2323, quantity: 2, productTitle: 'Potato', sum: '100$' }
                     ]}
                 />
             </ScrollView>
