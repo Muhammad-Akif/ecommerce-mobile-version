@@ -15,7 +15,7 @@ export default function Search() {
                 clearButtonMode="always"
                 value={query}
                 onFocus={() => setFocus(true)}
-                onBlur = {() => setFocus(false)}
+                onBlur={() => setFocus(false)}
                 underlineColorAndroid="transparent"
                 selectionColor="#5956E9"
                 onChangeText={queryText => setQuery(queryText)}
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.43,
         shadowRadius: 9.51,
-
         elevation: 15,
     },
     inputText: {

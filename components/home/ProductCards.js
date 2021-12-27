@@ -5,7 +5,6 @@ import { SafeAreaView, Text, View, StyleSheet, Image, ScrollView, TouchableOpaci
 const App = ({ data }) => {
   return (
     <SafeAreaView style={styles.container}>
-      {/* <Text style={styles.titleStyle}>Get 20% off in yout First Shop at Store</Text> */}
       <ScrollView>
         <View>
           <SingleRow data={data} />
@@ -59,7 +58,6 @@ const SingleRow = ({ data }) => {
                   }}>
                   {item.food.label}
                 </Text>
-                {/* <Text style={{ color: '#228B22' }}>&#8942;</Text> */}
               </View>
               <View style={styles.childViewTextStyle}>
                 <Text style={{ color: '#606070', fontWeight: '200' }}>

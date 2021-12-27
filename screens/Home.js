@@ -1,24 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Search from '../components/home/Search'
 import ProductCards from '../components/home/ProductCards';
-import { View, TextInput, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
-import { useFonts, Inter_900Black, Inter_800ExtraBold } from '@expo-google-fonts/inter';
-import AppLoading from 'expo-app-loading';
-// import Constants from 'expo-constants';
-// import { LinearGradient } from 'expo-linear-gradient';
+import { View, StyleSheet } from 'react-native';
 
-const { width } = Dimensions.get('window');
 export default function Home() {
-
-    let [fontsLoaded] = useFonts({
-        Inter_900Black,
-        Inter_800ExtraBold
-    });
 
     const [data, setData] = useState({})
 
-
-    useEffect( async () => {
+    useEffect(async () => {
         const responce = await fetch(`https://edamam-food-and-grocery-database.p.rapidapi.com/parser?ingr=apple`, {
             method: 'GET',
             headers: {
@@ -30,29 +19,19 @@ export default function Home() {
         setData(results);
     }, [])
 
-
-
-
-if (!fontsLoaded) {
-    return <AppLoading />;
-}
-else {
     return (
         <View style={styles.screen}>
             <Search />
-            <ProductCards data={data}/>
+            <ProductCards data={data} />
         </View>
     )
-}
+
 }
 
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        // justifyContent: 'space-between',
-        // marginTop: Constants.statusBarHeight,
         backgroundColor: '#fff',
-        // padding: 42
     },
     text: {
         fontSize: 60,
