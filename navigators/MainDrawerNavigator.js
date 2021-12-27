@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Dimensions } from 'react-native';
+import { View, Dimensions, TouchableOpacity } from 'react-native';
 import {
     createDrawerNavigator,
     DrawerContentScrollView,
@@ -13,6 +13,8 @@ import { Ionicons, MaterialCommunityIcons, FontAwesome, FontAwesome5, MaterialIc
 import Orders from '../screens/user/orders/Orders';
 import Filters from '../screens/user/filter/Filter';
 import Favorites from '../screens/user/favorites/Favorites';
+import OffersAndDeals from '../screens/user/offers and deals/OfferAndDeals';
+import HeaderButton from '../components/UI/HeaderButton';
 
 function CustomDrawerContent(props) {
     return (
@@ -65,12 +67,28 @@ export default function MainDrawerNavigator() {
             }}
             drawerContent={props => <CustomDrawerContent {...props} />}
         >
-            {/* User Screens */}
             <Drawer.Screen name="Home" component={Home} options={{ drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} /> }} />
-            <Drawer.Screen name="Filter" component={Filters} options={{ drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-funnel-sharp'} /> }} />
-            <Drawer.Screen name="Orders" component={Orders} options={{ drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-newspaper'} /> }} />
-            <Drawer.Screen name="Favorites" component={Favorites} options={{ drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-star'} /> }} />
-            <Drawer.Screen name="Offers and Deals" component={Filters} options={{ drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-star'} /> }} />
+            <Drawer.Screen name="Filter" component={Filters} options={({ navigation }) => ({
+                drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-funnel-sharp'} />,
+                headerLeft: () => <HeaderButton navigation={navigation} />,
+                headerStyle: { backgroundColor: colors.offWhite }
+            })} />
+            <Drawer.Screen name="Orders" component={Orders} options={({ navigation }) => ({
+                drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-newspaper'} />,
+                headerLeft: () => <HeaderButton navigation={navigation} />,
+            })} />
+            <Drawer.Screen name="Favorites" component={Favorites} options={({ navigation }) => ({
+                drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-star'} />,
+                headerLeft: () => <HeaderButton navigation={navigation} />,
+            })} />
+            <Drawer.Screen name="Offers and Deals" component={OffersAndDeals} options={({ navigation }) => ({
+                drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'infinite'} />,
+                headerLeft: () => <HeaderButton navigation={navigation} />,
+                headerStatusBarHeight: 59,
+                headerTitle: '',
+                headerLeftContainerStyle: { paddingLeft: 15 },
+                headerStyle: { borderBottomWidth: 0, elevation: 0, backgroundColor: colors.offWhite },
+            })} />
             {/* Admin Screens */}
         </Drawer.Navigator>
     );

@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
         right: 10,
         top: 5,
         transform: [{ rotate: '40deg' }],
-        // elevation: 10
     },
     text: {
         fontFamily: 'stylish'

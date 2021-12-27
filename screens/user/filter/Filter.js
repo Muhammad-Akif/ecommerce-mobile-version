@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: colors.secondary
+        backgroundColor: colors.offWhite
     },
     title: {
         fontFamily: 'extra-bold',
