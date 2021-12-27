@@ -10,7 +10,7 @@ const Card = ({ data }) => {
     <View style={styles.cardStyle}>
       <View style={styles.cardHeadingStyle}>
         <Text style={styles.cardHeadingTextStyle}>Featured Products</Text>
-        <Text style={{ color: 'green' }} onPress={() => alert('MORE')}>
+        <Text style={{ color: 'green' }}>
           View all &nbsp;
           <Icon name="arrow-right" size={10} color="grey" />
         </Text>
@@ -24,36 +24,20 @@ const Card = ({ data }) => {
               >
                 <Text style={{ color: 'green', fontSize: 12 }}>20% OFF</Text>
               </TouchableOpacity>
-              <Image
-                source={{
-                  uri: item.food.image,
-                }}
-                style={styles.productImage}
-              />
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}>
-                <Text
-                  style={{ color: '#494949', fontWeight: '200' }}
-                  onPress={() => {
-                    alert('Title ' + item.title + ' Clicked');
-                  }}>
+              <Image source={{ uri: item.food.image }} style={styles.productImage} />
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text style={{ color: '#494949', fontWeight: '200', fontFamily: 'text-bold', fontSize: 16.5 }} adjustsFontSizeToFit={true} numberOfLines={1}>
                   {item.food.label}
                 </Text>
               </View>
               <View style={styles.childViewTextStyle}>
-                <Text style={{ color: '#606070', fontWeight: '200' }}>
+                <Text style={{ color: 'grey', fontFamily: 'italic', fontSize: 15 }}>
                   {item.food.categoryLabel}
                 </Text>
               </View>
               <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {prePrice}</Text> </Text>
-
-              <TouchableOpacity
-                style={styles.button}
-              >
-                <Text style={{ color: colors.primary }}>Add to cart</Text>
+              <TouchableOpacity style={styles.button}>
+                <Text style={{ color: colors.primary, fontFamily: 'bold' }}>Add to cart</Text>
               </TouchableOpacity>
             </View>
           ))}
@@ -83,30 +67,29 @@ export default ProductCard;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.secondary,
   },
   titleStyle: {
     padding: 16,
     fontSize: 16,
-    color: 'white',
+    color: colors.secondary,
     backgroundColor: '#307ecc',
   },
   cardStyle: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.secondary,
     paddingVertical: 10,
-    marginTop: 0,
+    marginTop: 0
   },
   card: {
     marginVertical: 10,
     marginLeft: 15,
-    backgroundColor: '#fff',
+    backgroundColor: colors.secondary,
     paddingHorizontal: 8,
     paddingTop: 2,
     elevation: 5,
     width: 150,
     borderRadius: 15,
-
-    paddingBottom: 0
+    paddingBottom: 8
   },
   productImage: {
     width: '100%',
@@ -114,8 +97,8 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   button: {
-    backgroundColor: 'white',
-    height: 35,
+    backgroundColor: colors.secondary,
+    height: 30,
     borderRadius: 5,
     borderWidth: 0.8,
     marginTop: 5,
@@ -125,7 +108,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   button2: {
-    backgroundColor: 'white',
+    backgroundColor: colors.secondary,
     height: 20,
     width: 60,
     borderRadius: 5,
