@@ -14,7 +14,7 @@ const Filters = props => {
         <View style={styles.screen}>
             <Text style={styles.title}>Availabe Filters / Restrictions</Text>
             <FilterSwitch
-                label="Gluten-free"
+                label="Fats-free"
                 state={isGluttenFree}
                 onChange={bool => { setIsGluttenFree(bool) }} />
             <FilterSwitch
@@ -22,7 +22,7 @@ const Filters = props => {
                 state={isLactoseFree}
                 onChange={bool => { setIsLactoseFree(bool) }} />
             <FilterSwitch
-                label="Vegan"
+                label="Vinger"
                 state={isVegan}
                 onChange={bool => { setIsVegan(bool) }} />
             <FilterSwitch
