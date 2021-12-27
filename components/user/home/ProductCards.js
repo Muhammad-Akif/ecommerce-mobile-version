@@ -1,6 +1,7 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { SafeAreaView, Text, View, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import colors from '../../../constants/colors';
 
 const Card = ({ data }) => {
   const price = parseInt(Math.random() * (1000 - 200) + 200);
@@ -15,7 +16,7 @@ const Card = ({ data }) => {
         </Text>
       </View>
       <View style={{ flexDirection: 'row', width: '100%' }}>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingRight: 20 }}>
           {data?.hints?.map((item, index) => (
             <View key={item.food.foodId + index} style={styles.card}>
               <TouchableOpacity
@@ -47,12 +48,12 @@ const Card = ({ data }) => {
                   {item.food.categoryLabel}
                 </Text>
               </View>
-              <Text style={{ color: '#5956E9', fontWeight: '200' }}>Rs. {price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {prePrice}</Text> </Text>
+              <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {prePrice}</Text> </Text>
 
               <TouchableOpacity
                 style={styles.button}
               >
-                <Text style={{ color: '#5956E9' }}>Add to cart</Text>
+                <Text style={{ color: colors.primary }}>Add to cart</Text>
               </TouchableOpacity>
             </View>
           ))}
