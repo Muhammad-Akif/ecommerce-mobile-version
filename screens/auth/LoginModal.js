@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useDispatch } from 'react-redux';
 import Button from '../../components/UI/Button';
 import colors from '../../constants/colors';
-import { authenticate } from '../../store/actions';
 
 const LoginModal = props => {
-    const dispatch = useDispatch();
     const fromAdmin = props?.route?.params?.fromAdmin;
     const [selected, setSelected] = useState('no');
     const onBlur = () => {
@@ -85,7 +82,7 @@ const LoginModal = props => {
                 <Button normalText title={'Continue'} style={{ marginBottom: 20, borderRadius: 8 }} onPress={() => {
                     props.navigation.popToTop();
                     props.navigation.replace('MainNavigator')
-                    dispatch(authenticate('', '', fromAdmin ? false : true))
+                    //TODO
                 }} />
 
                 {
