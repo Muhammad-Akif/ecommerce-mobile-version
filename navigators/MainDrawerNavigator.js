@@ -12,13 +12,13 @@ import colors from '../constants/colors';
 import Orders from '../screens/user/orders/Orders';
 import Filters from '../screens/user/filter/Filter';
 import Favorites from '../screens/user/favorites/Favorites';
-import OffersAndDeals from '../screens/user/offers and deals/OfferAndDeals';
+import OffersAndDeals from '../screens/user/offersanddeals/OfferAndDeals';
 import HeaderButton from '../components/UI/HeaderButton';
 
 const { width } = Dimensions.get('window');
 import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
-import ManageRates from '../screens/admin/manage rates/ManageRates';
-import ManageOrders from '../screens/admin/manage orders/ManageOrders';
+import ManageRates from '../screens/admin/managerates/ManageRates';
+import ManageOrders from '../screens/admin/manageorders/ManageOrders';
 function CustomDrawerContent(props) {
     return (
         <>
