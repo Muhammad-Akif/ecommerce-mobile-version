@@ -19,6 +19,8 @@ const { width } = Dimensions.get('window');
 import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import ManageRates from '../screens/admin/managerates/ManageRates';
 import ManageOrders from '../screens/admin/manageorders/ManageOrders';
+import { useAuthContext } from '../contexts/ContextProvider';
+
 function CustomDrawerContent(props) {
     return (
         <>
@@ -56,6 +58,7 @@ function CustomDrawerContent(props) {
 const Drawer = createDrawerNavigator();
 
 export default function MainDrawerNavigator() {
+    const { auth } = useAuthContext();
     return (
         <Drawer.Navigator
             initialRouteName="Home"
@@ -71,54 +74,63 @@ export default function MainDrawerNavigator() {
             }}
             drawerContent={props => <CustomDrawerContent {...props} />}
         >
-            {/* User Screen */}
-            <Drawer.Screen name="Home" component={Home} options={({ navigation }) => ({
-                drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />,
-                headerRight: () => <HeaderButton cart navigation={navigation} />
-            })} />
-            <Drawer.Screen name="Filter" component={Filters} options={({ navigation }) => ({
-                drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-funnel-sharp'} />,
-                headerLeft: () => <HeaderButton navigation={navigation} />,
-                headerStyle: { backgroundColor: colors.offWhite }
-            })} />
-            <Drawer.Screen name="Orders" component={Orders} options={({ navigation }) => ({
-                drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-newspaper'} />,
-                headerLeft: () => <HeaderButton navigation={navigation} />,
-                headerStyle: { backgroundColor: colors.secondary }
-            })} />
-            <Drawer.Screen name="Favorites" component={Favorites} options={({ navigation }) => ({
-                drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-star'} />,
-                headerLeft: () => <HeaderButton navigation={navigation} />,
-            })} />
-            <Drawer.Screen name="Offers and Deals" component={OffersAndDeals} options={({ navigation }) => ({
-                drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'infinite'} />,
-                headerLeft: () => <HeaderButton navigation={navigation} />,
-                headerStatusBarHeight: 59,
-                headerTitle: '',
-                headerLeftContainerStyle: { paddingLeft: 15 },
-                headerStyle: { borderBottomWidth: 0, elevation: 0, backgroundColor: colors.offWhite },
-            })} />
+            {
+                !auth.isAdmin ? (
+                    <>
+                        {/* User Screen */}
+                        <Drawer.Screen name="Home" component={Home} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />,
+                            headerRight: () => <HeaderButton cart navigation={navigation} />
+                        })} />
+                        <Drawer.Screen name="Filter" component={Filters} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-funnel-sharp'} />,
+                            headerLeft: () => <HeaderButton navigation={navigation} />,
+                            headerStyle: { backgroundColor: colors.offWhite }
+                        })} />
+                        <Drawer.Screen name="Orders" component={Orders} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-newspaper'} />,
+                            headerLeft: () => <HeaderButton navigation={navigation} />,
+                            headerStyle: { backgroundColor: colors.secondary }
+                        })} />
+                        <Drawer.Screen name="Favorites" component={Favorites} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-star'} />,
+                            headerLeft: () => <HeaderButton navigation={navigation} />,
+                        })} />
+                        <Drawer.Screen name="Offers and Deals" component={OffersAndDeals} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'infinite'} />,
+                            headerLeft: () => <HeaderButton navigation={navigation} />,
+                            headerStatusBarHeight: 59,
+                            headerTitle: '',
+                            headerLeftContainerStyle: { paddingLeft: 15 },
+                            headerStyle: { borderBottomWidth: 0, elevation: 0, backgroundColor: colors.offWhite },
+                        })} />
+                    </>
+                ) : (
+                    <>
+                        {/* Admin Screens */}
+                        < Drawer.Screen name="Homes" component={AdminHome} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />
+                        })} />
+                        <Drawer.Screen name="Manage Rates" component={ManageRates} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-settings'} />,
+                            headerLeft: () => <HeaderButton navigation={navigation} />,
+                            headerStatusBarHeight: 59,
+                            headerTitle: '',
+                            headerLeftContainerStyle: { paddingLeft: 15 },
+                            headerStyle: { borderBottomWidth: 0, elevation: 0, backgroundColor: colors.offWhite },
+                        })} />
+                        <Drawer.Screen name="Manage Orders" component={ManageOrders} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-newspaper'} />,
+                            headerLeft: () => <HeaderButton navigation={navigation} />,
+                            headerStatusBarHeight: 59,
+                            headerTitle: '',
+                            headerLeftContainerStyle: { paddingLeft: 15 },
+                            headerStyle: { borderBottomWidth: 0, elevation: 0, backgroundColor: colors.offWhite },
+                        })} />
+                    </>
+                )
+            }
 
-            {/* Admin Screens */}
-            <Drawer.Screen name="Homes" component={AdminHome} options={({ navigation }) => ({
-                drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />
-            })} />
-            <Drawer.Screen name="Manage Rates" component={ManageRates} options={({ navigation }) => ({
-                drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-settings'} />,
-                headerLeft: () => <HeaderButton navigation={navigation} />,
-                headerStatusBarHeight: 59,
-                headerTitle: '',
-                headerLeftContainerStyle: { paddingLeft: 15 },
-                headerStyle: { borderBottomWidth: 0, elevation: 0, backgroundColor: colors.offWhite },
-            })} />
-            <Drawer.Screen name="Manage Orders" component={ManageOrders} options={({ navigation }) => ({
-                drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-newspaper'} />,
-                headerLeft: () => <HeaderButton navigation={navigation} />,
-                headerStatusBarHeight: 59,
-                headerTitle: '',
-                headerLeftContainerStyle: { paddingLeft: 15 },
-                headerStyle: { borderBottomWidth: 0, elevation: 0, backgroundColor: colors.offWhite },
-            })} />
         </Drawer.Navigator>
     );
 }

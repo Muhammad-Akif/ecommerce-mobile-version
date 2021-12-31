@@ -3,8 +3,10 @@ import { Text, View, TouchableOpacity, Image, TextInput, ScrollView } from 'reac
 import Icon from 'react-native-vector-icons/Ionicons';
 import Button from '../../components/UI/Button';
 import colors from '../../constants/colors';
+import { useAuthContext } from '../../contexts/ContextProvider';
 
 const LoginModal = props => {
+    const { setAuth } = useAuthContext();
     const fromAdmin = props?.route?.params?.fromAdmin;
     const [selected, setSelected] = useState('no');
     const onBlur = () => {
@@ -82,6 +84,13 @@ const LoginModal = props => {
                 <Button normalText title={'Continue'} style={{ marginBottom: 20, borderRadius: 8 }} onPress={() => {
                     props.navigation.popToTop();
                     props.navigation.replace('MainNavigator')
+                    setAuth({
+                        email: '',
+                        username: '',
+                        password: '',
+                        isAdmin: fromAdmin ? true : false,
+                        logout: true
+                    })
                     //TODO
                 }} />
 

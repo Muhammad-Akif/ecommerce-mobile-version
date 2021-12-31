@@ -1,19 +1,25 @@
 import React, { useState, createContext, useContext } from 'react';
 
-const ResultContext = createContext();
+const AuthContext = createContext();
 
 export const ContextProvider = ({ children }) => {
 
-    const [results, setResults] = useState(['Doctor Rafeh']);
+    const [auth, setAuth] = useState({
+        email: '',
+        username: '',
+        password: '',
+        isAdmin: false,
+        logout: true
+    });
 
     return (
-        <ResultContext.Provider value={{ results }}>
+        <AuthContext.Provider value={{ auth, setAuth }}>
             {children}
-        </ResultContext.Provider>
+        </AuthContext.Provider>
     )
 }
 
-export const useResultContext = () => useContext(ResultContext);
+export const useAuthContext = () => useContext(AuthContext);
 
 
 
