@@ -3,11 +3,14 @@ import Search from '../../../components/user/home/Search'
 import ProductCard from '../../../components/user/home/ProductCards';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import colors from '../../../constants/colors';
+import { useResultContext } from '../../../contexts/ContextProvider'
 
 export default function Home() {
 
     const [data, setData] = useState([]);
     const [isDataFetched, setIsDataFetched] = useState(false);
+    const { results } = useResultContext()
+    console.log("Results ===> ",results)
 
     const fetchData = async () => {
         const responce = await fetch(`https://edamam-food-and-grocery-database.p.rapidapi.com/parser?ingr=apple`, {
