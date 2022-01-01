@@ -4,7 +4,8 @@ class Item {
         this.name = name; // string
         this.detail = detail; //string
         this.price = price; // float
-        this.ratings = ratings; //list of objects [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }]
+        this.uri = uri; // string
+        this.ratings = ratings; //list of objects where object is of Rating Class.
     }
 }
 
