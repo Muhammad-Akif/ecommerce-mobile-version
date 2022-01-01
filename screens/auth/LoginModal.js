@@ -4,11 +4,14 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Button from '../../components/UI/Button';
 import colors from '../../constants/colors';
 import { useAuthContext } from '../../contexts/ContextProvider';
+import checkAndReadFile from '../../functions/checkAndReadFile';
 
 const LoginModal = props => {
     const { setAuth } = useAuthContext();
     const fromAdmin = props?.route?.params?.fromAdmin;
     const [selected, setSelected] = useState('no');
+    const [usernameOrEmail, setUsernameOrEmail] = useState('');
+    const [password, setPassword] = useState('');
     const onBlur = () => {
         setSelected('no');
     }
@@ -60,6 +63,8 @@ const LoginModal = props => {
                 <View style={{ marginBottom: 40 }}>
                     <TextInput
                         placeholder='Email or username'
+                        value={usernameOrEmail}
+                        onChangeText={setUsernameOrEmail}
                         style={{ color: 'black', borderBottomWidth: 1, borderColor: selected == 'email' ? colors.primary : 'grey', paddingBottom: 0, paddingLeft: 0, fontSize: 16 }}
                         placeholderTextColor={selected == 'email' ? colors.primary : 'grey'}
                         onFocus={() => {
@@ -72,6 +77,8 @@ const LoginModal = props => {
                 <View style={{ marginBottom: 30 }}>
                     <TextInput
                         placeholder='Password'
+                        value={password}
+                        onChangeText={setPassword}
                         style={{ color: 'black', borderBottomWidth: 1, borderColor: selected == 'password' ? colors.primary : 'grey', paddingBottom: 0, paddingLeft: 0, fontSize: 16 }}
                         placeholderTextColor={selected == 'password' ? colors.primary : 'grey'}
                         onFocus={() => {
@@ -81,15 +88,33 @@ const LoginModal = props => {
                     />
                 </View>
 
-                <Button normalText title={'Continue'} style={{ marginBottom: 20, borderRadius: 8 }} onPress={() => {
+                <Button normalText title={'Continue'} style={{ marginBottom: 20, borderRadius: 8 }} onPress={async () => {
+                    const data = await checkAndReadFile();
+                    let loginEmail = ''
+                    let loginUsername = ''
+                    let loginPassword = ''
+                    if (fromAdmin) {
+                        if (!(data.auth.admin.email == usernameOrEmail || data.auth.admin.username == usernameOrEmail)) return;
+                        const admin = data.auth.admin;
+                        loginEmail = admin.email;
+                        loginUsername = admin.username;
+                        loginPassword = admin.password
+                    } else {
+                        const indexOfUser = data.auth.users.findIndex(user => user.email == usernameOrEmail || user.password == usernameOrEmail);
+                        if (indexOfUser == -1) return;
+                        const user = data.auth.users[indexOfUser];
+                        loginEmail = user.email
+                        loginUsername = user.username
+                        loginPassword = user.password
+                    }
                     props.navigation.popToTop();
                     props.navigation.replace('MainNavigator')
                     setAuth({
-                        email: '',
-                        username: '',
-                        password: '',
+                        email: loginEmail,
+                        username: loginUsername,
+                        password: loginPassword,
                         isAdmin: fromAdmin ? true : false,
-                        logout: true
+                        logout: false
                     })
                     //TODO
                 }} />

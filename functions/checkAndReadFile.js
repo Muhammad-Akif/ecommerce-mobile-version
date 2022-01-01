@@ -1,6 +1,7 @@
 import * as FileSystem from 'expo-file-system';
 import * as MediaLibrary from 'expo-media-library';
 import { fileName, folderName } from '../constants/settings';
+import checkAndCreateFolder from './checkAndCreateFolder';
 
 const checkAndReadFile = async () => {
     const { granted } = await MediaLibrary.requestPermissionsAsync();
@@ -11,8 +12,9 @@ const checkAndReadFile = async () => {
     if (fileInfo.exists) {
         const data = await FileSystem.readAsStringAsync(file_path);
         console.log(JSON.parse(data))
-        return data;
+        return JSON.parse(data);
     }
+    checkAndCreateFolder();
     return false;
 };
 

@@ -30,9 +30,10 @@ export default function Home() {
 
     useEffect(() => {
         fetchData();
-        checkAndCreateFolder();
+        // checkAndCreateFolder();
         // checkAndWriteFile()
-        checkAndReadFile()
+        // checkAndReadFile()
+        console.log(checkAndReadFile());
     }, [])
 
     return (

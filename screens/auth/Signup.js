@@ -2,18 +2,41 @@ import React, { useState } from 'react';
 import { Text, View, TextInput, Alert } from 'react-native';
 import Button from '../../components/UI/Button';
 import colors from '../../constants/colors';
-
+import { useAuthContext } from '../../contexts/ContextProvider';
+import checkAndReadFile from '../../functions/checkAndReadFile';
+import checkAndWriteFile from '../../functions/checkAndWriteFile';
 
 const Signup = props => {
     const [selected, setSelected] = useState('email');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [isUsernameValid, setIsUsernameValid] = useState(true);
     const [isPasswordValid, setIsPasswordValid] = useState(true);
 
-    const handleSignup = () => {
+    const { setAuth } = useAuthContext();
 
+    const handleSignup = async () => {
+        if (email.trim() && password.trim() && username.trim()) {
+            const data = await checkAndReadFile();
+            await checkAndWriteFile({
+                ...data,
+                auth: {
+                    ...data?.auth,
+                    users: [...data?.auth?.users, { email: email.trim(), username: username.trim(), password: password.trim() }]
+                }
+            })
+        }
+        props.navigation.popToTop();
+        props.navigation.replace('MainNavigator')
+        setAuth({
+            email,
+            username,
+            password,
+            isAdmin: false,
+            logout: false
+        })
     }
 
     return (
@@ -37,8 +60,8 @@ const Signup = props => {
             </View>
             <TextInput
                 placeholder='Username'
-                value={password}
-                onChangeText={setPassword}
+                value={username}
+                onChangeText={setUsername}
                 style={{ color: 'black', borderBottomWidth: 1, borderColor: isUsernameValid ? selected == 'username' ? colors.primary : 'grey' : 'red', paddingBottom: 0, paddingLeft: 0, }}
                 placeholderTextColor={isUsernameValid ? selected == 'username' ? colors.primary : 'grey' : 'red'}
                 onFocus={setSelected.bind(null, 'username')}
@@ -53,6 +76,8 @@ const Signup = props => {
             </View>
             <TextInput
                 placeholder='Password'
+                value={password}
+                onChangeText={setPassword}
                 style={{ color: 'black', borderBottomWidth: 1, borderColor: isPasswordValid ? selected == 'password' ? colors.primary : 'grey' : 'red', paddingBottom: 0, paddingLeft: 0, }}
                 placeholderTextColor={isPasswordValid ? selected == 'password' ? colors.primary : 'grey' : 'red'}
                 onFocus={setSelected.bind(null, 'password')}
