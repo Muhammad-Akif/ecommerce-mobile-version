@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 
-export default function Search() {
+export default function Search({ search, searchFilterFunction }) { 
 
-    const [query, setQuery] = useState('')
     const [focus, setFocus] = useState(false)
     return (
         <View style={focus ? styles.focusSearch : styles.search}>
@@ -13,12 +12,13 @@ export default function Search() {
                 autoCapitalize="none"
                 autoCorrect={false}
                 clearButtonMode="always"
-                value={query}
+                value={search}
                 onFocus={() => setFocus(true)}
                 onBlur={() => setFocus(false)}
                 underlineColorAndroid="transparent"
                 selectionColor="#5956E9"
-                onChangeText={queryText => setQuery(queryText)}
+                onChangeText={queryText => searchFilterFunction(queryText)}
+                onClear={() => searchFilterFunction('')}
                 placeholder="What are you Looking for?"
                 style={styles.inputText}
 
