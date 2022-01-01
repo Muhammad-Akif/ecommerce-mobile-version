@@ -3,6 +3,8 @@ import Search from '../../../components/user/home/Search'
 import ProductCard from '../../../components/user/home/ProductCards';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import colors from '../../../constants/colors';
+import { checkAndCreateFolder } from '../../../functions/checkAndCreateFolder';
+import * as FileSystem from 'expo-file-system';
 
 export default function Home() {
     const [search, setSearch] = useState('')
@@ -25,6 +27,8 @@ export default function Home() {
 
     useEffect(() => {
         fetchData();
+        console.log(FileSystem.documentDirectory)
+        checkAndCreateFolder(FileSystem.documentDirectory + 'ecommerce-mobile')
     }, [])
 
     return (
