@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Button from '../../components/UI/Button';
+import FullScreenIndicator from '../../components/UI/FullScreenIndicator';
 import colors from '../../constants/colors';
 import { useAuthContext } from '../../contexts/ContextProvider';
 import checkAndReadFile from '../../functions/checkAndReadFile';
@@ -12,6 +13,8 @@ const LoginModal = props => {
     const [selected, setSelected] = useState('no');
     const [usernameOrEmail, setUsernameOrEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+
     const onBlur = () => {
         setSelected('no');
     }
@@ -25,7 +28,7 @@ const LoginModal = props => {
                     </Text>
                 </TouchableOpacity>
             </View>
-            <ScrollView contentContainerStyle={{ flex: 1, justifyContent: 'flex-end', marginHorizontal: 20 }}>
+            <ScrollView contentContainerStyle={{ flex: 1, justifyContent: 'flex-end', marginHorizontal: 20 }} keyboardShouldPersistTaps={'handled'}>
                 <Image style={{ width: '50%' }} resizeMode={'contain'} />
                 <View style={{ marginBottom: 10 }}>
                     <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'black' }}>
@@ -89,6 +92,7 @@ const LoginModal = props => {
                 </View>
 
                 <Button normalText title={'Continue'} style={{ marginBottom: 20, borderRadius: 8 }} onPress={async () => {
+                    setIsLoading(true);
                     const data = await checkAndReadFile();
                     let loginEmail = ''
                     let loginUsername = ''
@@ -107,6 +111,7 @@ const LoginModal = props => {
                         loginUsername = user.username
                         loginPassword = user.password
                     }
+                    setIsLoading(false);
                     props.navigation.popToTop();
                     props.navigation.replace('MainNavigator')
                     setAuth({
@@ -136,6 +141,11 @@ const LoginModal = props => {
                 }
 
             </ScrollView>
+
+            {
+                isLoading && <FullScreenIndicator />
+            }
+
         </View>
     );
 }

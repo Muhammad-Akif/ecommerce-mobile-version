@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Text, View, TextInput, Alert } from 'react-native';
+import { Text, View, TextInput, Alert, Keyboard } from 'react-native';
 import Button from '../../components/UI/Button';
+import FullScreenIndicator from '../../components/UI/FullScreenIndicator';
 import colors from '../../constants/colors';
 import { useAuthContext } from '../../contexts/ContextProvider';
 import checkAndReadFile from '../../functions/checkAndReadFile';
@@ -14,10 +15,13 @@ const Signup = props => {
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [isUsernameValid, setIsUsernameValid] = useState(true);
     const [isPasswordValid, setIsPasswordValid] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const { setAuth } = useAuthContext();
 
     const handleSignup = async () => {
+        setIsLoading(true);
+        Keyboard.dismiss();
         if (email.trim() && password.trim() && username.trim()) {
             const data = await checkAndReadFile();
             await checkAndWriteFile({
@@ -28,6 +32,7 @@ const Signup = props => {
                 }
             })
         }
+        setIsLoading(false);
         props.navigation.popToTop();
         props.navigation.replace('MainNavigator')
         setAuth({
@@ -92,6 +97,11 @@ const Signup = props => {
             </View>
 
             <Button normalText title={'Sign Up'} onPress={handleSignup} />
+
+            {
+                isLoading && <FullScreenIndicator />
+            }
+
         </View>
     );
 }
