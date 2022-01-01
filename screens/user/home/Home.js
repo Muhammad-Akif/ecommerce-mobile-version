@@ -3,36 +3,20 @@ import Search from '../../../components/user/home/Search'
 import ProductCard from '../../../components/user/home/ProductCards';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import colors from '../../../constants/colors';
+import items from '../../../data/items'
 
 export default function Home() {
     const [search, setSearch] = useState('')
 
     const [data, setData] = useState([]);
-    const [isDataFetched, setIsDataFetched] = useState(false);
-
-    const fetchData = async () => {
-        const responce = await fetch(`https://edamam-food-and-grocery-database.p.rapidapi.com/parser?ingr=apple`, {
-            method: 'GET',
-            headers: {
-                "x-rapidapi-host": "edamam-food-and-grocery-database.p.rapidapi.com",
-                "x-rapidapi-key": "c21f427b09msh296727ad4bf3af7p1dfe3djsned4f6f14e075"
-            }
-        })
-        const results = await responce.json();
-        setData(results);
-        setIsDataFetched(true);
-    }
-
-    useEffect(() => {
-        fetchData();
-    }, [])
+    const [isDataFetched, setIsDataFetched] = useState(items);
 
     return (
         <View style={styles.screen}>
             <Search search={search} />
             {
                 isDataFetched ? (
-                    <ProductCard data={data} />
+                    <ProductCard data={items} />
                 ) : (
                     <View style={styles.center}>
                         <ActivityIndicator size={30} color={colors.primary} />

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Search from '../../../components/user/home/Search'
 import { Text, StyleSheet, View, FlatList } from 'react-native';
 import { items } from '../../../data/items'
+import ProductCard from '../../../components/user/home/ProductCards'
 
 const App = () => {
-    console.log(items)
     const [search, setSearch] = useState('');
-    const [filteredDataSource, setFilteredDataSource] = useState([]);
-    const [masterDataSource, setMasterDataSource] = useState([]);
+    const [filteredDataSource, setFilteredDataSource] = useState(items);
+    const [masterDataSource, setMasterDataSource] = useState(items);
 
 
     const searchFilterFunction = (text) => {
@@ -17,8 +17,8 @@ const App = () => {
             // Filter the masterDataSource
             // Update FilteredDataSource
             const newData = masterDataSource.filter(function (item) {
-                const itemData = item.title
-                    ? item.title.toUpperCase()
+                const itemData = item.Category.Item.name
+                    ? item.Category.Item.name.toUpperCase()
                     : ''.toUpperCase();
                 const textData = text.toUpperCase();
                 return itemData.indexOf(textData) > -1;
@@ -37,9 +37,10 @@ const App = () => {
         return (
             // Flat List Item
             <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-                {item.id}
+                <ProductCard data={items} />
+                {/* {item.id}
                 {'.'}
-                {item.title.toUpperCase()}
+                {item.title.toUpperCase()} */}
             </Text>
         );
     };

@@ -3,13 +3,11 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { SafeAreaView, Text, View, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import colors from '../../../constants/colors';
 
-const Card = ({ data }) => {
-  const price = parseInt(Math.random() * (1000 - 200) + 200);
-  const prePrice = price - parseInt(Math.random() * (100 - 80) + 80)
+const Card = ({ item }) => {
   return (
     <View style={styles.cardStyle}>
       <View style={styles.cardHeadingStyle}>
-        <Text style={styles.cardHeadingTextStyle}>Featured Products</Text>
+        <Text style={styles.cardHeadingTextStyle}>{item.Category.name} Products</Text>
         <Text style={{ color: 'green' }}>
           View all &nbsp;
           <Icon name="arrow-right" size={10} color="grey" />
@@ -17,8 +15,8 @@ const Card = ({ data }) => {
       </View>
       <View style={{ flexDirection: 'row', width: '100%' }}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingRight: 20 }}>
-          {data?.hints?.map((item, index) => (
-            <View key={item.food.foodId + index} style={styles.card}>
+          {item.Category.Item.map((item) => (
+            <View key={item.id} style={styles.card}>
               <TouchableOpacity
                 style={styles.button2}
               >
@@ -27,15 +25,15 @@ const Card = ({ data }) => {
               <Image source={{ uri: item.food.image }} style={styles.productImage} />
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Text style={{ color: '#494949', fontWeight: '200', fontFamily: 'text-bold', fontSize: 16.5 }} adjustsFontSizeToFit={true} numberOfLines={1}>
-                  {item.food.label}
+                  {item.name}
                 </Text>
               </View>
               <View style={styles.childViewTextStyle}>
                 <Text style={{ color: 'grey', fontFamily: 'italic', fontSize: 15 }}>
-                  {item.food.categoryLabel}
+                  {item.detail}
                 </Text>
               </View>
-              <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {prePrice}</Text> </Text>
+              <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {item.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {item.price}</Text> </Text>
               <TouchableOpacity style={styles.button}>
                 <Text style={{ color: colors.primary, fontFamily: 'bold' }}>Add to cart</Text>
               </TouchableOpacity>
@@ -52,10 +50,9 @@ const ProductCard = ({ data }) => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View>
-          <Card data={data} />
-          <Card data={data} />
-          <Card data={data} />
-          <Card data={data} />
+          {
+            data.map((item, index) => <Card key={index} item={item} />)
+          }
         </View>
       </ScrollView>
     </SafeAreaView>
