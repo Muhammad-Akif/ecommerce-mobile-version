@@ -5,6 +5,7 @@ import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import colors from '../../../constants/colors';
 
 export default function Home() {
+    const [search, setSearch] = useState('')
 
     const [data, setData] = useState([]);
     const [isDataFetched, setIsDataFetched] = useState(false);
@@ -28,7 +29,7 @@ export default function Home() {
 
     return (
         <View style={styles.screen}>
-            <Search />
+            <Search search={search} />
             {
                 isDataFetched ? (
                     <ProductCard data={data} />
