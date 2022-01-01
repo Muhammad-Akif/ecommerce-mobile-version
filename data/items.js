@@ -1,10 +1,10 @@
 import Category from '../models/category';
 import Item from '../models/item';
 import Rating from '../models/rating';
-
+// [{name, items: [{ id, name, detail, uri, price }], lastId }, {name, items: [{ id,name, detail, uri, price }], lastId }]
 export const items = [
     new Category(
-        'Fruit/veg/salads',
+        'Vagetable',
         [
             new Item(
                 1,

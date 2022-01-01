@@ -16,12 +16,21 @@ const App = () => {
             // Inserted text is not blank
             // Filter the masterDataSource
             // Update FilteredDataSource
-            const newData = masterDataSource.filter(function (item) {
-                const itemData = item.items.name
-                    ? item.items.name.toUpperCase()
-                    : ''.toUpperCase();
-                const textData = text.toUpperCase();
-                return itemData.indexOf(textData) > -1;
+            // [{name, items: [{ id, name, detail, uri, price },{ id, name, detail, uri, price }], lastId }]
+            // [{ id: 1, name: 'akif'}]
+            const newData = masterDataSource.map(function (item) {
+
+                const arr = item.items.filter(i => {
+                    const itemData = i.name
+                        ? i.name.toUpperCase()
+                        : ''.toUpperCase();
+                    const textData = text.toUpperCase();
+                    return itemData.indexOf(textData) > -1;
+                })
+                return {
+                    ...item,
+                    items: arr
+                }
             });
             setFilteredDataSource(newData);
             setSearch(text);
@@ -36,32 +45,10 @@ const App = () => {
     const ItemView = ({ item }) => {
         return (
             // Flat List Item
-            <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-                {console.log( 'item ==> ', item)}
-                {/* <Card isAdmin={true} item={item} /> */}
-                {/* {item.id}
-                {'.'}
-                {item.title.toUpperCase()} */}
+            <Text style={styles.itemStyle}>
+                <Card isAdmin={true} item={item} />
             </Text>
         );
-    };
-
-    const ItemSeparatorView = () => {
-        return (
-            // Flat List Item Separator
-            <View
-                style={{
-                    height: 0.5,
-                    width: '100%',
-                    backgroundColor: '#C8C8C8',
-                }}
-            />
-        );
-    };
-
-    const getItem = (item) => {
-        // Function for click on an item
-        alert('Id : ' + item.id + ' Title : ' + item.title);
     };
 
     return (
@@ -72,7 +59,6 @@ const App = () => {
                 data={filteredDataSource}
                 numColumns={2}
                 keyExtractor={(item, index) => index.toString()}
-                // ItemSeparatorComponent={ItemSeparatorView}
                 renderItem={ItemView}
             />
         </View>
@@ -84,8 +70,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     itemStyle: {
-        width: '45%',
-        padding: 10,
+        width: '50%'
     },
 });
 
