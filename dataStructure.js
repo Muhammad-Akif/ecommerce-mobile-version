@@ -20,12 +20,12 @@ const auth = {
 // Items Data Structure!
 const items = {
   category1: [
-    { id: 'uniqueId', name: "abc", detail: "abc", price: 20, ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5 }] },
-    { id: 'uniqueId', name: "abc", detail: "abc", price: 20, ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 2 }] }
+    { id: 'uniqueId', name: "abc", detail: "abc", price: 20, ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] },
+    { id: 'uniqueId', name: "abc", detail: "abc", price: 20, ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 2, desc: 'Good Item' }] }
   ],
   category2: [
-    { id: 'uniqueId', name: "abc", detail: "abc", price: 20, ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2' }] },
-    { id: 'uniqueId', name: "abc", detail: "abc", price: 20, ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2' }] }
+    { id: 'uniqueId', name: "abc", detail: "abc", price: 20, ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] },
+    { id: 'uniqueId', name: "abc", detail: "abc", price: 20, ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] }
   ]
 };
 
@@ -44,19 +44,19 @@ const orders = [
       { category: 'uniqueId', id: 'uniqueId', name: 'abc', detail: 'abc', price: 30, quantity: 3, totalPrice: 3000 },
       { category: 'uniqueId', id: 'uniqueId', name: 'abc', detail: 'abc', price: 30, quantity: 3, totalPrice: 3000 },
     ]
-  }, // order 1
+  }, // 1st Order
 ]
 
 // weekly deals
 const weeklyDeals = [
-  { category: 'unique', id: 'uniqueId', name: 'abc', detail: 'abc', price: 100, discountPrice: 20, off: '20%' },
-  { category: 'unique', id: 'uniqueId', name: 'abc', detail: 'abc', price: 100, discountPrice: 20, off: '20%' }
+  { category: 'unique', id: 'uniqueId', name: 'abc', detail: 'abc', price: 100, ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }], discountPrice: 20, off: '20%' },
+  { category: 'unique', id: 'uniqueId', name: 'abc', detail: 'abc', price: 100, ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }], discountPrice: 20, off: '20%' }
   // { name: 'abc', detail: 'abc', price: 100, discountPrice: 20, off: '20%' } ........
 ]
 
 // Favorite Items
 const favoriteItems = [
-  { category: 'unique', id: 'uniqueId', name: "abc", detail: "abc", price: 20 },
-  { category: 'unique', id: 'uniqueId', name: "abc", detail: "abc", price: 20 },
-  // { category: 'unique', id: 'uniqueId', name: "abc", detail: "abc", price: 20 } ....
+  { id: 'uniqueId', name: "abc", detail: "abc", price: 20, ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] },
+  { id: 'uniqueId', name: "abc", detail: "abc", price: 20, ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] }
+  // { id: 'uniqueId', name: "abc", detail: "abc", price: 20, ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] }
 ]
