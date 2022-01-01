@@ -2,7 +2,7 @@ import Category from '../models/category';
 import Item from '../models/item';
 import Rating from '../models/rating';
 
-const items = [
+export const items = [
     new Category(
         'Fruit/veg/salads',
         [

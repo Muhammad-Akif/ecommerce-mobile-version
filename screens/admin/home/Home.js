@@ -1,23 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Search from '../../../components/user/home/Search'
-import { SafeAreaView, Text, StyleSheet, View, FlatList } from 'react-native';
+import { Text, StyleSheet, View, FlatList } from 'react-native';
+import { items } from '../../../data/items'
 
 const App = () => {
+    console.log(items)
     const [search, setSearch] = useState('');
-    const [filteredDataSource, setFilteredDataSource] = useState([{ id: 1, title: 'akif is a good boy' }, { id: 2, title: 'rafeh is a good boy' }, { id: 3, title: 'umer is a good boy' }, { id: 4, title: 'mohasin is a good boy' }, { id: 5, title: 'alexandr is a good boy' }]);
-    const [masterDataSource, setMasterDataSource] = useState([{ id: 1, title: 'akif is a good boy' }, { id: 2, title: 'rafeh is a good boy' }, { id: 3, title: 'umer is a good boy' }, { id: 4, title: 'mohasin is a good boy' }, { id: 5, title: 'alexandr is a good boy' }]);
+    const [filteredDataSource, setFilteredDataSource] = useState([]);
+    const [masterDataSource, setMasterDataSource] = useState([]);
 
-    // useEffect(() => {
-    //     fetch('https://jsonplaceholder.typicode.com/posts')
-    //         .then((response) => response.json())
-    //         .then((responseJson) => {
-    //             setFilteredDataSource(responseJson);
-    //             setMasterDataSource(responseJson);
-    //         })
-    //         .catch((error) => {
-    //             console.error(error);
-    //         });
-    // }, []);
 
     const searchFilterFunction = (text) => {
         // Check if searched text is not blank
@@ -72,17 +63,17 @@ const App = () => {
     };
 
     return (
-        // <SafeAreaView style={{ flex: 1 }}>
         <View style={styles.container}>
             <Search search={search} searchFilterFunction={searchFilterFunction} />
             <FlatList
+                columnWrapperStyle={{ justifyContent: 'space-between' }}
                 data={filteredDataSource}
+                numColumns={2}
                 keyExtractor={(item, index) => index.toString()}
-                ItemSeparatorComponent={ItemSeparatorView}
+                // ItemSeparatorComponent={ItemSeparatorView}
                 renderItem={ItemView}
             />
         </View>
-        // </SafeAreaView>
     );
 };
 
@@ -91,6 +82,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     itemStyle: {
+        width: '45%',
         padding: 10,
     },
 });
@@ -98,104 +90,3 @@ const styles = StyleSheet.create({
 export default App;
 
 
-
-
-
-
-
-// const SECTIONS = [
-//     {
-//         title: 'Made for you',
-//         horizontal: true,
-//         data: [
-//             {
-//                 id: '1',
-//                 text: 'Item text 1',
-//                 uri: 'https://picsum.photos/id/1/200',
-//             },
-//             {
-//                 key: '2',
-//                 text: 'Item text 2',
-//                 uri: 'https://picsum.photos/id/10/200',
-//             },
-
-//             {
-//                 key: '3',
-//                 text: 'Item text 3',
-//                 uri: 'https://picsum.photos/id/1002/200',
-//             },
-//             {
-//                 key: '4',
-//                 text: 'Item text 4',
-//                 uri: 'https://picsum.photos/id/1006/200',
-//             },
-//             {
-//                 key: '5',
-//                 text: 'Item text 5',
-//                 uri: 'https://picsum.photos/id/1008/200',
-//             },
-//         ],
-//     },
-//     {
-//         title: 'Punk and hardcore',
-//         data: [
-//             {
-//                 key: '1',
-//                 text: 'Item text 1',
-//                 uri: 'https://picsum.photos/id/1011/200',
-//             },
-//             {
-//                 key: '2',
-//                 text: 'Item text 2',
-//                 uri: 'https://picsum.photos/id/1012/200',
-//             },
-
-//             {
-//                 key: '3',
-//                 text: 'Item text 3',
-//                 uri: 'https://picsum.photos/id/1013/200',
-//             },
-//             {
-//                 key: '4',
-//                 text: 'Item text 4',
-//                 uri: 'https://picsum.photos/id/1015/200',
-//             },
-//             {
-//                 key: '5',
-//                 text: 'Item text 5',
-//                 uri: 'https://picsum.photos/id/1016/200',
-//             },
-//         ],
-//     },
-//     {
-//         title: 'Based on your recent listening',
-//         data: [
-//             {
-//                 key: '1',
-//                 text: 'Item text 1',
-//                 uri: 'https://picsum.photos/id/1020/200',
-//             },
-//             {
-//                 key: '2',
-//                 text: 'Item text 2',
-//                 uri: 'https://picsum.photos/id/1024/200',
-//             },
-
-//             {
-//                 key: '3',
-//                 text: 'Item text 3',
-//                 uri: 'https://picsum.photos/id/1027/200',
-//             },
-//             {
-//                 key: '4',
-//                 text: 'Item text 4',
-//                 uri: 'https://picsum.photos/id/1035/200',
-//             },
-//             {
-//                 key: '5',
-//                 text: 'Item text 5',
-//                 uri: 'https://picsum.photos/id/1038/200',
-//             },
-//         ],
-//     },
-// ];
