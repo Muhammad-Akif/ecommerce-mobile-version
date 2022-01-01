@@ -10,7 +10,7 @@ const checkAndReadFile = async () => {
     const fileInfo = await FileSystem.getInfoAsync(file_path);
     if (fileInfo.exists) {
         const data = await FileSystem.readAsStringAsync(file_path);
-        console.log(JSON.parse(data).items)
+        console.log(JSON.parse(data))
         return data;
     }
     return false;

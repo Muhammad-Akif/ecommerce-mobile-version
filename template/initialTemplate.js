@@ -1,3 +1,5 @@
+import { initialAdmin, initialUsers } from "../constants/settings";
+
 const template = {
     auth: {
         whoIsLogin: '', //admin | user
@@ -6,15 +8,8 @@ const template = {
             username: '',
             password: ''
         },
-        users: [
-            { email: 'mrafeh@gmail.com', username: 'rafeh', password: '104056' },
-            { email: 'makif@gmail.com', username: 'akif', password: '0312500' }
-        ],
-        admin: { // Only one Admin!
-            email: 'abc@gmail.com',
-            username: 'admin',
-            password: 'admin'
-        }
+        users: initialUsers,
+        admin: initialAdmin
     },
     items: {
         lastId: 0,

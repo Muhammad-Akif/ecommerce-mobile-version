@@ -1,7 +1,7 @@
 import * as FileSystem from 'expo-file-system';
 import * as MediaLibrary from 'expo-media-library';
 import { fileName, folderName } from '../constants/settings';
-import template from '../dataStructure';
+import template from '../template/initialTemplate';
 
 const checkAndWriteFile = async () => {
     const { granted } = await MediaLibrary.requestPermissionsAsync();
