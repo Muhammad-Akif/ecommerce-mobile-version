@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView, View, StyleSheet, ScrollView } from 'react-native';
 import colors from '../../../constants/colors';
-import Card from '../../Card'
+import { Card } from '../../Card'
 
 const ProductCard = ({ data }) => {
   return (

@@ -1,8 +1,7 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
 import { Text, View, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import colors from '../../../constants/colors';
+import colors from '../constants/colors';
 
 
 export const Card = ({ item, isAdmin }) => {

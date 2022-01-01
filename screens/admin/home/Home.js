@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Search from '../../../components/user/home/Search'
 import { Text, StyleSheet, View, FlatList } from 'react-native';
 import { items } from '../../../data/items'
-import Card from '../../../components/Card'
+import { Card } from '../../../components/Card'
 
 const App = () => {
     const [search, setSearch] = useState('');
@@ -17,8 +17,8 @@ const App = () => {
             // Filter the masterDataSource
             // Update FilteredDataSource
             const newData = masterDataSource.filter(function (item) {
-                const itemData = item.Category.Item.name
-                    ? item.Category.Item.name.toUpperCase()
+                const itemData = item.items.name
+                    ? item.items.name.toUpperCase()
                     : ''.toUpperCase();
                 const textData = text.toUpperCase();
                 return itemData.indexOf(textData) > -1;
@@ -37,7 +37,8 @@ const App = () => {
         return (
             // Flat List Item
             <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-                <Card isAdmin={true} data={items} />
+                {console.log( 'item ==> ', item)}
+                {/* <Card isAdmin={true} item={item} /> */}
                 {/* {item.id}
                 {'.'}
                 {item.title.toUpperCase()} */}
