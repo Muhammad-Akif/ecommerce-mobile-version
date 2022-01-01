@@ -19,13 +19,14 @@ const auth = {
 
 // Items Data Structure!
 const items = {
+  lastId: 4,
   category1: [
-    { id: 'uniqueId', name: "abc", detail: "abc", price: 20, uri: '///', ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] },
-    { id: 'uniqueId', name: "abc", detail: "abc", price: 20, uri: '///', ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 2, desc: 'Good Item' }] }
+    { id: 1, name: "abc", detail: "abc", price: 20, uri: '///', ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] },
+    { id: 2, name: "abc", detail: "abc", price: 20, uri: '///', ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 2, desc: 'Good Item' }] }
   ],
   category2: [
-    { id: 'uniqueId', name: "abc", detail: "abc", price: 20, uri: '///', ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] },
-    { id: 'uniqueId', name: "abc", detail: "abc", price: 20, uri: '///', ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] }
+    { id: 3, name: "abc", detail: "abc", price: 20, uri: '///', ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] },
+    { id: 4, name: "abc", detail: "abc", price: 20, uri: '///', ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] }
   ]
 };
 

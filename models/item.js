@@ -1,5 +1,5 @@
 class Item {
-    constructor(id, name, detail, price, ratings) {
+    constructor(id, name, detail, price, uri, ratings) {
         this.id = id; // unique & number
         this.name = name; // string
         this.detail = detail; //string
