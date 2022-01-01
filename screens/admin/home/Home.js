@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Search from '../../../components/user/home/Search'
 import { Text, StyleSheet, View, FlatList } from 'react-native';
 import { items } from '../../../data/items'
-import ProductCard from '../../../components/user/home/ProductCards'
+import Card from '../../../components/Card'
 
 const App = () => {
     const [search, setSearch] = useState('');
@@ -37,7 +37,7 @@ const App = () => {
         return (
             // Flat List Item
             <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-                <ProductCard data={items} />
+                <Card isAdmin={true} data={items} />
                 {/* {item.id}
                 {'.'}
                 {item.title.toUpperCase()} */}
