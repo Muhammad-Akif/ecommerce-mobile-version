@@ -20,9 +20,3 @@ export const ContextProvider = ({ children }) => {
 }
 
 export const useAuthContext = () => useContext(AuthContext);
-
-
-
-
-
-
