@@ -1,53 +1,49 @@
 import React, { useEffect, useState } from 'react'
 import Search from '../../../components/user/home/Search'
 import ProductCard from '../../../components/user/home/ProductCards';
-import { View, StyleSheet, ActivityIndicator } from 'react-native';
-import colors from '../../../constants/colors';
-import checkAndCreateFolder from '../../../functions/checkAndCreateFolder';
-import * as FileSystem from 'expo-file-system';
-import { fileName, folderName } from '../../../constants/settings';
-import checkAndReadFile from '../../../functions/checkAndReadFile';
-import checkAndWriteFile from '../../../functions/checkAndWriteFile';
+import { View, StyleSheet } from 'react-native';
+import { items } from '../../../data/items'
 
 export default function Home() {
-    const [search, setSearch] = useState('')
+    const [search, setSearch] = useState('');
+    const [filteredDataSource, setFilteredDataSource] = useState(items);
+    const [masterDataSource, setMasterDataSource] = useState(items);
 
-    const [data, setData] = useState([]);
-    const [isDataFetched, setIsDataFetched] = useState(false);
 
-    const fetchData = async () => {
-        const responce = await fetch(`https://edamam-food-and-grocery-database.p.rapidapi.com/parser?ingr=apple`, {
-            method: 'GET',
-            headers: {
-                "x-rapidapi-host": "edamam-food-and-grocery-database.p.rapidapi.com",
-                "x-rapidapi-key": "c21f427b09msh296727ad4bf3af7p1dfe3djsned4f6f14e075"
-            }
-        })
-        const results = await responce.json();
-        setData(results);
-        setIsDataFetched(true);
-    }
+    const searchFilterFunction = (text) => {
+        // Check if searched text is not blank
+        if (text) {
+            // [{name, items: [{ id, name, detail, uri, price },{ id, name, detail, uri, price }], lastId }]
+            // [{ id: 1, name: 'akif'}]
+            const newData = masterDataSource.map(function (item) {
+                const arr = item.items.filter(i => {
+                    const itemData = i.name
+                        ? i.name.toUpperCase()
+                        : ''.toUpperCase();
+                    const textData = text.toUpperCase();
+                    return itemData.indexOf(textData) > -1;
+                })
+                return {
+                    ...item,
+                    items: arr,
+                }
 
-    useEffect(() => {
-        fetchData();
-        // checkAndCreateFolder();
-        // checkAndWriteFile()
-        // checkAndReadFile()
-        console.log(checkAndReadFile());
-    }, [])
-
+            });
+            const searchedData = newData.filter(item => item.items.length > 0)
+            setFilteredDataSource(searchedData);
+            setSearch(text);
+        } else {
+            // Inserted text is blank
+            // Update FilteredDataSource with masterDataSource
+            setFilteredDataSource(masterDataSource);
+            setSearch(text);
+        }
+    };
+  
     return (
         <View style={styles.screen}>
-            <Search search={search} />
-            {
-                isDataFetched ? (
-                    <ProductCard data={data} />
-                ) : (
-                    <View style={styles.center}>
-                        <ActivityIndicator size={30} color={colors.primary} />
-                    </View>
-                )
-            }
+            <Search search={search} searchFilterFunction={searchFilterFunction} />
+            <ProductCard data={filteredDataSource} />
         </View>
     )
 
@@ -58,21 +54,4 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
-    text: {
-        fontSize: 60,
-        fontFamily: 'Inter_800ExtraBold',
-        color: 'white'
-    },
-    button: {
-        backgroundColor: 'white',
-        height: 50,
-        borderRadius: 20,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    center: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
 });
