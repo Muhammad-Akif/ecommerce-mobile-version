@@ -16,7 +16,6 @@ export default function Home() {
             // [{name, items: [{ id, name, detail, uri, price },{ id, name, detail, uri, price }], lastId }]
             // [{ id: 1, name: 'akif'}]
             const newData = masterDataSource.map(function (item) {
-
                 const arr = item.items.filter(i => {
                     const itemData = i.name
                         ? i.name.toUpperCase()
@@ -40,7 +39,7 @@ export default function Home() {
             setSearch(text);
         }
     };
-
+  
     return (
         <View style={styles.screen}>
             <Search search={search} searchFilterFunction={searchFilterFunction} />
