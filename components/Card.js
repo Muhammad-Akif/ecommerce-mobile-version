@@ -1,10 +1,53 @@
 import React from 'react'
-import { Text, View, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, FlatList, Image, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import colors from '../constants/colors';
 
 
 export const Card = ({ item, isAdmin }) => {
+    if (isAdmin) {
+        const ItemView = ({ item }) => {
+            return (
+                // Flat List Item
+                <View key={item.id} style={styles.card}>
+                    <TouchableOpacity
+                        style={styles.button2}
+                    >
+                        <Text style={{ color: 'green', fontSize: 12 }}>20% OFF</Text>
+                    </TouchableOpacity>
+                    <Image source={{ uri: item.uri }} style={styles.productImage} />
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={{ color: '#494949', fontWeight: '200', fontFamily: 'text-bold', fontSize: 16.5 }} adjustsFontSizeToFit={true} numberOfLines={1}>
+                            {item.name}
+                        </Text>
+                    </View>
+                    <View style={styles.childViewTextStyle}>
+                        <Text style={{ color: 'grey', fontFamily: 'italic', fontSize: 15 }}>
+                            {item.detail}
+                        </Text>
+                    </View>
+                    <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {item.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {item.price}</Text> </Text>
+                    <TouchableOpacity style={styles.button}>
+                        <Text style={{ color: colors.primary, fontFamily: 'bold' }}>Add to cart</Text>
+                    </TouchableOpacity>
+                </View>
+            );
+        };
+        return (
+            <View style={styles.cardStyle}>
+                <View style={styles.cardHeadingStyle}>
+                    <Text style={styles.cardHeadingTextStyle}>{item.name} Products</Text>
+                </View>
+                <FlatList
+                    columnWrapperStyle={{ justifyContent: 'space-between',backgroundColor:"red", flex: 1}}
+                    data={item.items}
+                    numColumns={2}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={ItemView}
+                />
+            </View>
+        )
+    }
 
     return (
         <View style={styles.cardStyle}>
