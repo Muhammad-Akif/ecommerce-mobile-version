@@ -48,7 +48,7 @@ const Signup = props => {
                 return;
             }
             Keyboard.dismiss();
-            
+
             const data = await checkAndReadFile();
             await checkAndWriteFile({
                 ...data,
