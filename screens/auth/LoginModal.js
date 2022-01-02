@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Text, View, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Button from '../../components/UI/Button';
@@ -17,6 +17,8 @@ const LoginModal = props => {
     const [isLoading, setIsLoading] = useState(false);
     const [isInIncorrect, setIsInIncorrect] = useState(false);
 
+    const emailRef = useRef(null);
+
     const onBlur = () => {
         setSelected('no');
     }
@@ -25,6 +27,7 @@ const LoginModal = props => {
         setIsInIncorrect(false);
         setUsernameOrEmail('');
         setPassword('');
+        emailRef.current.focus();
     }
     return (
         <View style={{ flex: 1 }}>
@@ -73,6 +76,7 @@ const LoginModal = props => {
 
                 <View style={{ marginBottom: 40 }}>
                     <TextInput
+                        ref={(ref) => { emailRef.current = ref; }}
                         placeholder='Email or username'
                         value={usernameOrEmail}
                         onChangeText={setUsernameOrEmail}
