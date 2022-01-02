@@ -5,11 +5,11 @@ import Button from '../../components/UI/Button';
 import CloseButton from '../../components/UI/CloseButton';
 import FullScreenIndicator from '../../components/UI/FullScreenIndicator';
 import colors from '../../constants/colors';
-import { useAuthContext } from '../../contexts/ContextProvider';
+import { useEcommerceContext } from '../../contexts/ContextProvider';
 import checkAndReadFile from '../../functions/checkAndReadFile';
 
 const LoginModal = props => {
-    const { setAuth } = useAuthContext();
+    const { setAuth } = useEcommerceContext();
     const fromAdmin = props?.route?.params?.fromAdmin;
     const [selected, setSelected] = useState('no');
     const [usernameOrEmail, setUsernameOrEmail] = useState('');

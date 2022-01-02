@@ -6,7 +6,7 @@ import EditIcon  from 'react-native-vector-icons/FontAwesome'
 import DeleteIcon  from 'react-native-vector-icons/AntDesign'
 
 
-export const Card = ({ item, isAdmin }) => {
+export const Card = ({ item, isAdmin, navigation }) => {
     if (isAdmin) {
         const ItemView = ({ item, i }) => {
             return (
@@ -74,12 +74,12 @@ export const Card = ({ item, isAdmin }) => {
             <View style={{ flexDirection: 'row', width: '100%' }}>
                 <ScrollView horizontal={!isAdmin} showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingRight: 20 }}>
                     {item.items.map((item) => (
-                        <View key={item.id} style={styles.card}>
-                            <TouchableOpacity
+                        <TouchableOpacity key={item.id} style={styles.card} onPress={() => navigation.navigate('ProductDetails', { item })}>
+                            <View
                                 style={styles.button2}
                             >
                                 <Text style={{ color: 'green', fontSize: 12 }}>20% OFF</Text>
-                            </TouchableOpacity>
+                            </View>
                             <Image source={{ uri: item.uri }} style={styles.productImage} />
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <Text style={{ color: '#494949', fontWeight: '200', fontFamily: 'text-bold', fontSize: 16.5 }} adjustsFontSizeToFit={true} numberOfLines={1}>
@@ -95,7 +95,7 @@ export const Card = ({ item, isAdmin }) => {
                             <TouchableOpacity style={styles.button}>
                                 <Text style={{ color: colors.primary, fontFamily: 'bold' }}>Add to cart</Text>
                             </TouchableOpacity>
-                        </View>
+                        </TouchableOpacity>
                     ))}
                 </ScrollView>
             </View>

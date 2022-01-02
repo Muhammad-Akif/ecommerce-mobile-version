@@ -18,7 +18,7 @@ const { width } = Dimensions.get('window');
 import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import ManageRates from '../screens/admin/managerates/ManageRates';
 import ManageOrders from '../screens/admin/manageorders/ManageOrders';
-import { useAuthContext } from '../contexts/ContextProvider';
+import { useEcommerceContext } from '../contexts/ContextProvider';
 import Home from '../screens/user/home/Home';
 
 function CustomDrawerContent(props) {
@@ -58,7 +58,7 @@ function CustomDrawerContent(props) {
 const Drawer = createDrawerNavigator();
 
 export default function MainDrawerNavigator() {
-    const { auth } = useAuthContext();
+    const { auth } = useEcommerceContext();
     return (
         <Drawer.Navigator
             initialRouteName="Home"
@@ -70,7 +70,8 @@ export default function MainDrawerNavigator() {
                 drawerStyle: { backgroundColor: colors.primary, width: '100%' },
                 drawerLabelStyle: { fontWeight: 'bold', left: -19 },
                 drawerItemStyle: { marginLeft: 26 },
-                drawerType: 'slide'
+                drawerType: 'slide',
+                headerTitleStyle: { fontFamily: 'bold' }
             }}
             drawerContent={props => <CustomDrawerContent {...props} />}
         >
