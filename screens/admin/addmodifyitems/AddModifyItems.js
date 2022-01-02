@@ -6,7 +6,7 @@ import Item from '../../../models/item'
 
 const AddModifyItems = props => {
     const [name, setName] = useState('')
-    const [details, setDetails] = useState('')
+    const [detail, setDetail] = useState('')
     const [price, setPrice] = useState(0)
     const [imageUri, setImageUri] = useState('')
     const [isUsernameValid, setIsUsernameValid] = useState(true)
@@ -24,7 +24,22 @@ const AddModifyItems = props => {
 
     const addItemHandler = () => {
         const UID = generateID()
-        const newItem = new Item(UID,)
+        console.log('level one seller',name.length > 2,detail.length > 10, imageUri.length > 10),price.length > 1
+        if (name.length > 2 && detail.length > 10 && imageUri.length > 10 && price.length > 1) {
+            const newItem = {
+                UID,
+                name,
+                detail,
+                price,
+                imageUri,
+                // []   
+            }
+            console.log('result --==>> ',newItem)
+            // const newItem = new Item(UID, name, detail, price, imageUri, [])
+        }
+        else {
+            setIsUsernameValid(false)
+        }
 
     }
 
@@ -36,46 +51,62 @@ const AddModifyItems = props => {
     return (
         <View style={styles.container}>
             <View style={{ flex: 1, paddingTop: 18, marginTop: 2, paddingHorizontal: 20, backgroundColor: 'white' }}>
-               
+
                 <TextInput
-                    placeholder='Item Name'
+                    placeholder='Name'
+                    value={name}
                     style={{ color: 'black', borderBottomWidth: 1, borderColor: isUsernameValid ? name == 'username' ? colors.primary : 'grey' : 'red', paddingBottom: 0, paddingLeft: 0, }}
-                    placeholderTextColor={isUsernameValid ? name == 'username' ? colors.primary : 'grey' : 'red'}
-                    onFocus={setName.bind(null, 'username')}
-                    onBlur={setName.bind(null, 'no')}
+                    placeholderTextColor={isUsernameValid ? colors.primary : 'grey' }
+                    onChangeText={(text) => setName(text)}
                 />
                 <View style={{ marginVertical: 10, marginBottom: 20 }}>
                     <Text style={{ color: isUsernameValid ? 'grey' : 'red', fontSize: 12, letterSpacing: -0.2 }}>
                         {
-                            isUsernameValid ? "Your username will be public. Can't change later." : "Must start with letter and have minimum 6 characters."
+                            isUsernameValid ? "Your username will be public. Can't change later." : "Must have minimum 2 characters Name."
                         }
                     </Text>
                 </View>
                 <TextInput
-                    placeholder='Item Details'
-                    style={{ color: 'black', borderBottomWidth: 1, borderColor: isUsernameValid ? details == 'username' ? colors.primary : 'grey' : 'red', paddingBottom: 0, paddingLeft: 0, }}
-                    placeholderTextColor={isUsernameValid ? details == 'username' ? colors.primary : 'grey' : 'red'}
-                    onFocus={setDetails.bind(null, 'username')}
-                    onBlur={setDetails.bind(null, 'no')}
+                    placeholder='Detail'
+                    multiline={true}
+                    value={detail}
+                    style={{ color: 'black', borderBottomWidth: 1, borderColor: isUsernameValid ? detail == 'username' ? colors.primary : 'grey' : 'red', paddingBottom: 0, paddingLeft: 0, }}
+                    placeholderTextColor={isUsernameValid ? colors.primary : 'grey' }
+                    onChangeText={(text) => setDetail(text)}
                 />
                 <View style={{ marginVertical: 10, marginBottom: 20 }}>
                     <Text style={{ color: isUsernameValid ? 'grey' : 'red', fontSize: 12, letterSpacing: -0.2 }}>
                         {
-                            isUsernameValid ? "Your username will be public. Can't change later." : "Must start with letter and have minimum 6 characters."
+                            isUsernameValid ? "Complete Description about Product..." : "At least have 10 characters Description."
                         }
                     </Text>
                 </View>
                 <TextInput
                     placeholder='Image url'
+                    value={imageUri}
                     style={{ color: 'black', borderBottomWidth: 1, borderColor: isUsernameValid ? imageUri == 'username' ? colors.primary : 'grey' : 'red', paddingBottom: 0, paddingLeft: 0, }}
-                    placeholderTextColor={isUsernameValid ? imageUri == 'username' ? colors.primary : 'grey' : 'red'}
-                    onFocus={setImageUri.bind(null, 'username')}
-                    onBlur={setImageUri.bind(null, 'no')}
+                    placeholderTextColor={isUsernameValid ? colors.primary : 'grey'}
+                    onChangeText={(text) => setImageUri(text)}
                 />
                 <View style={{ marginVertical: 10, marginBottom: 20 }}>
                     <Text style={{ color: isUsernameValid ? 'grey' : 'red', fontSize: 12, letterSpacing: -0.2 }}>
                         {
-                            isUsernameValid ? "Your username will be public. Can't change later." : "Must start with letter and have minimum 6 characters."
+                            isUsernameValid ? "Any remote image address you like... " : "Must have minimum 10 characters Image Address."
+                        }
+                    </Text>
+                </View>
+                <TextInput
+                    keyboardType='numeric'
+                    placeholder='Price'
+                    value={price}
+                    style={{ color: 'black', borderBottomWidth: 1, borderColor: isUsernameValid ? price == 'username' ? colors.primary : 'grey' : 'red', paddingBottom: 0, paddingLeft: 0, }}
+                    placeholderTextColor={isUsernameValid ? colors.primary : 'grey'}
+                    onChangeText={(text) => setPrice(text)}
+                />
+                <View style={{ marginVertical: 10, marginBottom: 20 }}>
+                    <Text style={{ color: isUsernameValid ? 'grey' : 'red', fontSize: 12, letterSpacing: -0.2 }}>
+                        {
+                            isUsernameValid ? "Item Price in Dollar..." : "At least have 1 digit number."
                         }
                     </Text>
                 </View>
