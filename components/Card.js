@@ -6,10 +6,10 @@ import colors from '../constants/colors';
 
 export const Card = ({ item, isAdmin }) => {
     if (isAdmin) {
-        const ItemView = ({ item }) => {
+        const ItemView = ({ item, i }) => {
             return (
                 // Flat List Item
-                <View key={item.id} style={styles.Acard}>
+                <View key={item.id + i} style={styles.Acard}>
                     <TouchableOpacity
                         style={styles.button2}
                     >
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 8,
         paddingTop: 2,
         elevation: 5,
-        width: "45%",
+        width: 160,
         borderRadius: 15,
         paddingBottom: 8
     },
