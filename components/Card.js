@@ -5,6 +5,7 @@ import colors from '../constants/colors';
 
 
 export const Card = ({ item, isAdmin }) => {
+
     return (
         <View style={styles.cardStyle}>
             <View style={styles.cardHeadingStyle}>
@@ -117,3 +118,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
 })
+
+
+
+
+
