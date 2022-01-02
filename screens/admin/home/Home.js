@@ -4,7 +4,7 @@ import { Text, StyleSheet, View, FlatList } from 'react-native';
 import { items } from '../../../data/items'
 import { Card } from '../../../components/Card'
 
-const App = () => {
+const Home = () => {
     const [search, setSearch] = useState('');
     const [filteredDataSource, setFilteredDataSource] = useState(items);
     const [masterDataSource, setMasterDataSource] = useState(items);
@@ -13,9 +13,6 @@ const App = () => {
     const searchFilterFunction = (text) => {
         // Check if searched text is not blank
         if (text) {
-            // Inserted text is not blank
-            // Filter the masterDataSource
-            // Update FilteredDataSource
             // [{name, items: [{ id, name, detail, uri, price },{ id, name, detail, uri, price }], lastId }]
             // [{ id: 1, name: 'akif'}]
             const newData = masterDataSource.map(function (item) {
@@ -29,10 +26,12 @@ const App = () => {
                 })
                 return {
                     ...item,
-                    items: arr
+                    items: arr,
                 }
+
             });
-            setFilteredDataSource(newData);
+            const searchedData = newData.filter(item => item.items.length > 0)
+            setFilteredDataSource(searchedData);
             setSearch(text);
         } else {
             // Inserted text is blank
@@ -55,9 +54,9 @@ const App = () => {
         <View style={styles.container}>
             <Search search={search} searchFilterFunction={searchFilterFunction} />
             <FlatList
-                columnWrapperStyle={{ justifyContent: 'space-between' }}
+                // columnWrapperStyle={{ justifyContent: 'space-between' }}
                 data={filteredDataSource}
-                numColumns={2}
+                // numColumns={2}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={ItemView}
             />
@@ -74,6 +73,6 @@ const styles = StyleSheet.create({
     },
 });
 
-export default App;
+export default Home;
 
 
