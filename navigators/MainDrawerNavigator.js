@@ -70,7 +70,8 @@ export default function MainDrawerNavigator() {
                 drawerStyle: { backgroundColor: colors.primary, width: '100%' },
                 drawerLabelStyle: { fontWeight: 'bold', left: -19 },
                 drawerItemStyle: { marginLeft: 26 },
-                drawerType: 'slide'
+                drawerType: 'slide',
+                headerTitleStyle: { fontFamily: 'bold' }
             }}
             drawerContent={props => <CustomDrawerContent {...props} />}
         >

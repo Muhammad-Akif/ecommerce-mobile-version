@@ -5,7 +5,7 @@ import { View, StyleSheet } from 'react-native';
 import { items } from '../../../data/items'
 import colors from '../../../constants/colors';
 
-export default function Home() {
+export default function Home(props) {
     const [search, setSearch] = useState('');
     const [filteredDataSource, setFilteredDataSource] = useState(items);
     const [masterDataSource, setMasterDataSource] = useState(items);
@@ -44,7 +44,7 @@ export default function Home() {
     return (
         <View style={styles.screen}>
             <Search search={search} searchFilterFunction={searchFilterFunction} />
-            <ProductCard data={filteredDataSource} />
+            <ProductCard data={filteredDataSource} navigation={props.navigation} />
         </View>
     )
 

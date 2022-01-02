@@ -4,7 +4,7 @@ import colors from '../../../constants/colors';
 
 const Cart = props => {
     return (
-        <View style={styles.screen} />
+        <View style={styles.screen}/>
     );
 }
 
