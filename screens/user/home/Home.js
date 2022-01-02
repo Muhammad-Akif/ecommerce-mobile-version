@@ -3,6 +3,11 @@ import Search from '../../../components/user/home/Search'
 import ProductCard from '../../../components/user/home/ProductCards';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import colors from '../../../constants/colors';
+import checkAndCreateFolder from '../../../functions/checkAndCreateFolder';
+import * as FileSystem from 'expo-file-system';
+import { fileName, folderName } from '../../../constants/settings';
+import checkAndReadFile from '../../../functions/checkAndReadFile';
+import checkAndWriteFile from '../../../functions/checkAndWriteFile';
 
 export default function Home() {
     const [search, setSearch] = useState('')
@@ -25,6 +30,10 @@ export default function Home() {
 
     useEffect(() => {
         fetchData();
+        // checkAndCreateFolder();
+        // checkAndWriteFile()
+        // checkAndReadFile()
+        console.log(checkAndReadFile());
     }, [])
 
     return (
