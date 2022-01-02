@@ -44,7 +44,7 @@ const Home = () => {
     const ItemView = ({ item }) => {
         return (
             // Flat List Item
-            <View >
+            <View style={{paddingBottom: '12%'}}>
                 <Card isAdmin={true} item={item} />
             </View>
         );
@@ -54,7 +54,7 @@ const Home = () => {
         <View style={styles.container}>
             <Search search={search} searchFilterFunction={searchFilterFunction} />
             <FlatList
-                columnWrapperStyle={{ flexWrap: 'wrap', backgroundColor:"yellow"}}
+                columnWrapperStyle={{ flexWrap: 'wrap'}}
                 data={filteredDataSource}
                 numColumns={2}
                 keyExtractor={(item, index) => index.toString()}
@@ -66,8 +66,7 @@ const Home = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: 'green',
+        backgroundColor: 'white',
     },
 });
 

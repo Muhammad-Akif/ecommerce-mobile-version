@@ -9,7 +9,7 @@ export const Card = ({ item, isAdmin }) => {
         const ItemView = ({ item }) => {
             return (
                 // Flat List Item
-                <View key={item.id} style={styles.card}>
+                <View key={item.id} style={styles.Acard}>
                     <TouchableOpacity
                         style={styles.button2}
                     >
@@ -39,7 +39,7 @@ export const Card = ({ item, isAdmin }) => {
                     <Text style={styles.cardHeadingTextStyle}>{item.name} Products</Text>
                 </View>
                 <FlatList
-                    columnWrapperStyle={{ justifyContent: 'space-between',backgroundColor:"red", flex: 1}}
+                    columnWrapperStyle={{width: "100%"}}
                     data={item.items}
                     numColumns={2}
                     keyExtractor={(item, index) => index.toString()}
@@ -105,6 +105,17 @@ const styles = StyleSheet.create({
         backgroundColor: colors.secondary,
         paddingVertical: 10,
         marginTop: 0
+    },
+    Acard: {
+        marginVertical: 10,
+        marginHorizontal: 9,
+        backgroundColor: colors.secondary,
+        paddingHorizontal: 8,
+        paddingTop: 2,
+        elevation: 5,
+        width: "45%",
+        borderRadius: 15,
+        paddingBottom: 8
     },
     card: {
         marginVertical: 10,
