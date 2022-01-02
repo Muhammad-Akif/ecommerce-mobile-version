@@ -15,7 +15,7 @@ const LoginModal = props => {
     const [usernameOrEmail, setUsernameOrEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [isInIncorrect, setIsInIncorrect] = useState(false);
+    const [isInIncorrect, setIsIncorrect] = useState(false);
 
     const emailRef = useRef(null);
 
@@ -24,7 +24,7 @@ const LoginModal = props => {
     }
 
     const onCloseButtonPress = () => {
-        setIsInIncorrect(false);
+        setIsIncorrect(false);
         setUsernameOrEmail('');
         setPassword('');
         emailRef.current.focus();
@@ -122,8 +122,8 @@ const LoginModal = props => {
                     let loginUsername = ''
                     let loginPassword = ''
                     if (fromAdmin) {
-                        if (!(data.auth.admin.email == usernameOrEmail || data.auth.admin.username == usernameOrEmail)) {
-                            setIsInIncorrect(true);
+                        if (!((data.auth.admin.email.trim() == usernameOrEmail.trim() || data.auth.admin.username.trim() == usernameOrEmail.trim()) && (data.auth.admin.password.trim() == password.trim()))) {
+                            setIsIncorrect(true);
                             setIsLoading(false);
                             return;
                         }
@@ -132,10 +132,10 @@ const LoginModal = props => {
                         loginUsername = admin.username;
                         loginPassword = admin.password
                     } else {
-                        const indexOfUser = data.auth.users.findIndex(user => user.email == usernameOrEmail || user.password == usernameOrEmail);
+                        const indexOfUser = data.auth.users.findIndex(user => (user.email.trim() == usernameOrEmail.trim() || user.username.trim() == usernameOrEmail.trim()) && (user.password.trim() == password.trim()));
                         if (indexOfUser == -1) {
                             setIsLoading(false);
-                            setIsInIncorrect(true);
+                            setIsIncorrect(true);
                             return;
                         }
                         const user = data.auth.users[indexOfUser];
@@ -145,7 +145,7 @@ const LoginModal = props => {
                     }
                     setIsLoading(false);
                     props.navigation.popToTop();
-                    props.navigation.replace('MainNavigator')
+                    props.navigation.replace('DrawerCartStackNavigator')
                     setAuth({
                         email: loginEmail,
                         username: loginUsername,

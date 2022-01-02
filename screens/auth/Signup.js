@@ -59,7 +59,7 @@ const Signup = props => {
             })
             setIsLoading(false);
             props.navigation.popToTop();
-            props.navigation.replace('MainNavigator')
+            props.navigation.replace('DrawerCartStackNavigator')
             setAuth({
                 email,
                 username,

@@ -3,6 +3,7 @@ import Search from '../../../components/user/home/Search'
 import ProductCard from '../../../components/user/home/ProductCards';
 import { View, StyleSheet } from 'react-native';
 import { items } from '../../../data/items'
+import colors from '../../../constants/colors';
 
 export default function Home() {
     const [search, setSearch] = useState('');
@@ -39,7 +40,7 @@ export default function Home() {
             setSearch(text);
         }
     };
-  
+
     return (
         <View style={styles.screen}>
             <Search search={search} searchFilterFunction={searchFilterFunction} />
@@ -52,6 +53,6 @@ export default function Home() {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: colors.secondary,
     },
 });

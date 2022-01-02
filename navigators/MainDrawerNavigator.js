@@ -6,7 +6,6 @@ import {
     DrawerItemList,
     DrawerItem
 } from '@react-navigation/drawer';
-import Home from '../screens/user/home/Home';
 import AdminHome from '../screens/admin/home/Home';
 import colors from '../constants/colors';
 import Orders from '../screens/user/orders/Orders';
@@ -20,6 +19,7 @@ import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import ManageRates from '../screens/admin/managerates/ManageRates';
 import ManageOrders from '../screens/admin/manageorders/ManageOrders';
 import { useAuthContext } from '../contexts/ContextProvider';
+import Home from '../screens/user/home/Home';
 
 function CustomDrawerContent(props) {
     return (
@@ -108,7 +108,7 @@ export default function MainDrawerNavigator() {
                 ) : (
                     <>
                         {/* Admin Screens */}
-                        < Drawer.Screen name="Homes" component={AdminHome} options={({ navigation }) => ({
+                        < Drawer.Screen name="Home" component={AdminHome} options={({ navigation }) => ({
                             drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />
                         })} />
                         <Drawer.Screen name="Manage Rates" component={ManageRates} options={({ navigation }) => ({
