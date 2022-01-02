@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import OrderItem from '../../../components/user/orders/OderItem';
+import checkAndReadFile from '../../../functions/checkAndReadFile';
 
 const Completed = props => {
+    const fetchData = async () => {
+        const { orders } = await checkAndReadFile();
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, [])
     return (
         <View style={style.screen}>
             <ScrollView>

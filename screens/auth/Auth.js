@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, Image, ScrollView } from 'react-native';
 import Steps from '../../components/UI/Steps';
 import Constants from 'expo-constants';
 import Card from '../../components/UI/Card';
+import checkAndCreateFolder from '../../functions/checkAndCreateFolder';
 
 const Login = props => {
+    useEffect(() => {
+        checkAndCreateFolder();
+    }, [])
     return (
         <View style={{ flex: 1, paddingTop: Constants.statusBarHeight + 20 }}>
             <View style={{ justifyContent: 'center', marginBottom: 20 }}>
