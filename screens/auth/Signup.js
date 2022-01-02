@@ -29,7 +29,6 @@ const Signup = props => {
 
     const handleSignup = async () => {
         setIsLoading(true);
-        Keyboard.dismiss();
         if (email.trim() && password.trim() && username.trim()) {
             let isAllTrue = true;
             if (!validateEmail(email)) {
@@ -48,7 +47,8 @@ const Signup = props => {
                 setIsLoading(false);
                 return;
             }
-
+            Keyboard.dismiss();
+            
             const data = await checkAndReadFile();
             await checkAndWriteFile({
                 ...data,
