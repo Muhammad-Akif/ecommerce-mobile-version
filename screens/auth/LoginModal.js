@@ -122,7 +122,7 @@ const LoginModal = props => {
                     let loginUsername = ''
                     let loginPassword = ''
                     if (fromAdmin) {
-                        if (!(data.auth.admin.email.trim() == usernameOrEmail.trim() || data.auth.admin.username.trim() == usernameOrEmail.trim())) {
+                        if (!((data.auth.admin.email.trim() == usernameOrEmail.trim() || data.auth.admin.username.trim() == usernameOrEmail.trim()) && (data.auth.admin.password.trim() == password.trim()))) {
                             setIsIncorrect(true);
                             setIsLoading(false);
                             return;
@@ -132,7 +132,7 @@ const LoginModal = props => {
                         loginUsername = admin.username;
                         loginPassword = admin.password
                     } else {
-                        const indexOfUser = data.auth.users.findIndex(user => user.email.trim() == usernameOrEmail.trim() || user.password.trim() == usernameOrEmail.trim());
+                        const indexOfUser = data.auth.users.findIndex(user => (user.email.trim() == usernameOrEmail.trim() || user.username.trim() == usernameOrEmail.trim()) && (user.password.trim() == password.trim()));
                         if (indexOfUser == -1) {
                             setIsLoading(false);
                             setIsIncorrect(true);
