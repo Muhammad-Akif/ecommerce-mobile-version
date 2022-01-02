@@ -3,7 +3,8 @@ import Search from '../../../components/user/home/Search'
 import { TouchableOpacity, Text, StyleSheet, View, FlatList } from 'react-native';
 import { items } from '../../../data/items'
 import colors from '../../../constants/colors';
-import { Card } from '../../../components/Card'
+import { Card } from '../../../components/Card';
+import AddIcon  from 'react-native-vector-icons/AntDesign'
 
 const Home = () => {
     const [search, setSearch] = useState('');
@@ -65,7 +66,9 @@ const Home = () => {
                 style={styles.floatingButton}
                 // onPress={() => navigate('HomeScreen')}
                 >
-                <Text style={styles.btnText}>+</Text>
+                <Text style={styles.btnText}>
+                    <AddIcon name="plus" style={{ fontSize:28}}/>
+                </Text>
             </TouchableOpacity>
         </View>
     );
@@ -78,8 +81,7 @@ const styles = StyleSheet.create({
     },
     btnText: {
         color: colors.primary,
-        fontSize: 26,
-        paddingBottom: 3,
+        // paddingBottom: 3,
     },
     floatingButton: {
         width: 50,  

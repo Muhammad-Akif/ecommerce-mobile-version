@@ -2,6 +2,8 @@ import React from 'react'
 import { Text, View, StyleSheet, FlatList, Image, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import colors from '../constants/colors';
+import EditIcon  from 'react-native-vector-icons/FontAwesome'
+import DeleteIcon  from 'react-native-vector-icons/AntDesign'
 
 
 export const Card = ({ item, isAdmin }) => {
@@ -29,10 +31,14 @@ export const Card = ({ item, isAdmin }) => {
                     <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {item.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {item.price}</Text> </Text>
                     <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                         <TouchableOpacity style={styles.button}>
-                            <Text style={{ color: "green", fontFamily: 'bold', margin: 5 }}>Edit Details</Text>
+                            <Text adjustsFontSizeToFit={true} style={{ color: "green", fontFamily: 'bold', margin: 5 }}>
+                                <EditIcon name="edit" style={{ fontSize:40}}/>
+                            </Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.button}>
-                            <Text style={{ color: "red", fontFamily: 'bold', margin: 5 }}>Delete</Text>
+                            <Text adjustsFontSizeToFit={true} style={{ color: "red", fontFamily: 'bold', margin: 5}}>
+                                <DeleteIcon name='delete' style={{ fontSize:40}}/>
+                            </Text>
                         </TouchableOpacity>
                     </View>
                 </View>
