@@ -27,9 +27,14 @@ export const Card = ({ item, isAdmin }) => {
                         </Text>
                     </View>
                     <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {item.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {item.price}</Text> </Text>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={{ color: colors.primary, fontFamily: 'bold' }}>Add to cart</Text>
-                    </TouchableOpacity>
+                    <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <TouchableOpacity style={styles.button}>
+                            <Text style={{ color: "green", fontFamily: 'bold', margin: 5 }}>Edit Details</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.button}>
+                            <Text style={{ color: "red", fontFamily: 'bold', margin: 5 }}>Delete</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             );
         };
@@ -81,14 +86,9 @@ export const Card = ({ item, isAdmin }) => {
                                 </Text>
                             </View>
                             <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {item.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {item.price}</Text> </Text>
-                            <View>
                             <TouchableOpacity style={styles.button}>
-                                <Text style={{ color: colors.primary, fontFamily: 'bold' }}>Edit Details</Text>
+                                <Text style={{ color: colors.primary, fontFamily: 'bold' }}>Add to cart</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.button}>
-                                <Text style={{ color: colors.primary, fontFamily: 'bold' }}>Delete</Text>
-                            </TouchableOpacity>
-                            </View>
                         </View>
                     ))}
                 </ScrollView>
