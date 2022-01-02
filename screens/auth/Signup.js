@@ -31,17 +31,17 @@ const Signup = props => {
                     users: [...data?.auth?.users, { email: email.trim(), username: username.trim(), password: password.trim() }]
                 }
             })
+            setIsLoading(false);
+            props.navigation.popToTop();
+            props.navigation.replace('MainNavigator')
+            setAuth({
+                email,
+                username,
+                password,
+                isAdmin: false,
+                logout: false
+            })
         }
-        setIsLoading(false);
-        props.navigation.popToTop();
-        props.navigation.replace('MainNavigator')
-        setAuth({
-            email,
-            username,
-            password,
-            isAdmin: false,
-            logout: false
-        })
     }
 
     return (

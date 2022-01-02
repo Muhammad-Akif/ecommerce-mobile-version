@@ -6,7 +6,7 @@ import checkAndCreateFolder from './checkAndCreateFolder';
 const checkAndReadFile = async () => {
     const { granted } = await MediaLibrary.requestPermissionsAsync();
     if (!granted) return false;
-    
+
     const file_path = FileSystem.documentDirectory + folderName + '/' + fileName;
     const fileInfo = await FileSystem.getInfoAsync(file_path);
     if (fileInfo.exists) {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Button from '../../components/UI/Button';
+import CloseButton from '../../components/UI/CloseButton';
 import FullScreenIndicator from '../../components/UI/FullScreenIndicator';
 import colors from '../../constants/colors';
 import { useAuthContext } from '../../contexts/ContextProvider';
@@ -14,9 +15,16 @@ const LoginModal = props => {
     const [usernameOrEmail, setUsernameOrEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isInIncorrect, setIsInIncorrect] = useState(false);
 
     const onBlur = () => {
         setSelected('no');
+    }
+
+    const onCloseButtonPress = () => {
+        setIsInIncorrect(false);
+        setUsernameOrEmail('');
+        setPassword('');
     }
     return (
         <View style={{ flex: 1 }}>
@@ -68,28 +76,40 @@ const LoginModal = props => {
                         placeholder='Email or username'
                         value={usernameOrEmail}
                         onChangeText={setUsernameOrEmail}
-                        style={{ color: 'black', borderBottomWidth: 1, borderColor: selected == 'email' ? colors.primary : 'grey', paddingBottom: 0, paddingLeft: 0, fontSize: 16 }}
-                        placeholderTextColor={selected == 'email' ? colors.primary : 'grey'}
+                        style={{ color: 'black', borderBottomWidth: 1, borderColor: isInIncorrect ? 'red' : selected == 'email' ? colors.primary : 'grey', paddingBottom: 0, paddingLeft: 0, fontSize: 16 }}
+                        placeholderTextColor={isInIncorrect ? 'red' : selected == 'email' ? colors.primary : 'grey'}
                         onFocus={() => {
                             setSelected('email')
                         }}
                         onBlur={onBlur}
                     />
+                    {
+                        isInIncorrect && <CloseButton onPress={onCloseButtonPress} />
+                    }
+
                 </View>
 
-                <View style={{ marginBottom: 30 }}>
+                <View style={{ marginBottom: isInIncorrect ? 0 : 30 }}>
                     <TextInput
                         placeholder='Password'
                         value={password}
                         onChangeText={setPassword}
-                        style={{ color: 'black', borderBottomWidth: 1, borderColor: selected == 'password' ? colors.primary : 'grey', paddingBottom: 0, paddingLeft: 0, fontSize: 16 }}
-                        placeholderTextColor={selected == 'password' ? colors.primary : 'grey'}
+                        style={{ color: 'black', borderBottomWidth: 1, borderColor: isInIncorrect ? 'red' : selected == 'password' ? colors.primary : 'grey', paddingBottom: 0, paddingLeft: 0, fontSize: 16 }}
+                        placeholderTextColor={isInIncorrect ? 'red' : selected == 'password' ? colors.primary : 'grey'}
                         onFocus={() => {
                             setSelected('password')
                         }}
                         onBlur={onBlur}
                     />
                 </View>
+
+                {
+                    isInIncorrect && <View style={{ marginVertical: 10, marginBottom: 20 }}>
+                        <Text style={{ color: 'red', fontSize: 12, letterSpacing: -0.2 }}>
+                            Email/username or password is incorrect.
+                        </Text>
+                    </View>
+                }
 
                 <Button normalText title={'Continue'} style={{ marginBottom: 20, borderRadius: 8 }} onPress={async () => {
                     setIsLoading(true);
@@ -98,14 +118,22 @@ const LoginModal = props => {
                     let loginUsername = ''
                     let loginPassword = ''
                     if (fromAdmin) {
-                        if (!(data.auth.admin.email == usernameOrEmail || data.auth.admin.username == usernameOrEmail)) return;
+                        if (!(data.auth.admin.email == usernameOrEmail || data.auth.admin.username == usernameOrEmail)) {
+                            setIsInIncorrect(true);
+                            setIsLoading(false);
+                            return;
+                        }
                         const admin = data.auth.admin;
                         loginEmail = admin.email;
                         loginUsername = admin.username;
                         loginPassword = admin.password
                     } else {
                         const indexOfUser = data.auth.users.findIndex(user => user.email == usernameOrEmail || user.password == usernameOrEmail);
-                        if (indexOfUser == -1) return;
+                        if (indexOfUser == -1) {
+                            setIsLoading(false);
+                            setIsInIncorrect(true);
+                            return;
+                        }
                         const user = data.auth.users[indexOfUser];
                         loginEmail = user.email
                         loginUsername = user.username
