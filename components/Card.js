@@ -2,6 +2,8 @@ import React from 'react'
 import { Text, View, StyleSheet, FlatList, Image, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import colors from '../constants/colors';
+import EditIcon  from 'react-native-vector-icons/FontAwesome'
+import DeleteIcon  from 'react-native-vector-icons/AntDesign'
 
 
 export const Card = ({ item, isAdmin }) => {
@@ -27,9 +29,18 @@ export const Card = ({ item, isAdmin }) => {
                         </Text>
                     </View>
                     <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {item.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {item.price}</Text> </Text>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={{ color: colors.primary, fontFamily: 'bold' }}>Add to cart</Text>
-                    </TouchableOpacity>
+                    <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <TouchableOpacity style={styles.button}>
+                            <Text adjustsFontSizeToFit={true} style={{ color: "green", fontFamily: 'bold', margin: 5 }}>
+                                <EditIcon name="edit" style={{ fontSize:40}}/>
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.button}>
+                            <Text adjustsFontSizeToFit={true} style={{ color: "red", fontFamily: 'bold', margin: 5}}>
+                                <DeleteIcon name='delete' style={{ fontSize:40}}/>
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             );
         };
@@ -39,7 +50,7 @@ export const Card = ({ item, isAdmin }) => {
                     <Text style={styles.cardHeadingTextStyle}>{item.name} Products</Text>
                 </View>
                 <FlatList
-                    columnWrapperStyle={{width: "100%"}}
+                    columnWrapperStyle={{ width: "100%" }}
                     data={item.items}
                     numColumns={2}
                     keyExtractor={(item, index) => index.toString()}
@@ -115,7 +126,7 @@ const styles = StyleSheet.create({
         elevation: 5,
         width: 160,
         borderRadius: 15,
-        paddingBottom: 8
+        paddingBottom: 8,
     },
     card: {
         marginVertical: 10,

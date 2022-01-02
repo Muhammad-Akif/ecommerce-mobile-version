@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Search from '../../../components/user/home/Search'
-import { Text, StyleSheet, View, FlatList } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, View, FlatList } from 'react-native';
 import { items } from '../../../data/items'
-import { Card } from '../../../components/Card'
+import colors from '../../../constants/colors';
+import { Card } from '../../../components/Card';
+import AddIcon  from 'react-native-vector-icons/AntDesign'
 
 const Home = () => {
     const [search, setSearch] = useState('');
@@ -44,7 +46,7 @@ const Home = () => {
     const ItemView = ({ item }) => {
         return (
             // Flat List Item
-            <View style={{paddingBottom: '12%'}}>
+            <View style={{ paddingBottom: '12%' }}>
                 <Card isAdmin={true} item={item} />
             </View>
         );
@@ -54,12 +56,20 @@ const Home = () => {
         <View style={styles.container}>
             <Search search={search} searchFilterFunction={searchFilterFunction} />
             <FlatList
-                columnWrapperStyle={{ flexWrap: 'wrap'}}
+                columnWrapperStyle={{ flexWrap: 'wrap' }}
                 data={filteredDataSource}
                 numColumns={2}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={ItemView}
             />
+            <TouchableOpacity
+                style={styles.floatingButton}
+                // onPress={() => navigate('HomeScreen')}
+                >
+                <Text style={styles.btnText}>
+                    <AddIcon name="plus" style={{ fontSize:28}}/>
+                </Text>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -67,7 +77,25 @@ const Home = () => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
+        flex: 1
     },
+    btnText: {
+        color: colors.primary,
+        // paddingBottom: 3,
+    },
+    floatingButton: {
+        width: 50,  
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 50,   
+        borderRadius: 25,
+        elevation: 8,            
+        backgroundColor: "#fff",                                    
+        position: 'absolute',                                          
+        bottom: 10,                                                    
+        right: 10, 
+    }
 });
 
 export default Home;
