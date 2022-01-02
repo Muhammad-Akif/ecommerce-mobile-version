@@ -145,7 +145,7 @@ const LoginModal = props => {
                     }
                     setIsLoading(false);
                     props.navigation.popToTop();
-                    props.navigation.replace('MainNavigator')
+                    props.navigation.replace('DrawerCartStackNavigator')
                     setAuth({
                         email: loginEmail,
                         username: loginUsername,
