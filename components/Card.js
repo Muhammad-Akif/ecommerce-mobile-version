@@ -38,41 +38,13 @@ export const Card = ({ item, isAdmin }) => {
                 <View style={styles.cardHeadingStyle}>
                     <Text style={styles.cardHeadingTextStyle}>{item.name} Products</Text>
                 </View>
-                {/* <FlatList
+                <FlatList
                     columnWrapperStyle={{ width: "100%" }}
                     data={item.items}
                     numColumns={2}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={ItemView}
-                /> */}
-                <ScrollView columnWrapperStyle={{ width: "100%" }} contentContainerStyle={{flexWrap: 'wrap'}}>
-                    {
-                        item.items.map((item, index) => (
-                            <View key={item.id + index} style={styles.Acard}>
-                                <TouchableOpacity
-                                    style={styles.button2}
-                                >
-                                    <Text style={{ color: 'green', fontSize: 12 }}>20% OFF</Text>
-                                </TouchableOpacity>
-                                <Image source={{ uri: item.uri }} style={styles.productImage} />
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={{ color: '#494949', fontWeight: '200', fontFamily: 'text-bold', fontSize: 16.5 }} adjustsFontSizeToFit={true} numberOfLines={1}>
-                                        {item.name}
-                                    </Text>
-                                </View>
-                                <View style={styles.childViewTextStyle}>
-                                    <Text style={{ color: 'grey', fontFamily: 'italic', fontSize: 15 }}>
-                                        {item.detail}
-                                    </Text>
-                                </View>
-                                <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {item.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {item.price}</Text> </Text>
-                                <TouchableOpacity style={styles.button}>
-                                    <Text style={{ color: colors.primary, fontFamily: 'bold' }}>Add to cart</Text>
-                                </TouchableOpacity>
-                            </View>
-                        ))
-                    }
-                </ScrollView>
+                />
             </View>
         )
     }
@@ -109,9 +81,14 @@ export const Card = ({ item, isAdmin }) => {
                                 </Text>
                             </View>
                             <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {item.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {item.price}</Text> </Text>
+                            <View>
                             <TouchableOpacity style={styles.button}>
-                                <Text style={{ color: colors.primary, fontFamily: 'bold' }}>Add to cart</Text>
+                                <Text style={{ color: colors.primary, fontFamily: 'bold' }}>Edit Details</Text>
                             </TouchableOpacity>
+                            <TouchableOpacity style={styles.button}>
+                                <Text style={{ color: colors.primary, fontFamily: 'bold' }}>Delete</Text>
+                            </TouchableOpacity>
+                            </View>
                         </View>
                     ))}
                 </ScrollView>
