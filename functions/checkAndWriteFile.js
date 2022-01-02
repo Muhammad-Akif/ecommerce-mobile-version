@@ -11,8 +11,6 @@ const checkAndWriteFile = async data => {
     const fileInfo = await FileSystem.getInfoAsync(file_path);
     if (fileInfo.exists) {
         await FileSystem.writeAsStringAsync(file_path, JSON.stringify(data), { encoding: FileSystem.EncodingType.UTF8 });
-        const asset = await MediaLibrary.createAssetAsync(file_path)
-        await MediaLibrary.createAlbumAsync("Download", asset, false)
         return true;
     }
     checkAndCreateFolder();

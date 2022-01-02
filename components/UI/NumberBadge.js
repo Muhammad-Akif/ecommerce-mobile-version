@@ -16,13 +16,15 @@ export default NumberBadge;
 
 const styles = StyleSheet.create({
     numberBadge: {
-        backgroundColor: colors.lightGrey,
-        top: -1,
+        backgroundColor: '#00008b',
+        top: 10,
+        right: 8,
         width: 14,
         height: 14,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 7
+        borderRadius: 7,
+        position: 'absolute'
     },
     text: {
         fontSize: 10,

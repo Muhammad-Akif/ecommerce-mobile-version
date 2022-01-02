@@ -33,17 +33,20 @@ const items = {
 };
 
 // Cart Items
-const cart = {
-  totalPrice: 3000, // Some of all items totalPrice
-  items: [
-    { category: 'uniqueId', id: 'uniqueId', name: 'abc', detail: 'abc', price: 30, uri: '///', quantity: 3, totalPrice: 3 * 30 }
-  ]
-}
+const cart = [
+  {
+    username: '', // unique
+    totalPrice: 3000, // Some of all items totalPrice
+    items: [
+      { category: 'uniqueId', id: 'uniqueId', name: 'abc', detail: 'abc', price: 30, uri: '///', quantity: 3, totalPrice: 3 * 30 }
+    ]
+  }
+]
 
 // Orders
 const orders = [
   {
-    startDate: '', price: 6000, deliveryTime: '', status: 'delivered | picked', items: [
+    username: '', startDate: '', price: 6000, deliveryTime: '', status: 'delivered | picked', items: [
       { category: 'uniqueId', id: 'uniqueId', name: 'abc', detail: 'abc', price: 30, quantity: 3, totalPrice: 3000 },
       { category: 'uniqueId', id: 'uniqueId', name: 'abc', detail: 'abc', price: 30, quantity: 3, totalPrice: 3000 },
     ]
@@ -59,7 +62,7 @@ const weeklyDeals = [
 
 // Favorite Items
 const favoriteItems = [
-  { id: 'uniqueId', name: "abc", detail: "abc", price: 20, uri: '///', ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] },
-  { id: 'uniqueId', name: "abc", detail: "abc", price: 20, uri: '///', ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] }
+  { username: '', id: 'uniqueId', name: "abc", detail: "abc", price: 20, uri: '///', ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] },
+  { username: '', id: 'uniqueId', name: "abc", detail: "abc", price: 20, uri: '///', ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] }
   // { id: 'uniqueId', name: "abc", detail: "abc", price: 20, ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] }
 ]
