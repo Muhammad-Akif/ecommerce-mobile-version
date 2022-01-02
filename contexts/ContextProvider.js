@@ -12,11 +12,17 @@ export const ContextProvider = ({ children }) => {
         logout: true
     });
 
+    const [cart, setCart] = useState({
+        totalPrice: 0,
+        items: [
+        ]
+    });
+
     return (
-        <AuthContext.Provider value={{ auth, setAuth }}>
+        <AuthContext.Provider value={{ auth, setAuth, cart, setCart }}>
             {children}
         </AuthContext.Provider>
     )
 }
 
-export const useAuthContext = () => useContext(AuthContext);
+export const useEcommerceContext = () => useContext(AuthContext);

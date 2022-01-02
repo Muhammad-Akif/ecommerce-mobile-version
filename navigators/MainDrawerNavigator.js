@@ -18,7 +18,7 @@ const { width } = Dimensions.get('window');
 import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import ManageRates from '../screens/admin/managerates/ManageRates';
 import ManageOrders from '../screens/admin/manageorders/ManageOrders';
-import { useAuthContext } from '../contexts/ContextProvider';
+import { useEcommerceContext } from '../contexts/ContextProvider';
 import Home from '../screens/user/home/Home';
 
 function CustomDrawerContent(props) {
@@ -58,7 +58,7 @@ function CustomDrawerContent(props) {
 const Drawer = createDrawerNavigator();
 
 export default function MainDrawerNavigator() {
-    const { auth } = useAuthContext();
+    const { auth } = useEcommerceContext();
     return (
         <Drawer.Navigator
             initialRouteName="Home"

@@ -15,7 +15,7 @@ const ProductDetailScreen = props => {
             <View style={styles.buttonContainer}>
                 <Button color={colors.primary} title='Add to Cart' onPress={() => { }} />
             </View>
-            <Text style={styles.price}>Rs {selectedProduct?.price}</Text>
+            <Text style={styles.price}>${selectedProduct?.price}</Text>
             <Text style={styles.description}>{selectedProduct?.detail}</Text>
         </ScrollView>
     );
