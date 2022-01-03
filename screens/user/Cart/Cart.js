@@ -11,7 +11,17 @@ import Button from '../../../components/UI/Button';
 const Cart = props => {
     const { auth, cart, setCart, allData, setAllData, setOrders, orders } = useEcommerceContext();
     const cartIndex = cart.findIndex(cartItem => cartItem.username == auth.username);
+
+    if (cartIndex == -1 || cart[cartIndex].items.length == 0) {
+        return (
+            <View style={{ ...styles.screen, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={styles.noItemLabel}>No items here</Text>
+            </View>
+        )
+    }
+
     let totalPrice = 0;
+    console.log(cart, 'aaaaaaaaaaaaaaaaa', cartIndex)
     cart[cartIndex].items.forEach(item => {
         totalPrice += parseFloat(item.totalPrice);
     })
@@ -64,13 +74,7 @@ const Cart = props => {
         setAllData(newFileData);
     }
 
-    if (cart[cartIndex].items.length == 0) {
-        return (
-            <View style={{ ...styles.screen, justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={styles.noItemLabel}>No items here</Text>
-            </View>
-        )
-    }
+
 
     return (
         <View style={styles.screen}>
