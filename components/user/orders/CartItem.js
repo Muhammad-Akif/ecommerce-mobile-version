@@ -11,7 +11,7 @@ const OrderItem = props => {
                 <Text style={styles.mainText}>{props.title}</Text>
             </View>
             <View style={styles.priceTrash}>
-                <Text style={styles.mainText}>{props.price}</Text>
+                <Text style={styles.mainText}>${props.price}</Text>
                 {props.deleteButton && <TouchableOpacity style={styles.deleteButton} onPress={props.onDeleteItem}>
                     <Ionicons
                         name={Platform.OS === 'android' ? 'md-trash' : 'ios-trash'}
@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingHorizontal: 10,
-        marginHorizontal: 20
+        marginHorizontal: 20,
+        alignItems: 'center'
     },
     titleQuantity: {
         flexDirection: 'row',
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginRight: 4
     },
-    mainText: { 
+    mainText: {
         fontFamily: 'open-sans-bold',
         fontSize: 16
     },
