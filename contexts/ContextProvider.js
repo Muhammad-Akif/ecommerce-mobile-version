@@ -8,6 +8,7 @@ export const ContextProvider = ({ children }) => {
         const data = await checkAndReadFile();
         setCart(data.cart);
         setAllData(data);
+        setOrders(data.orders)
     }
     useEffect(() => {
         fetchData();

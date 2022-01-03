@@ -31,10 +31,10 @@ const OrderItem = props => { // inprogress
             {isShowDetail && <View style={styles.detailSection}>
                 {props.items.map(order =>
                     <CartItem
-                        key={order.productId}
+                        key={order.id}
                         quantity={order.quantity}
-                        title={order.productTitle}
-                        price={order.sum} />
+                        title={order.name}
+                        price={order.totalPrice} />
                 )}
             </View>}
         </View>
