@@ -10,6 +10,7 @@ export const ContextProvider = ({ children }) => {
         setAllData(data);
         setOrders(data.orders)
         setFavoriteItems(data.favoriteItems)
+        setItems(data.items)
     }
     useEffect(() => {
         fetchData();
@@ -30,13 +31,15 @@ export const ContextProvider = ({ children }) => {
     ]);
 
     const [orders, setOrders] = useState([]);
-    
+
     const [favoriteItems, setFavoriteItems] = useState([]);
 
     const [allData, setAllData] = useState({});
 
+    const [items, setItems] = useState({});
+
     return (
-        <AuthContext.Provider value={{ auth, setAuth, cart, setCart, allData, setAllData, orders, setOrders, favoriteItems, setFavoriteItems }}>
+        <AuthContext.Provider value={{ items, setItems, auth, setAuth, cart, setCart, allData, setAllData, orders, setOrders, favoriteItems, setFavoriteItems }}>
             {children}
         </AuthContext.Provider>
     )

@@ -2,20 +2,18 @@ import React, { useEffect, useState } from 'react'
 import Search from '../../../components/user/home/Search'
 import ProductCard from '../../../components/user/home/ProductCards';
 import { View, StyleSheet } from 'react-native';
-import { items } from '../../../data/items'
 import colors from '../../../constants/colors';
+import { useEcommerceContext } from '../../../contexts/ContextProvider';
 
 export default function Home(props) {
-    const [search, setSearch] = useState('');
-    const [filteredDataSource, setFilteredDataSource] = useState(items);
-    const [masterDataSource, setMasterDataSource] = useState(items);
+    const { items } = useEcommerceContext();
 
+    const [search, setSearch] = useState('');
+    const [filteredDataSource, setFilteredDataSource] = useState(items.categories);
+    const [masterDataSource, setMasterDataSource] = useState(items.categories);
 
     const searchFilterFunction = (text) => {
-        // Check if searched text is not blank
         if (text) {
-            // [{name, items: [{ id, name, detail, uri, price },{ id, name, detail, uri, price }], lastId }]
-            // [{ id: 1, name: 'akif'}]
             const newData = masterDataSource.map(function (item) {
                 const arr = item.items.filter(i => {
                     const itemData = i.name
@@ -34,8 +32,6 @@ export default function Home(props) {
             setFilteredDataSource(searchedData);
             setSearch(text);
         } else {
-            // Inserted text is blank
-            // Update FilteredDataSource with masterDataSource
             setFilteredDataSource(masterDataSource);
             setSearch(text);
         }

@@ -1,5 +1,5 @@
 import { initialAdmin, initialUsers } from "../constants/settings";
-
+import { items } from '../data/items';
 const template = {
     auth: {
         whoIsLogin: '', //admin | user
@@ -12,10 +12,8 @@ const template = {
         admin: initialAdmin
     },
     items: {
-        lastId: 0,
-        categories: {
-            // categoryName: [],
-        }
+        lastId: 16,
+        categories: items
     },
     cart: [],
     orders: [],
