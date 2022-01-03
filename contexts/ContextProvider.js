@@ -27,10 +27,17 @@ export const ContextProvider = ({ children }) => {
         // items: [] }
     ]);
 
+    const [orders, setOrders] = useState([
+        // {
+        // uername: '',
+        // totalPrice: 0,
+        // items: [] }
+    ]);
+
     const [allData, setAllData] = useState({});
 
     return (
-        <AuthContext.Provider value={{ auth, setAuth, cart, setCart, allData, setAllData }}>
+        <AuthContext.Provider value={{ auth, setAuth, cart, setCart, allData, setAllData, orders, setOrders }}>
             {children}
         </AuthContext.Provider>
     )
