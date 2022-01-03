@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Search from '../../../components/user/home/Search'
 import { TouchableOpacity, Text, StyleSheet, View, FlatList } from 'react-native';
-import { items } from '../../../data/items'
 import colors from '../../../constants/colors';
 import { Card } from '../../../components/Card';
 import AddIcon from 'react-native-vector-icons/AntDesign'
+import { useEcommerceContext } from '../../../contexts/ContextProvider';
 
 const Home = props => {
-    const [search, setSearch] = useState('');
-    const [filteredDataSource, setFilteredDataSource] = useState(items);
-    const [masterDataSource, setMasterDataSource] = useState(items);
+    const { items } = useEcommerceContext();
 
+    const [search, setSearch] = useState('');
+    const [filteredDataSource, setFilteredDataSource] = useState(items.categories);
+    const [masterDataSource, setMasterDataSource] = useState(items.categories);
 
     const searchFilterFunction = (text) => {
-        // Check if searched text is not blank
         if (text) {
-            // [{name, items: [{ id, name, detail, uri, price },{ id, name, detail, uri, price }], lastId }]
-            // [{ id: 1, name: 'akif'}]
             const newData = masterDataSource.map(function (item) {
 
                 const arr = item.items.filter(i => {
@@ -36,8 +34,6 @@ const Home = props => {
             setFilteredDataSource(searchedData);
             setSearch(text);
         } else {
-            // Inserted text is blank
-            // Update FilteredDataSource with masterDataSource
             setFilteredDataSource(masterDataSource);
             setSearch(text);
         }
@@ -64,7 +60,7 @@ const Home = props => {
             />
             <TouchableOpacity
                 style={styles.floatingButton}
-                onPress={() => props.navigation.navigate('AddModifyItems', {isEdit: false})}
+                onPress={() => props.navigation.navigate('AddModifyItems', { isEdit: false })}
             >
                 <Text style={styles.btnText}>
                     <AddIcon name="plus" style={{ fontSize: 28 }} />
