@@ -9,8 +9,9 @@ import CartItem from '../models/cartItem';
 import checkAndWriteFile from '../functions/checkAndWriteFile';
 import Cart from '../models/cart';
 
-export const Card = ({ item, isAdmin, navigation }) => {
-    const { cart, setCart, allData, setAllData, auth } = useEcommerceContext();
+export const Card = (props) => {
+  const { cart, setCart, allData, setAllData, auth } = useEcommerceContext();
+    const { item, isAdmin, navigation } = props;
 
     if (isAdmin) {
         const ItemView = ({ item, i }) => {
@@ -35,7 +36,10 @@ export const Card = ({ item, isAdmin, navigation }) => {
                     </View>
                     <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {item.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {item.price}</Text> </Text>
                     <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={() => props.navigation.navigate('AddModifyItems', {isEdit: true})}
+                        >
                             <Text adjustsFontSizeToFit={true} style={{ color: "green", fontFamily: 'bold', margin: 5 }}>
                                 <EditIcon name="edit" style={{ fontSize: 40 }} />
                             </Text>
