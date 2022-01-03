@@ -4,7 +4,6 @@ import * as Google from "expo-google-app-auth";
 
 export default class GoogleSignin extends Component {
     _handleGoogleLogin = async () => {
-        console.log("LoginScreen.js 6 | loggin in");
         try {
             const { type, user } = await Google.logInAsync({
                 androidClientId: `1063086127018-ios3ojhcij7qce2cv4tb328euiee32c4.apps.googleusercontent.com`,
