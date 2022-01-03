@@ -1,21 +1,63 @@
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, Button } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Image, ScrollView, Button, TouchableOpacity } from 'react-native';
 import colors from '../../constants/colors';
 import { useEcommerceContext } from '../../contexts/ContextProvider';
 import CartItem from '../../models/cartItem';
 import Cart from '../../models/cart';
 import checkAndWriteFile from '../../functions/checkAndWriteFile';
+import { Ionicons } from '@expo/vector-icons';
+import FavoritesItemModal from '../../models/favoriteItem';
+
 
 const ProductDetailScreen = props => {
     const product = props?.route?.params?.item;
     const category = props?.route?.params?.category;
-    const { cart, setCart, auth, allData, setAllData } = useEcommerceContext();
+    const { cart, setCart, auth, allData, setAllData, favoriteItems, setFavoriteItems } = useEcommerceContext();
+
+    const isItemExists = favoriteItems.findIndex(item => (item.username == auth.username && item.id == product.id));
+
+
+    const handleFavorite = async () => {
+        let newFavorites = [];
+        if (isItemExists != -1) {
+            newFavorites = [...favoriteItems];
+            favoriteDuplicate.splice(isItemExists, 1);
+        } else {
+            newFavorites = [
+                ...favoriteItems,
+                new FavoritesItemModal(
+                    auth.username,
+                    product.id,
+                    product.name,
+                    product.detail,
+                    product.price,
+                    product.uri,
+                    []
+                )
+            ];
+        }
+
+
+        setFavoriteItems(newFavorites);
+        const newData = {
+            ...allData,
+            favoriteItems: newFavorites
+        };
+
+        await checkAndWriteFile(newData)
+        setAllData(newData);
+    }
 
     useEffect(() => {
         props.navigation.setOptions({
-            headerTitle: product.name[0].toUpperCase() + product.name.slice(1)
+            headerTitle: product.name[0].toUpperCase() + product.name.slice(1),
+            headerRight: () => (
+                <TouchableOpacity style={{ marginRight: 10 }} onPress={handleFavorite}>
+                    <Ionicons name={isItemExists > -1 ? 'md-star' : 'md-star-outline'} size={26} color={colors.primary} />
+                </TouchableOpacity>
+            )
         })
-    }, [])
+    })
 
     const handleAddToCart = async () => {
         const cartIndex = cart.findIndex(cartItem => cartItem.username == auth.username);

@@ -9,6 +9,7 @@ export const ContextProvider = ({ children }) => {
         setCart(data.cart);
         setAllData(data);
         setOrders(data.orders)
+        setFavoriteItems(data.favoriteItems)
     }
     useEffect(() => {
         fetchData();
@@ -28,17 +29,14 @@ export const ContextProvider = ({ children }) => {
         // items: [] }
     ]);
 
-    const [orders, setOrders] = useState([
-        // {
-        // uername: '',
-        // totalPrice: 0,
-        // items: [] }
-    ]);
+    const [orders, setOrders] = useState([]);
+    
+    const [favoriteItems, setFavoriteItems] = useState([]);
 
     const [allData, setAllData] = useState({});
 
     return (
-        <AuthContext.Provider value={{ auth, setAuth, cart, setCart, allData, setAllData, orders, setOrders }}>
+        <AuthContext.Provider value={{ auth, setAuth, cart, setCart, allData, setAllData, orders, setOrders, favoriteItems, setFavoriteItems }}>
             {children}
         </AuthContext.Provider>
     )

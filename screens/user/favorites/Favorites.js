@@ -2,8 +2,11 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import MealList from '../../../components/user/favorites/MealList';
 import colors from '../../../constants/colors';
+import { useEcommerceContext } from '../../../contexts/ContextProvider';
 
 const Favorites = props => {
+
+    const { auth } = useEcommerceContext();
 
     const favMeals = [
         { id: 0, title: 'Foods', imageUrl: 'https://media.istockphoto.com/photos/foods-high-in-zinc-picture-id1289940519?b=1&k=20&m=1289940519&s=170667a&w=0&h=u5BwIDikkJCxrQQopgYHW2rOi7XBmG3JOHJJvYIE2C0=', price: 23, category: 'Fats free' },
