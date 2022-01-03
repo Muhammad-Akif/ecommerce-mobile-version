@@ -7,10 +7,12 @@ const MealList = props => {
 
     const renderMealItem = itemData => {
         return <MealItem
-            title={itemData.item.title}
-            image={itemData.item.imageUrl}
+            title={itemData.item.name}
+            image={itemData.item.uri}
             price={itemData.item.price}
-            category={itemData.item.category} />
+            details={itemData.item.detail}
+            fullInfo={itemData.item}
+            navigation={props.navigation} />
     }
 
     return (

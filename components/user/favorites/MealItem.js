@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import colors from '../../../constants/colors';
 import Badge from '../../UI/Badge';
 
-const MealItem = props => {
-
-    const [favorite, setFavorite] = useState(true);
-
+const MealItem = props => { // fullInfo
     return (
-        <View style={styles.mealItem}>
+
+        <TouchableOpacity onPress={() => props.navigation.navigate('ProductDetails', { item: props.fullInfo, category: props.fullInfo.category })} style={styles.mealItem}>
             <View style={{ ...styles.mealRow, ...styles.mealHeader }}>
                 <ImageBackground source={{ uri: props.image }} style={styles.bgImage}>
                     <View style={styles.titleContainer}>
@@ -19,13 +15,9 @@ const MealItem = props => {
             </View>
             <View style={{ ...styles.mealRow, ...styles.mealDetail }}>
                 <Text style={styles.text}>{props.price}$</Text>
-                <Badge text={props.category.toUpperCase()} />
+                <Badge text={props.details} favorite />
             </View>
-            <View style={styles.circle} />
-            <TouchableOpacity style={styles.star} onPress={setFavorite.bind(null, !favorite)}>
-                <Ionicons name={favorite ? 'md-star' : 'md-star-outline'} size={26} color={colors.secondary} />
-            </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
     );
 }
 

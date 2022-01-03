@@ -6,12 +6,9 @@ import { useEcommerceContext } from '../../../contexts/ContextProvider';
 
 const Favorites = props => {
 
-    const { auth } = useEcommerceContext();
+    const { auth, favoriteItems } = useEcommerceContext();
 
-    const favMeals = [
-        { id: 0, title: 'Foods', imageUrl: 'https://media.istockphoto.com/photos/foods-high-in-zinc-picture-id1289940519?b=1&k=20&m=1289940519&s=170667a&w=0&h=u5BwIDikkJCxrQQopgYHW2rOi7XBmG3JOHJJvYIE2C0=', price: 23, category: 'Fats free' },
-        { id: 1, title: 'Dinner', imageUrl: 'https://media.istockphoto.com/photos/thanksgiving-party-table-setting-traditional-holiday-stuffed-turkey-picture-id1268544544?b=1&k=20&m=1268544544&s=170667a&w=0&h=J5F56fvQ8jeuUG4HRs3Ngj0g6JBooX0pCq8UVMMKMf4=', price: 500, category: 'Lactose free' },
-    ];
+    const favMeals = favoriteItems.filter(item => item.username == auth.username);
 
     if (favMeals.length == 0 || !favMeals) {
         return (
@@ -23,7 +20,7 @@ const Favorites = props => {
         )
     }
 
-    return <MealList listData={favMeals} />
+    return <MealList listData={favMeals} navigation={props.navigation}/>
 }
 
 export default Favorites;

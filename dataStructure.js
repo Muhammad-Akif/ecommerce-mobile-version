@@ -62,7 +62,7 @@ const weeklyDeals = [
 
 // Favorite Items
 const favoriteItems = [
-  { username: '', id: 'uniqueId', name: "abc", detail: "abc", price: 20, uri: '///', ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] },
-  { username: '', id: 'uniqueId', name: "abc", detail: "abc", price: 20, uri: '///', ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] }
+  { username: '', id: 'uniqueId', name: "abc", detail: "abc", price: 20, uri: '///', category: '', ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] },
+  { username: '', id: 'uniqueId', name: "abc", detail: "abc", price: 20, uri: '///', category: '', ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] }
   // { id: 'uniqueId', name: "abc", detail: "abc", price: 20, ratings: [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }] }
 ]

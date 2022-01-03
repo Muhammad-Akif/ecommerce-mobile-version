@@ -21,7 +21,7 @@ const ProductDetailScreen = props => {
         let newFavorites = [];
         if (isItemExists != -1) {
             newFavorites = [...favoriteItems];
-            favoriteDuplicate.splice(isItemExists, 1);
+            newFavorites.splice(isItemExists, 1);
         } else {
             newFavorites = [
                 ...favoriteItems,
@@ -32,6 +32,7 @@ const ProductDetailScreen = props => {
                     product.detail,
                     product.price,
                     product.uri,
+                    category,
                     []
                 )
             ];
