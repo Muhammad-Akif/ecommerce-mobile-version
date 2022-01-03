@@ -62,11 +62,9 @@ const LoginModal = props => {
                             Facebook
                         </Text>
                     </View>
-                    <View style={{ borderRadius: 6, width: '47%', backgroundColor: '#3f80e8', height: 36, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ color: 'white', fontWeight: 'bold' }}>
-                            <GoogleSignin />
-                        </Text>
-                    </View>
+                    
+                    <GoogleSignin />
+
                 </View>
 
                 <View style={{ alignItems: 'center', marginBottom: 20 }}>
