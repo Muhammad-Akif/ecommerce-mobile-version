@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Inter_900Black, Inter_800ExtraBold, } from '@expo-google-fonts/inter';
@@ -6,7 +6,6 @@ import Constants from 'expo-constants';
 import { LinearGradient } from 'expo-linear-gradient';
 import colors from '../constants/colors';
 import Button from '../components/UI/Button';
-
 const { width } = Dimensions.get('window');
 
 export default function OnBoarding(props) {

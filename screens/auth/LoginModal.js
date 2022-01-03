@@ -7,6 +7,8 @@ import FullScreenIndicator from '../../components/UI/FullScreenIndicator';
 import colors from '../../constants/colors';
 import { useEcommerceContext } from '../../contexts/ContextProvider';
 import checkAndReadFile from '../../functions/checkAndReadFile';
+import GoogleSignin from './GoogleSignin'
+import FacebookSignin from './FacebookSignin'
 
 const LoginModal = props => {
     const { setAuth } = useEcommerceContext();
@@ -56,16 +58,10 @@ const LoginModal = props => {
                     </Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-                    <View style={{ borderRadius: 6, width: '47%', backgroundColor: '#002e78', height: 36, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ color: 'white', fontWeight: 'bold' }}>
-                            Facebook
-                        </Text>
-                    </View>
-                    <View style={{ borderRadius: 6, width: '47%', backgroundColor: '#3f80e8', height: 36, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ color: 'white', fontWeight: 'bold' }}>
-                            Google
-                        </Text>
-                    </View>
+                    <FacebookSignin/>
+
+                    <GoogleSignin />
+
                 </View>
 
                 <View style={{ alignItems: 'center', marginBottom: 20 }}>

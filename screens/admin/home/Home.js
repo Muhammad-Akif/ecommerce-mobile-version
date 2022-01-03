@@ -4,9 +4,9 @@ import { TouchableOpacity, Text, StyleSheet, View, FlatList } from 'react-native
 import { items } from '../../../data/items'
 import colors from '../../../constants/colors';
 import { Card } from '../../../components/Card';
-import AddIcon  from 'react-native-vector-icons/AntDesign'
+import AddIcon from 'react-native-vector-icons/AntDesign'
 
-const Home = () => {
+const Home = props => {
     const [search, setSearch] = useState('');
     const [filteredDataSource, setFilteredDataSource] = useState(items);
     const [masterDataSource, setMasterDataSource] = useState(items);
@@ -47,7 +47,7 @@ const Home = () => {
         return (
             // Flat List Item
             <View style={{ paddingBottom: '12%' }}>
-                <Card isAdmin={true} item={item} />
+                <Card isAdmin={true} item={item} navigation={props.navigation} />
             </View>
         );
     };
@@ -64,10 +64,10 @@ const Home = () => {
             />
             <TouchableOpacity
                 style={styles.floatingButton}
-                // onPress={() => navigate('HomeScreen')}
-                >
+                onPress={() => props.navigation.navigate('AddModifyItems', {isEdit: false})}
+            >
                 <Text style={styles.btnText}>
-                    <AddIcon name="plus" style={{ fontSize:28}}/>
+                    <AddIcon name="plus" style={{ fontSize: 28 }} />
                 </Text>
             </TouchableOpacity>
         </View>
@@ -84,17 +84,17 @@ const styles = StyleSheet.create({
         // paddingBottom: 3,
     },
     floatingButton: {
-        width: 50,  
+        width: 50,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: 50,   
+        height: 50,
         borderRadius: 25,
-        elevation: 8,            
-        backgroundColor: "#fff",                                    
-        position: 'absolute',                                          
-        bottom: 10,                                                    
-        right: 10, 
+        elevation: 8,
+        backgroundColor: "#fff",
+        position: 'absolute',
+        bottom: 10,
+        right: 10,
     }
 });
 
