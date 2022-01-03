@@ -4,6 +4,7 @@ import ProductCard from '../../../components/user/home/ProductCards';
 import { View, StyleSheet } from 'react-native';
 import colors from '../../../constants/colors';
 import { useEcommerceContext } from '../../../contexts/ContextProvider';
+import itemsData from '../../../data/items';
 
 export default function Home(props) {
     const { items } = useEcommerceContext();

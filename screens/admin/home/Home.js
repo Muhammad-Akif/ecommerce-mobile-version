@@ -5,6 +5,7 @@ import colors from '../../../constants/colors';
 import { Card } from '../../../components/Card';
 import AddIcon from 'react-native-vector-icons/AntDesign'
 import { useEcommerceContext } from '../../../contexts/ContextProvider';
+import itemsData from '../../../data/items';
 
 const Home = props => {
     const { items } = useEcommerceContext();

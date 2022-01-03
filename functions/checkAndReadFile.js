@@ -14,7 +14,7 @@ const checkAndReadFile = async () => {
         console.log(JSON.parse(data))
         return JSON.parse(data);
     }
-    checkAndCreateFolder();
+    await checkAndCreateFolder();
     return false;
 };
 
