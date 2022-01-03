@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, TextInput, StyleSheet } from 'react-native';
+import { Text, View, TextInput, StyleSheet, Picker } from 'react-native';
 import Button from '../../../components/UI/Button';
 import colors from '../../../constants/colors';
 import Item from '../../../models/item'
@@ -10,6 +10,8 @@ const AddModifyItems = props => {
     const [price, setPrice] = useState(0)
     const [imageUri, setImageUri] = useState('')
     const [isUsernameValid, setIsUsernameValid] = useState(true)
+    const [category, setCategory] = useState('');
+    const [categories] = useState(['vagetables','Diary','Backery'])
     const isEdit = props.route.params.isEdit;
 
     useEffect(() => {
@@ -25,13 +27,14 @@ const AddModifyItems = props => {
     const addItemHandler = () => {
         const UID = generateID()
         console.log('level one seller',name.length > 2,detail.length > 10, imageUri.length > 10),price.length > 1
-        if (name.length > 2 && detail.length > 10 && imageUri.length > 10 && price.length > 1) {
+        if (name.length > 2 && detail.length > 10 && imageUri.length > 10 && price.length > 1 && category.length > 2) {
             const newItem = {
                 UID,
                 name,
                 detail,
                 price,
                 imageUri,
+                category
                 // []   
             }
             console.log('result --==>> ',newItem)
@@ -110,6 +113,15 @@ const AddModifyItems = props => {
                         }
                     </Text>
                 </View>
+                <Picker
+                style={{  marginBottom: 20, color: isUsernameValid ? colors.primary : 'grey' }}
+                selectedValue={category}
+                onValueChange={val => setCategory(val)}
+                >
+                    {
+                        categories.map(cat => <Picker.Item label={cat} value={cat} />)
+                    }
+                </Picker>
                 {
                     isEdit ?
                         <Button title="Edit Item" onPress={editItemHandler} />
