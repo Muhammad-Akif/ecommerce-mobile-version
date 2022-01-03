@@ -17,11 +17,7 @@ const template = {
             // categoryName: [],
         }
     },
-    cart: {
-        totalPrice: 0, // Some of all items totalPrice
-        items: [
-        ]
-    },
+    cart: [],
     orders: [],
     weeklyDeals: [],
     favoriteItems: []

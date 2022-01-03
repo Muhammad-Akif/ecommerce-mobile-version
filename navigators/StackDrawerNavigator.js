@@ -7,7 +7,7 @@ import AddModifyItems from '../screens/admin/addmodifyitems/AddModifyItems';
 
 const Stack = createStackNavigator();
 
-function DrawerCartStackNavigator() {
+function StackDrawerNavigator() {
     return (
         <Stack.Navigator initialRouteName={'Main'} screenOptions={{ headerTitleStyle: { fontFamily: 'bold' } }}>
             <Stack.Screen name="Main" component={MainDrawerNavigator} options={{ headerShown: false }} />
@@ -18,4 +18,4 @@ function DrawerCartStackNavigator() {
     );
 }
 
-export default DrawerCartStackNavigator;
+export default StackDrawerNavigator;

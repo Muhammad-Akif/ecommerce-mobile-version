@@ -1,37 +1,26 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import OrderItem from '../../../components/user/orders/OderItem';
-import checkAndReadFile from '../../../functions/checkAndReadFile';
+import { useEcommerceContext } from '../../../contexts/ContextProvider';
 
 const Completed = props => {
-    const fetchData = async () => {
-        const { orders } = await checkAndReadFile();
-    }
 
-    useEffect(() => {
-        fetchData();
-    }, [])
+    const { allData, setAllData, orders, setOrders, auth } = useEcommerceContext();
+    const userOrders = orders.filter(order => (order.username == auth.username && order.status == 'delivered'));
+
     return (
         <View style={style.screen}>
             <ScrollView>
-                <OrderItem
-                    amount={4220}
-                    date={'23 Aug'}
-                    items={[
-                        { productId: 1, quantity: 4, productTitle: 'Raita', sum: '50 $' },
-                        { productId: 2, quantity: 5, productTitle: 'Salad', sum: '230 $' },
-                        { productId: 3, quantity: 1, productTitle: 'Dahi', sum: '233 $' },
-                        { productId: 4, quantity: 2, productTitle: 'Mango', sum: '213 $' },
-                        { productId: 5, quantity: 3, productTitle: 'banana', sum: '323 $' },
-                    ]}
-                />
-                <OrderItem
-                    amount={430}
-                    date={'12 Nov'}
-                    items={[
-                        { productId: 2323, quantity: 2, productTitle: 'Potato', sum: '100$' }
-                    ]}
-                />
+                {
+                    userOrders.map((item, index) => (
+                        <OrderItem
+                            key={index}
+                            amount={item.price}
+                            date={new Date(item.startDate).toDateString()}
+                            items={item.items}
+                        />
+                    ))
+                }
             </ScrollView>
         </View>
     );

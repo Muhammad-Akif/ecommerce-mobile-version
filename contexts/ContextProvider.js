@@ -1,9 +1,18 @@
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState, createContext, useContext, useEffect } from 'react';
+import checkAndReadFile from '../functions/checkAndReadFile';
 
 const AuthContext = createContext();
 
 export const ContextProvider = ({ children }) => {
-
+    const fetchData = async () => {
+        const data = await checkAndReadFile();
+        setCart(data.cart);
+        setAllData(data);
+        setOrders(data.orders)
+    }
+    useEffect(() => {
+        fetchData();
+    }, [])
     const [auth, setAuth] = useState({
         email: '',
         username: '',
@@ -12,14 +21,24 @@ export const ContextProvider = ({ children }) => {
         logout: true
     });
 
-    const [cart, setCart] = useState({
-        totalPrice: 0,
-        items: [
-        ]
-    });
+    const [cart, setCart] = useState([
+        // {
+        // uername: '',
+        // totalPrice: 0,
+        // items: [] }
+    ]);
+
+    const [orders, setOrders] = useState([
+        // {
+        // uername: '',
+        // totalPrice: 0,
+        // items: [] }
+    ]);
+
+    const [allData, setAllData] = useState({});
 
     return (
-        <AuthContext.Provider value={{ auth, setAuth, cart, setCart }}>
+        <AuthContext.Provider value={{ auth, setAuth, cart, setCart, allData, setAllData, orders, setOrders }}>
             {children}
         </AuthContext.Provider>
     )

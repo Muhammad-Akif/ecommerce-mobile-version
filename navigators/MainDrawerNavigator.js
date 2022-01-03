@@ -58,7 +58,12 @@ function CustomDrawerContent(props) {
 const Drawer = createDrawerNavigator();
 
 export default function MainDrawerNavigator() {
-    const { auth } = useEcommerceContext();
+    const { auth, cart } = useEcommerceContext();
+    const index = cart?.findIndex(item => item.username == auth.username);
+    let length = 0;
+    if (index != -1) {
+        length = cart[index].items.length;
+    }
     return (
         <Drawer.Navigator
             initialRouteName="Home"
@@ -81,7 +86,7 @@ export default function MainDrawerNavigator() {
                         {/* User Screen */}
                         <Drawer.Screen name="Home" component={Home} options={({ navigation }) => ({
                             drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />,
-                            headerRight: () => <HeaderButton cart navigation={navigation} />
+                            headerRight: () => <HeaderButton cart navigation={navigation} text={length} />
                         })} />
                         <Drawer.Screen name="Filter" component={Filters} options={({ navigation }) => ({
                             drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-funnel-sharp'} />,
