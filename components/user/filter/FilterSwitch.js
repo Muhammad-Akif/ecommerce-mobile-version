@@ -5,7 +5,9 @@ import colors from '../../../constants/colors';
 const FilterSwitch = props => {
     return (
         <View style={styles.filterContainer}>
-            <Text style={styles.label}>{props.label}</Text>
+            <View style={{ width: '70%' }}>
+                <Text style={styles.label} numberOfLines={2} adjustsFontSizeToFit={true}>{props.label}</Text>
+            </View>
             <Switch
                 trackColor={{
                     true: colors.primary,

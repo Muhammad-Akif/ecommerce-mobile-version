@@ -108,11 +108,11 @@ export default function MainDrawerNavigator() {
                             drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />,
                             headerRight: () => <HeaderButton cart navigation={navigation} text={length} />
                         })} />
-                        <Drawer.Screen name="Filter" component={Filters} options={({ navigation }) => ({
+                        {/* <Drawer.Screen name="Filter" component={Filters} options={({ navigation }) => ({
                             drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-funnel-sharp'} />,
                             headerLeft: () => <HeaderButton navigation={navigation} />,
                             headerStyle: { backgroundColor: colors.offWhite }
-                        })} />
+                        })} /> */}
                         <Drawer.Screen name="Orders" component={Orders} options={({ navigation }) => ({
                             drawerIcon: ({ color, size }) => <Ionicons size={size} color={color} name={'md-newspaper'} />,
                             headerLeft: () => <HeaderButton navigation={navigation} />,

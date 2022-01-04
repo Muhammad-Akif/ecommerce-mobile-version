@@ -95,12 +95,6 @@ export const Card = (props) => {
         <View style={styles.cardStyle}>
             <View style={styles.cardHeadingStyle}>
                 <Text style={styles.cardHeadingTextStyle}>{item.name} Products</Text>
-                {
-                    !isAdmin && (<Text style={{ color: 'green' }}>
-                        View all &nbsp;
-                        <Icon name="arrow-right" size={10} color="grey" />
-                    </Text>)
-                }
             </View>
             <View style={{ flexDirection: 'row', width: '100%' }}>
                 <ScrollView horizontal={!isAdmin} showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingRight: 20 }}>
