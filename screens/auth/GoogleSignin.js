@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Google from "expo-google-app-auth";
+import { useEcommerceContext } from '../../contexts/ContextProvider';
+import checkAndWriteFile from '../../functions/checkAndWriteFile';
 
-export default class GoogleSignin extends Component {
-    _handleGoogleLogin = async () => {
+const GoogleSignin = props => {
+
+    const { setAuth, auth, allData, setAllData } = useEcommerceContext();
+
+    const _handleGoogleLogin = async () => {
         try {
             const { type, user } = await Google.logInAsync({
                 androidClientId: `1063086127018-ios3ojhcij7qce2cv4tb328euiee32c4.apps.googleusercontent.com`,
@@ -11,6 +16,29 @@ export default class GoogleSignin extends Component {
 
             if (type === "success") {
                 console.log("Success ==> ", user);
+
+                props.navigation.popToTop();
+                props.navigation.replace('DrawerCartStackNavigator')
+                const newAuth = {
+                    ...auth,
+                    whoIsLogin: 'user',
+                    loginUserInfo: {
+                        email: user.email,
+                        username: user.givenName,
+                        password: '',
+                        loginFromWhere: 'g' // f | g
+                    }
+                };
+                setAuth(newAuth)
+                setAllData({
+                    ...allData,
+                    auth: newAuth
+                })
+
+                await checkAndWriteFile({
+                    ...allData,
+                    auth: newAuth
+                })
             }
         }
         catch (error) {
@@ -18,18 +46,18 @@ export default class GoogleSignin extends Component {
         }
     }
 
-    render() {
-        return (
-            <View style={styles.container}>
-                <TouchableOpacity onPress={this._handleGoogleLogin} style={styles.button}>
-                    <Text style={{ color: 'white', fontWeight: 'bold' }}>
-                        Google
-                    </Text>
-                </TouchableOpacity>
+    return (
+        <TouchableOpacity onPress={_handleGoogleLogin} style={styles.container}>
+            <View style={styles.button}>
+                <Text style={{ color: 'white', fontWeight: 'bold' }}>
+                    Google
+                </Text>
             </View>
-        );
-    }
+        </TouchableOpacity>
+    )
 }
+
+export default GoogleSignin;
 
 const styles = StyleSheet.create({
     container: {

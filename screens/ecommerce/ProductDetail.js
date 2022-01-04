@@ -14,9 +14,9 @@ const ProductDetailScreen = props => {
     const category = props?.route?.params?.category;
     const { cart, setCart, auth, allData, setAllData, favoriteItems, setFavoriteItems } = useEcommerceContext();
 
-    const isItemExists = favoriteItems.findIndex(item => (item.username == auth.username && item.id == product.id));
+    const isItemExists = favoriteItems.findIndex(item => (item.username == auth.loginUserInfo.username && item.id == product.id));
 
-
+    const ratingsNum = [1, 2, 3, 4, 5];
     const handleFavorite = async () => {
         let newFavorites = [];
         if (isItemExists != -1) {
@@ -26,7 +26,7 @@ const ProductDetailScreen = props => {
             newFavorites = [
                 ...favoriteItems,
                 new FavoritesItemModal(
-                    auth.username,
+                    auth.loginUserInfo.username,
                     product.id,
                     product.name,
                     product.detail,
@@ -61,10 +61,10 @@ const ProductDetailScreen = props => {
     })
 
     const handleAddToCart = async () => {
-        const cartIndex = cart.findIndex(cartItem => cartItem.username == auth.username);
+        const cartIndex = cart.findIndex(cartItem => cartItem.username == auth.loginUserInfo.username);
         if (cartIndex == -1) {
             const newCart = [...cart, new Cart(
-                auth.username,
+                auth.loginUserInfo.username,
                 product.price,
                 [new CartItem(product.id, product.name, product.detail, product.price, product.uri, category, 1, product.price)]
             )]
@@ -82,7 +82,7 @@ const ProductDetailScreen = props => {
 
         const newCart = [...cart]
         newCart.splice(cartIndex, 1, new Cart(
-            auth.username,
+            auth.loginUserInfo.username,
             product.price,
             [...cart[cartIndex].items, new CartItem(product.id, product.name, product.detail, product.price, product.uri, category, 1, product.price)]
         ))
@@ -104,6 +104,52 @@ const ProductDetailScreen = props => {
             </View>
             <Text style={styles.price}>${product?.price}</Text>
             <Text style={styles.description}>{product?.detail}</Text>
+            <View style={{ marginTop: 40 }}>
+                <Text style={{ fontSize: 30, marginLeft: 20, textShadowColor: 'white', fontFamily: 'bold' }}>Ratings</Text>
+            </View>
+
+            {/*  */}
+            {product.ratings.map((rating, index) => {
+                if (rating.username == 'shikari') {
+                    return <View key={index} />
+                }
+                return <View key={index} style={{ padding: 10, marginVertical: 5 }}>
+                    <View style={{ alignItems: 'center', width: '76%', alignSelf: 'center' }}>
+                        <Text style={{ fontFamily: 'italic' }} numberOfLines={1} adjustsFontSizeToFit={true}>{rating.email}</Text>
+                    </View>
+                    <View style={{ alignItems: 'center', width: '78%', alignSelf: 'center' }}>
+                        <Text style={{ textAlign: 'center' }} numberOfLines={1} adjustsFontSizeToFit={true}>
+                            {
+                                // item.ratings.ratingNumber
+                                ratingsNum.map((number, index) => {
+                                    if (index < rating.rating) {
+                                        return <Ionicons key={index} name={'star'} size={23} color={'red'} />
+                                    } return <Ionicons key={index} name={'star-outline'} size={23} color={'red'} />
+                                })
+                            }
+                        </Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', marginTop: 10, width: '76%', alignSelf: 'center' }}>
+                        <View style={{ flex: 1 }}>
+                            <Text style={{ textAlign: 'left', color: 'grey' }} numberOfLines={1} adjustsFontSizeToFit={true}>Username:</Text>
+                        </View>
+                        <View style={{ flex: 1 }}>
+                            <Text style={{ textAlign: 'center' }}>
+                                {rating.username}
+                            </Text>
+                        </View>
+                    </View>
+                    <View style={{ height: 1, backgroundColor: 'grey', width: '80%', alignSelf: 'center', marginTop: 10 }} />
+                </View>
+            })}
+            {
+                (product.ratings.length == 1 && product.ratings[0].username == 'shikari') && (
+                    <View style={{ alignItems: 'center', marginTop: 60 }}>
+                        <Text style={{ fontFamily: 'italic', }}>No Ratings Yet!</Text>
+                    </View>
+                )
+            }
+            {/*  */}
         </ScrollView>
     );
 }

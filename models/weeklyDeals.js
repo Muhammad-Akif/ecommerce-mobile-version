@@ -1,13 +1,11 @@
 class weeklyDeals {
-    constructor(category, id, name, detail, price, uri, ratings, discountPrice, off) {
-        this.category = category; // string
+    constructor(id, name, detail, price, uri, quantity, off) {
         this.id = id; // unique & number
         this.name = name; // string
         this.detail = detail; //string
         this.price = price; // float | real price
         this.uri = uri;
-        this.ratings = ratings; //list of objects [{ email: 'abc2', username: 'abc2', password: 'abc2', rating: 5, desc: 'Good Item' }]
-        this.discountPrice = discountPrice; // number
+        this.quantity = quantity;
         this.off = off; // string
     }
 }

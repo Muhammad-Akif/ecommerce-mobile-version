@@ -6,7 +6,7 @@ import { useEcommerceContext } from '../../../contexts/ContextProvider';
 const Inprogress = props => {
 
     const { orders, auth } = useEcommerceContext();
-    const userOrders = orders.filter(order => (order.username == auth.loginUserInfo.username && order.status != 'delivered'));
+    const userOrders = orders.filter(order => (order.username == auth.loginUserInfo.username && order.status != 'delivered' && order.status != 'rated'));
 
     return (
         <View style={style.screen}>
@@ -32,7 +32,6 @@ export default Inprogress;
 
 const style = StyleSheet.create({
     screen: {
-        flex: 1,
-        paddingTop: 20
+        flex: 1
     }
 })

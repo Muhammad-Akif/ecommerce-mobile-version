@@ -6,7 +6,8 @@ const template = {
         loginUserInfo: {
             email: '',
             username: '',
-            password: ''
+            password: '',
+            loginFromWhere: '' // f | g | app
         },
         users: initialUsers,
         admin: initialAdmin

@@ -21,11 +21,12 @@ const Signup = props => {
     const [isPasswordValid, setIsPasswordValid] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
 
+    const { auth, setAuth, allData, setAllData } = useEcommerceContext();
+
     const emailRef = useRef(null);
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
 
-    const { setAuth } = useEcommerceContext();
 
     const handleSignup = async () => {
         setIsLoading(true);
@@ -49,23 +50,33 @@ const Signup = props => {
             }
             Keyboard.dismiss();
 
-            const data = await checkAndReadFile();
-            await checkAndWriteFile({
-                ...data,
-                auth: {
-                    ...data?.auth,
-                    users: [...data?.auth?.users, { email: email.trim(), username: username.trim(), password: password.trim() }]
+
+            const newAuth = {
+                ...auth,
+                users: [...auth.users, { email: email.trim(), username: username.trim(), password: password.trim() }],
+                whoIsLogin: 'user',
+                loginUserInfo: {
+                    email: email.trim(),
+                    username: username.trim(),
+                    password: password.trim(),
+                    loginFromWhere: 'app'
                 }
-            })
+            }
+
+            const newData = {
+                ...allData,
+                auth: newAuth
+            }
+
+            await checkAndWriteFile(newData)
+            setAllData(newData);
+
             setIsLoading(false);
             props.navigation.popToTop();
             props.navigation.replace('DrawerCartStackNavigator')
             setAuth({
-                email,
-                username,
-                password,
-                isAdmin: false,
-                logout: false
+                ...auth,
+                auth: newAuth
             })
             return;
         }

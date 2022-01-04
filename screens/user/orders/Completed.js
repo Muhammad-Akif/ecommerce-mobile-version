@@ -6,7 +6,7 @@ import { useEcommerceContext } from '../../../contexts/ContextProvider';
 const Completed = props => {
 
     const { allData, setAllData, orders, setOrders, auth } = useEcommerceContext();
-    const userOrders = orders.filter(order => (order.username == auth.loginUserInfo.username && order.status == 'delivered'));
+    const userOrders = orders.filter(order => (order.username == auth.loginUserInfo.username && (order.status == 'delivered' || order.status == 'rated')));
 
     return (
         <View style={style.screen}>
@@ -18,6 +18,8 @@ const Completed = props => {
                             amount={item.price}
                             date={new Date(item.startDate).toDateString()}
                             items={item.items}
+                            order={item}
+                            status={item.status}
                         />
                     ))
                 }
@@ -31,6 +33,5 @@ export default Completed;
 const style = StyleSheet.create({
     screen: {
         flex: 1,
-        paddingTop: 20
     }
 })
