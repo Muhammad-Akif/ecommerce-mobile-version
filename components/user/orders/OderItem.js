@@ -1,11 +1,66 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import colors from '../../../constants/colors';
+import { useEcommerceContext } from '../../../contexts/ContextProvider';
+import checkAndWriteFile from '../../../functions/checkAndWriteFile';
+import Rating from '../../../models/rating';
 import Badge from '../../UI/Badge';
 import Button from '../../UI/Button';
+import Ratings from '../../UI/Ratings';
 import CartItem from './CartItem';
 
 const OrderItem = props => { // inprogress
+
+    const { items, setItems, allData, setAllData, orders, setOrders, auth } = useEcommerceContext();
+
+    const [ratings, setRatings] = useState([]); // [{id, category, rating}]
+
+    const onRate = async (id, category, rating) => {
+        console.log(id, category, rating);
+        const newRatings = ratings.filter(rate => (rate.id != id && rate.category != category));
+        setRatings([
+            ...newRatings,
+            {
+                id,
+                category,
+                rating
+            }
+        ])
+    }
+
+    const submitReview = async () => { //ratings
+        const dupItems = { ...items };
+        const dupOrders = [...orders];
+
+        // dupItems.categories.name;
+
+        ratings.forEach(rating => {
+            try {
+                const cactegoryIndex = dupItems.categories.findIndex(cat => cat.name == rating.category);
+                const itemIndex = dupItems.categories[cactegoryIndex].items.findIndex(item => item.id == rating.id);
+                dupItems.categories[cactegoryIndex].items[itemIndex].ratings.push(new Rating(auth.loginUserInfo.email, auth.loginUserInfo.username, auth.loginUserInfo.password, rating.rating))
+            } catch (err) {
+
+            }
+        })
+
+        const orderIndex = dupOrders.findIndex(order => order.id == props.order.id);
+        dupOrders[orderIndex].status = 'rated';
+
+        setOrders(dupOrders);
+        setItems(dupItems);
+
+        const newData = {
+            ...allData,
+            items: dupItems,
+            orders: dupOrders
+        }
+
+        setAllData(newData);
+
+        await checkAndWriteFile(newData);
+
+    }
 
     const [isShowDetail, setIsShowDetail] = useState(false)
 
@@ -41,7 +96,7 @@ const OrderItem = props => { // inprogress
                 <View style={{ flex: 1 }}>
                     <Text style={styles.totalAmount} adjustsFontSizeToFit={true} numberOfLines={1}>${props.amount.toFixed(2)}</Text>
                 </View>
-                <Badge text={props.isAdmin ? props.status : props.inprogress ? props.status.toUpperCase() : 'DELIVERED'} style={{ width: props.status == 'not picked yet' ? 90 : 70 }} />
+                <Badge text={props.isAdmin ? props.status : props.inprogress ? props.status.toUpperCase() : props.status.toUpperCase()} style={{ width: props.status == 'not picked yet' ? 90 : 70 }} />
                 <View style={{ flex: 1, alignItems: 'flex-end' }}>
                     <Text style={styles.date} adjustsFontSizeToFit={true} numberOfLines={1}>{props.date}</Text>
                 </View>
@@ -50,19 +105,45 @@ const OrderItem = props => { // inprogress
                 normalText
                 textStyle={{ fontWeight: 'normal', fontSize: 13 }}
                 style={{ width: '35%', height: 30 }}
-                title={isShowDetail ? 'HIDE DETAILS' : 'SHOW DETAILS'}
+                title={props.inprogress ? (isShowDetail ? 'HIDE DETAILS' : 'SHOW DETAILS') : (isShowDetail ? 'Close' : 'Rate Items')}
                 onPress={() => setIsShowDetail(prevState => !prevState)}
             />
 
             {isShowDetail && <View style={styles.detailSection}>
-                {props.items.map(order =>
-                    <CartItem
-                        key={order.id}
-                        quantity={order.quantity}
-                        title={order.name}
-                        price={order.totalPrice} />
-                )}
+                {props.items.map(order => {
+
+                    if (!props.inprogress) {
+                        return (
+                            <View key={order.id}>
+                                <CartItem
+                                    key={order.id}
+                                    quantity={order.quantity}
+                                    title={order.name}
+                                    price={order.totalPrice} />
+                                <Ratings onRate={onRate} id={order.id} category={order.category} />
+                            </View>
+                        )
+                    }
+                    return (
+                        <CartItem
+                            key={order.id}
+                            quantity={order.quantity}
+                            title={order.name}
+                            price={order.totalPrice} />
+                    )
+                })}
             </View>}
+            {
+                (isShowDetail && !props.inprogress && props.status != 'rated') && (
+                    <Button
+                        normalText
+                        textStyle={{ fontWeight: 'normal', fontSize: 13 }}
+                        style={{ width: '35%', height: 30, alignSelf: 'flex-end', marginVertical: 5 }}
+                        title={'Submit'}
+                        onPress={submitReview}
+                    />
+                )
+            }
         </View>
     );
 }

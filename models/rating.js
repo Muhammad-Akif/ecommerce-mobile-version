@@ -4,7 +4,6 @@ class Rating {
         this.username = username;
         this.password = password;
         this.rating = rating;
-        this.desc = desc;
     }
 }
 

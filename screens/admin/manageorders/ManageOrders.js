@@ -8,7 +8,7 @@ import checkAndWriteFile from '../../../functions/checkAndWriteFile';
 const ManageOrders = props => {
 
     const { allData, setAllData, orders, setOrders } = useEcommerceContext();
-    const userOrders = orders.filter(order => order.status != 'delivered');
+    const userOrders = orders.filter(order => order.status != 'delivered' && order.status != 'rated');
 
     const handlePick = async id => {
         const newOrders = [...orders];

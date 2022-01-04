@@ -61,10 +61,10 @@ const ProductDetailScreen = props => {
     })
 
     const handleAddToCart = async () => {
-        const cartIndex = cart.findIndex(cartItem => cartItem.username == auth.username);
+        const cartIndex = cart.findIndex(cartItem => cartItem.username == auth.loginUserInfo.username);
         if (cartIndex == -1) {
             const newCart = [...cart, new Cart(
-                auth.username,
+                auth.loginUserInfo.username,
                 product.price,
                 [new CartItem(product.id, product.name, product.detail, product.price, product.uri, category, 1, product.price)]
             )]
@@ -82,7 +82,7 @@ const ProductDetailScreen = props => {
 
         const newCart = [...cart]
         newCart.splice(cartIndex, 1, new Cart(
-            auth.username,
+            auth.loginUserInfo.username,
             product.price,
             [...cart[cartIndex].items, new CartItem(product.id, product.name, product.detail, product.price, product.uri, category, 1, product.price)]
         ))
