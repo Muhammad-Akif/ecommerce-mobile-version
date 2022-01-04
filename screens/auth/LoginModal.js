@@ -59,9 +59,9 @@ const LoginModal = props => {
                     </Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-                    <FacebookSignin />
+                    <FacebookSignin navigation={props.navigation}/>
 
-                    <GoogleSignin />
+                    <GoogleSignin navigation={props.navigation}/>
 
                 </View>
 
@@ -154,11 +154,16 @@ const LoginModal = props => {
                             password: loginPassword.trim()
                         }
                     };
+                    setAllData({
+                        ...allData,
+                        auth: newAuth
+                    })
                     setAuth(newAuth)  //TODO
                     await checkAndWriteFile({
                         ...allData,
                         auth: newAuth
                     })
+
                 }} />
 
                 {

@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Facebook from 'expo-facebook';
+import { useEcommerceContext } from '../../contexts/ContextProvider';
+import checkAndWriteFile from '../../functions/checkAndWriteFile';
 
-const FacebookSignin = () => {
+const FacebookSignin = propss => {
+    const { setAuth, auth, allData, setAllData } = useEcommerceContext();
 
-    async function logIn() {
+    async function logIn(props) {
         try {
             await Facebook.initializeAsync({
                 appId: '471321207933541',
@@ -14,11 +17,32 @@ const FacebookSignin = () => {
                     permissions: ['public_profile'],
                 });
             if (type === 'success') {
-                // Get the user's name using Facebook's Graph API
                 const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
-                console.log(`Hi ${(await response.json()).name}!`);
+
+                propss.navigation.popToTop();
+                propss.navigation.replace('DrawerCartStackNavigator')
+                const newAuth = {
+                    ...auth,
+                    whoIsLogin: 'user',
+                    loginUserInfo: {
+                        email: '',
+                        username: await response.json().name,
+                        password: '',
+                        loginFromWhere: 'f' // f | g
+                    }
+                };
+                setAuth(newAuth)
+                setAllData({
+                    ...allData,
+                    auth: newAuth
+                })
+                await checkAndWriteFile({
+                    ...allData,
+                    auth: newAuth
+                })
+
+
             } else {
-                // type === 'cancel'
             }
         } catch ({ message }) {
             alert(`Facebook Login Error: ${message}`);
@@ -26,13 +50,13 @@ const FacebookSignin = () => {
     }
 
     return (
-        <View style={styles.container}>
-            <TouchableOpacity onPress={logIn} style={styles.button}>
+        <TouchableOpacity style={styles.container} onPress={logIn}>
+            <View style={styles.button}>
                 <Text style={{ color: 'white', fontWeight: 'bold' }}>
                     Facebook
                 </Text>
-            </TouchableOpacity>
-        </View>
+            </View>
+        </TouchableOpacity>
     )
 }
 const styles = StyleSheet.create({
