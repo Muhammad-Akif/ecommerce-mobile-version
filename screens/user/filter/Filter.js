@@ -1,34 +1,43 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import FilterSwitch from '../../../components/user/filter/FilterSwitch';
 import colors from '../../../constants/colors';
+import { useEcommerceContext } from '../../../contexts/ContextProvider';
 
 const Filters = props => {
 
-    const [isGluttenFree, setIsGluttenFree] = useState(false);
-    const [isLactoseFree, setIsLactoseFree] = useState(false);
-    const [isVegan, setIsVegan] = useState(false);
-    const [isVegetarian, setIsVegetarian] = useState(false);
+    const [filter, setFilter] = useState([]);
+
+    const { items, setItems } = useEcommerceContext();
+
+    const setFilters = (name, bool) => {
+        const index = filter.findIndex(cat => cat == name);
+
+        if (index == -1) {
+            setFilter([...filter, name])
+        } else {
+            setFilter(
+                filter.filter(names => names != name)
+            )
+        }
+
+    }
+
+    const catNames = items.categories.map(cat => cat.name);
 
     return (
         <View style={styles.screen}>
-            <Text style={styles.title}>Availabe Filters / Restrictions</Text>
-            <FilterSwitch
-                label="Fats-free"
-                state={isGluttenFree}
-                onChange={bool => { setIsGluttenFree(bool) }} />
-            <FilterSwitch
-                label="Lactose-free"
-                state={isLactoseFree}
-                onChange={bool => { setIsLactoseFree(bool) }} />
-            <FilterSwitch
-                label="Vinger"
-                state={isVegan}
-                onChange={bool => { setIsVegan(bool) }} />
-            <FilterSwitch
-                label="Vegetarian"
-                state={isVegetarian}
-                onChange={bool => { setIsVegetarian(bool) }} />
+            <ScrollView contentContainerStyle={{ alignItems: 'center', width: '100%' }}>
+                <Text style={styles.title}>Availabe Filters / Restrictions</Text>
+                {
+                    catNames.map(name => (
+                        <FilterSwitch
+                            label={`Only ${name} Food`}
+                            state={filter.includes(name)}
+                            onChange={setFilters.bind(null, name)} />
+                    ))
+                }
+            </ScrollView>
         </View>
     );
 }
@@ -38,7 +47,7 @@ export default Filters;
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        alignItems: 'center',
+        // alignItems: 'center',
         backgroundColor: colors.offWhite
     },
     title: {
