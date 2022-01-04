@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native
 import { Ionicons } from '@expo/vector-icons';
 import colors from '../../../constants/colors';
 
-const OrderItem = props => {
+const CartItem = props => {
     return (
         <View style={styles.item}>
             <View style={styles.titleQuantity}>
@@ -24,7 +24,7 @@ const OrderItem = props => {
     );
 }
 
-export default OrderItem;
+export default CartItem;
 
 const styles = StyleSheet.create({
     item: {

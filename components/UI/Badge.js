@@ -4,7 +4,7 @@ import colors from '../../constants/colors';
 
 const Badge = props => {
     return (
-        <View style={styles.badge}>
+        <View style={{...styles.badge, ...props.style}}>
             <Text style={styles.text} adjustsFontSizeToFit={props.favorite ? false: true} numberOfLines={1}>
                 {props.text}
             </Text>

@@ -11,11 +11,37 @@ const OrderItem = props => { // inprogress
 
     return (
         <View style={styles.item}>
+            {
+                props.isAdmin && (
+                    <View style={styles.firstRow}>
+                        <Button
+                            normalText
+                            whiteTheme
+                            textStyle={{ fontWeight: 'normal', fontSize: 13 }}
+                            style={{ width: '35%', height: 30, borderWidth: 0.2, borderColor: colors.primary }}
+                            title={'Picked'}
+                            onPress={props.handlePick}
+                        />
+                        <View style={{ flex: 1, alignItems: 'center' }}>
+                            <Text numberOfLines={1} style={{ fontFamily: 'italic' }}>{props.username}</Text>
+                        </View>
+                        <Button
+                            whiteTheme
+                            normalText
+                            textStyle={{ fontWeight: 'normal', fontSize: 13 }}
+                            style={{ width: '35%', height: 30, borderWidth: 0.2, borderColor: colors.primary }}
+                            title={'Delivered'}
+                            onPress={props.handleDeliver}
+                        />
+                    </View>
+                )
+            }
+
             <View style={styles.firstRow}>
                 <View style={{ flex: 1 }}>
                     <Text style={styles.totalAmount} adjustsFontSizeToFit={true} numberOfLines={1}>${props.amount.toFixed(2)}</Text>
                 </View>
-                <Badge text={props.inprogress ? 'IN PROGRESS' : 'COMPLETED'} />
+                <Badge text={props.isAdmin ? props.status : props.inprogress ? props.status.toUpperCase() : 'DELIVERED'} style={{ width: props.status == 'not picked yet' ? 90 : 70 }} />
                 <View style={{ flex: 1, alignItems: 'flex-end' }}>
                     <Text style={styles.date} adjustsFontSizeToFit={true} numberOfLines={1}>{props.date}</Text>
                 </View>

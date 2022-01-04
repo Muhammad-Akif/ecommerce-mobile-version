@@ -4,6 +4,7 @@ import Button from '../../../components/UI/Button';
 import colors from '../../../constants/colors';
 import { useEcommerceContext } from '../../../contexts/ContextProvider';
 import checkAndWriteFile from '../../../functions/checkAndWriteFile';
+import generateID from '../../../functions/generateId';
 import Item from '../../../models/item'
 
 const AddModifyItems = props => {
@@ -27,10 +28,6 @@ const AddModifyItems = props => {
             headerTitle: isEdit ? 'Edit Item' : 'Add Item'
         })
     }, [])
-
-    const generateID = () => {
-        return Math.random().toString(36).slice(2)
-    }
 
     const addItemHandler = async () => {
         const UID = generateID()

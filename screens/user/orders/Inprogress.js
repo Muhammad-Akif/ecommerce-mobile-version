@@ -5,7 +5,7 @@ import { useEcommerceContext } from '../../../contexts/ContextProvider';
 
 const Inprogress = props => {
 
-    const { allData, setAllData, orders, setOrders, auth } = useEcommerceContext();
+    const { orders, auth } = useEcommerceContext();
     const userOrders = orders.filter(order => (order.username == auth.loginUserInfo.username && order.status != 'delivered'));
 
     return (
@@ -19,6 +19,7 @@ const Inprogress = props => {
                             amount={item.price}
                             date={new Date(item.startDate).toDateString()}
                             items={item.items}
+                            status={item.status}
                         />
                     ))
                 }
