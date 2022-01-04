@@ -8,7 +8,7 @@ const Favorites = props => {
 
     const { auth, favoriteItems } = useEcommerceContext();
 
-    const favMeals = favoriteItems.filter(item => item.username == auth.username);
+    const favMeals = favoriteItems.filter(item => item.username == auth.loginUserInfo.username);
 
     if (favMeals.length == 0 || !favMeals) {
         return (
@@ -20,7 +20,7 @@ const Favorites = props => {
         )
     }
 
-    return <MealList listData={favMeals} navigation={props.navigation}/>
+    return <MealList listData={favMeals} navigation={props.navigation} />
 }
 
 export default Favorites;

@@ -101,15 +101,20 @@ const OrderItem = props => { // inprogress
                     <Text style={styles.date} adjustsFontSizeToFit={true} numberOfLines={1}>{props.date}</Text>
                 </View>
             </View>
-            <Button
-                normalText
-                textStyle={{ fontWeight: 'normal', fontSize: 13 }}
-                style={{ width: '35%', height: 30 }}
-                title={props.inprogress ? (isShowDetail ? 'HIDE DETAILS' : 'SHOW DETAILS') : (isShowDetail ? 'Close' : 'Rate Items')}
-                onPress={() => setIsShowDetail(prevState => !prevState)}
-            />
 
-            {isShowDetail && <View style={styles.detailSection}>
+            {
+                props.status != 'rated' && (
+                    <Button
+                        normalText
+                        textStyle={{ fontWeight: 'normal', fontSize: 13 }}
+                        style={{ width: '35%', height: 30 }}
+                        title={props.inprogress ? (isShowDetail ? 'HIDE DETAILS' : 'SHOW DETAILS') : (isShowDetail ? 'Close' : 'Rate Items')}
+                        onPress={() => setIsShowDetail(prevState => !prevState)}
+                    />
+                )
+            }
+
+            {isShowDetail && props.status != 'rated' && <View style={styles.detailSection}>
                 {props.items.map(order => {
 
                     if (!props.inprogress) {
