@@ -10,8 +10,30 @@ import checkAndWriteFile from '../functions/checkAndWriteFile';
 import Cart from '../models/cart';
 
 export const Card = (props) => {
-    const { cart, setCart, allData, setAllData, auth } = useEcommerceContext();
+    const { cart, setCart, allData, setAllData, auth, items, setItems } = useEcommerceContext();
     const { item, isAdmin, navigation } = props;
+
+    const handleDeletePress = async id => {
+        const catIndex = items.categories.findIndex(cat => cat.name == item.name);
+        const newItems = items.categories[catIndex].items.filter(item => item.id != id);
+
+        const dupItems = {
+            ...items
+        }
+
+        dupItems.categories[catIndex].items = newItems;
+
+        setItems(dupItems);
+
+        const newData = {
+            ...allData,
+            items: dupItems
+        }
+
+        await checkAndWriteFile(newData);
+        setAllData(newData)
+
+    }
 
     if (isAdmin) {
         const ItemView = (productItem) => {
@@ -44,7 +66,7 @@ export const Card = (props) => {
                                 <EditIcon name="edit" style={{ fontSize: 40 }} />
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button} onPress={handleDeletePress.bind(null, product.id)}>
                             <Text adjustsFontSizeToFit={true} style={{ color: "red", fontFamily: 'bold', margin: 5 }}>
                                 <DeleteIcon name='delete' style={{ fontSize: 40 }} />
                             </Text>

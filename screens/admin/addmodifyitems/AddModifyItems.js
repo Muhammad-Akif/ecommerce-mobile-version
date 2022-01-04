@@ -20,7 +20,6 @@ const AddModifyItems = props => {
     const [category, setCategory] = useState();
 
 
-    console.log(product.price, 'assssssssssssssssssssss')
     const { allData, setAllData, items, setItems } = useEcommerceContext();
 
     useEffect(() => {
@@ -64,6 +63,7 @@ const AddModifyItems = props => {
             setAllData(newAllData);
 
             await checkAndWriteFile(newAllData);
+            props.navigation.goBack();
 
         }
         else {
@@ -95,7 +95,7 @@ const AddModifyItems = props => {
         setAllData(newAllData);
 
         await checkAndWriteFile(newAllData);
-
+        props.navigation.goBack();
     }
 
     return (
