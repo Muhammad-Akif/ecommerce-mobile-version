@@ -59,9 +59,9 @@ const LoginModal = props => {
                     </Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-                    <FacebookSignin navigation={props.navigation}/>
+                    <FacebookSignin navigation={props.navigation} />
 
-                    <GoogleSignin navigation={props.navigation}/>
+                    <GoogleSignin navigation={props.navigation} />
 
                 </View>
 
@@ -151,7 +151,8 @@ const LoginModal = props => {
                         loginUserInfo: {
                             email: loginEmail.trim(),
                             username: loginUsername.trim(),
-                            password: loginPassword.trim()
+                            password: loginPassword.trim(),
+                            loginFromWhere: 'app'
                         }
                     };
                     setAllData({

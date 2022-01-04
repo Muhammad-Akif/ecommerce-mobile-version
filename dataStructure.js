@@ -4,7 +4,8 @@ const auth = {
   loginUserInfo: {
     email: '',
     username: '',
-    password: ''
+    password: '',
+    loginFromWhere: '' // f | g | app
   },
   users: [
     { email: 'abc1', username: 'abc1', password: 'abc1' },
