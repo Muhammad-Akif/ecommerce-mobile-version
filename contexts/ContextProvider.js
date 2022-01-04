@@ -1,6 +1,7 @@
 import React, { useState, createContext, useContext, useEffect } from 'react';
 import checkAndReadFile from '../functions/checkAndReadFile';
 import { items as defaultItems } from '../data/items';
+import template from '../template/initialTemplate';
 
 const AuthContext = createContext();
 
@@ -19,26 +20,15 @@ export const ContextProvider = ({ children }) => {
     useEffect(() => {
         fetchData();
     }, [])
-    const [auth, setAuth] = useState({
-        email: '',
-        username: '',
-        password: '',
-        isAdmin: false,
-        logout: true
-    });
+    const [auth, setAuth] = useState(template.auth);
 
-    const [cart, setCart] = useState([
-        // {
-        // uername: '',
-        // totalPrice: 0,
-        // items: [] }
-    ]);
+    const [cart, setCart] = useState([]);
 
     const [orders, setOrders] = useState([]);
 
     const [favoriteItems, setFavoriteItems] = useState([]);
 
-    const [allData, setAllData] = useState({});
+    const [allData, setAllData] = useState(template);
 
     const [items, setItems] = useState({
         lastId: 16,

@@ -9,9 +9,10 @@ import { useEcommerceContext } from '../../contexts/ContextProvider';
 import checkAndReadFile from '../../functions/checkAndReadFile';
 import GoogleSignin from './GoogleSignin'
 import FacebookSignin from './FacebookSignin'
+import checkAndWriteFile from '../../functions/checkAndWriteFile';
 
 const LoginModal = props => {
-    const { setAuth } = useEcommerceContext();
+    const { setAuth, auth, allData, setAllData } = useEcommerceContext();
     const fromAdmin = props?.route?.params?.fromAdmin;
     const [selected, setSelected] = useState('no');
     const [usernameOrEmail, setUsernameOrEmail] = useState('');
@@ -58,7 +59,7 @@ const LoginModal = props => {
                     </Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-                    <FacebookSignin/>
+                    <FacebookSignin />
 
                     <GoogleSignin />
 
@@ -113,28 +114,30 @@ const LoginModal = props => {
 
                 <Button normalText title={'Continue'} style={{ marginBottom: 20, borderRadius: 8 }} onPress={async () => {
                     setIsLoading(true);
-                    const data = await checkAndReadFile();
+                    const users = auth.users;
+                    const admin = auth.admin;
+
                     let loginEmail = ''
                     let loginUsername = ''
                     let loginPassword = ''
+
                     if (fromAdmin) {
-                        if (!((data.auth.admin.email.trim() == usernameOrEmail.trim() || data.auth.admin.username.trim() == usernameOrEmail.trim()) && (data.auth.admin.password.trim() == password.trim()))) {
+                        if (!((admin.email.trim() == usernameOrEmail.trim() || admin.username.trim() == usernameOrEmail.trim()) && (admin.password.trim() == password.trim()))) {
                             setIsIncorrect(true);
                             setIsLoading(false);
                             return;
                         }
-                        const admin = data.auth.admin;
                         loginEmail = admin.email;
                         loginUsername = admin.username;
                         loginPassword = admin.password
                     } else {
-                        const indexOfUser = data.auth.users.findIndex(user => (user.email.trim() == usernameOrEmail.trim() || user.username.trim() == usernameOrEmail.trim()) && (user.password.trim() == password.trim()));
+                        const indexOfUser = users.findIndex(user => (user.email.trim() == usernameOrEmail.trim() || user.username.trim() == usernameOrEmail.trim()) && (user.password.trim() == password.trim()));
                         if (indexOfUser == -1) {
                             setIsLoading(false);
                             setIsIncorrect(true);
                             return;
                         }
-                        const user = data.auth.users[indexOfUser];
+                        const user = users[indexOfUser];
                         loginEmail = user.email
                         loginUsername = user.username
                         loginPassword = user.password
@@ -142,14 +145,20 @@ const LoginModal = props => {
                     setIsLoading(false);
                     props.navigation.popToTop();
                     props.navigation.replace('DrawerCartStackNavigator')
-                    setAuth({
-                        email: loginEmail,
-                        username: loginUsername,
-                        password: loginPassword,
-                        isAdmin: fromAdmin ? true : false,
-                        logout: false
+                    const newAuth = {
+                        ...auth,
+                        whoIsLogin: fromAdmin ? 'admin' : 'user',
+                        loginUserInfo: {
+                            email: loginEmail.trim(),
+                            username: loginUsername.trim(),
+                            password: loginPassword.trim()
+                        }
+                    };
+                    setAuth(newAuth)  //TODO
+                    await checkAndWriteFile({
+                        ...allData,
+                        auth: newAuth
                     })
-                    //TODO
                 }} />
 
                 {

@@ -6,7 +6,7 @@ import { useEcommerceContext } from '../../../contexts/ContextProvider';
 const Completed = props => {
 
     const { allData, setAllData, orders, setOrders, auth } = useEcommerceContext();
-    const userOrders = orders.filter(order => (order.username == auth.username && order.status == 'delivered'));
+    const userOrders = orders.filter(order => (order.username == auth.loginUserInfo.username && order.status == 'delivered'));
 
     return (
         <View style={style.screen}>

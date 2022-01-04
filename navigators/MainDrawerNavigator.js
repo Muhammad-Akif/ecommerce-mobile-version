@@ -59,7 +59,7 @@ const Drawer = createDrawerNavigator();
 
 export default function MainDrawerNavigator() {
     const { auth, cart } = useEcommerceContext();
-    const index = cart?.findIndex(item => item.username == auth.username);
+    const index = cart?.findIndex(item => item.username == auth.loginUserInfo.username);
     let length = 0;
     if (index != -1) {
         length = cart[index].items.length;
@@ -81,7 +81,7 @@ export default function MainDrawerNavigator() {
             drawerContent={props => <CustomDrawerContent {...props} />}
         >
             {
-                !auth.isAdmin ? (
+                auth.whoIsLogin == 'user' ? (
                     <>
                         {/* User Screen */}
                         <Drawer.Screen name="Home" component={Home} options={({ navigation }) => ({

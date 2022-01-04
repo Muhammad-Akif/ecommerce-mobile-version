@@ -10,7 +10,7 @@ import Button from '../../../components/UI/Button';
 
 const Cart = props => {
     const { auth, cart, setCart, allData, setAllData, setOrders, orders } = useEcommerceContext();
-    const cartIndex = cart.findIndex(cartItem => cartItem.username == auth.username);
+    const cartIndex = cart.findIndex(cartItem => cartItem.username == auth.loginUserInfo.username);
 
     if (cartIndex == -1 || cart[cartIndex].items.length == 0) {
         return (
@@ -21,7 +21,6 @@ const Cart = props => {
     }
 
     let totalPrice = 0;
-    console.log(cart, 'aaaaaaaaaaaaaaaaa', cartIndex)
     cart[cartIndex].items.forEach(item => {
         totalPrice += parseFloat(item.totalPrice);
     })
@@ -29,7 +28,7 @@ const Cart = props => {
         const newCartItemData = cart[cartIndex].items.filter(item => item.id != id);
         const cartDuplicate = [...cart];
         cartDuplicate.splice(cartIndex, 1, new CartModel(
-            auth.username,
+            auth.loginUserInfo.username,
             2,
             newCartItemData
         ))
@@ -45,7 +44,7 @@ const Cart = props => {
     const handleOrder = async () => {
         const cartDuplicate = [...cart];
         cartDuplicate.splice(cartIndex, 1, new CartModel(
-            auth.username,
+            auth.loginUserInfo.username,
             2,
             []
         ));
@@ -54,7 +53,7 @@ const Cart = props => {
         const newOrders = [
             ...orders,
             new OrderModel(
-                auth.username,
+                auth.loginUserInfo.username,
                 new Date().toUTCString(),
                 totalPrice,
                 'not defined yet',

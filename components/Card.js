@@ -102,10 +102,10 @@ export const Card = (props) => {
                             </View>
                             <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {product.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {product.price}</Text> </Text>
                             <TouchableOpacity style={styles.button} onPress={async () => {
-                                const cartIndex = cart.findIndex(cartItem => cartItem.username == auth.username);
+                                const cartIndex = cart.findIndex(cartItem => cartItem.username == auth.loginUserInfo.username);
                                 if (cartIndex == -1) {
                                     const newCart = [...cart, new Cart(
-                                        auth.username,
+                                        auth.loginUserInfo.username,
                                         product.price,
                                         [new CartItem(product.id, product.name, product.detail, product.price, product.uri, item.name, 1, product.price)]
                                     )]
@@ -123,7 +123,7 @@ export const Card = (props) => {
 
                                 const newCart = [...cart]
                                 newCart.splice(cartIndex, 1, new Cart(
-                                    auth.username,
+                                    auth.loginUserInfo.username,
                                     product.price,
                                     [...cart[cartIndex].items, new CartItem(product.id, product.name, product.detail, product.price, product.uri, item.name, 1, product.price)]
                                 ))
