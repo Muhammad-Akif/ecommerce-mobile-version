@@ -7,6 +7,7 @@ import CartModel from '../../../models/cart';
 import OrderModel from '../../../models/order';
 import checkAndWriteFile from '../../../functions/checkAndWriteFile';
 import Button from '../../../components/UI/Button';
+import generateID from '../../../functions/generateId';
 
 const Cart = props => {
     const { auth, cart, setCart, allData, setAllData, setOrders, orders } = useEcommerceContext();
@@ -53,6 +54,7 @@ const Cart = props => {
         const newOrders = [
             ...orders,
             new OrderModel(
+                generateID(),
                 auth.loginUserInfo.username,
                 new Date().toUTCString(),
                 totalPrice,

@@ -1,8 +1,51 @@
 import React from 'react';
-import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { Text, ScrollView, View, StyleSheet } from 'react-native';
+import OrderItem from '../../../components/user/orders/OderItem';
 import colors from '../../../constants/colors';
+import { useEcommerceContext } from '../../../contexts/ContextProvider';
+import checkAndWriteFile from '../../../functions/checkAndWriteFile';
 
 const ManageOrders = props => {
+
+    const { allData, setAllData, orders, setOrders } = useEcommerceContext();
+    const userOrders = orders.filter(order => order.status != 'delivered');
+
+    const handlePick = async id => {
+        const newOrders = [...orders];
+        const orderIndex = newOrders.findIndex(order => order.id == id);
+
+        newOrders[orderIndex].status = 'picked';
+
+
+        const newData = {
+            ...allData,
+            orders: newOrders
+        }
+
+        setOrders(newOrders);
+        setAllData(newData);
+        await checkAndWriteFile(newData)
+
+    }
+
+    const handleDeliver = async id => {
+        const newOrders = [...orders];
+        const orderIndex = newOrders.findIndex(order => order.id == id);
+
+        newOrders[orderIndex].status = 'delivered';
+
+
+        const newData = {
+            ...allData,
+            orders: newOrders
+        }
+
+        setOrders(newOrders);
+        setAllData(newData);
+        await checkAndWriteFile(newData)
+
+    }
+
     return (
         <View style={styles.screen}>
             <View style={{ marginTop: '4%', paddingHorizontal: 50, height: '7%' }}>
@@ -10,64 +53,25 @@ const ManageOrders = props => {
                     Manage Orders
                 </Text>
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <View style={styles.Acard}>
-                    {/* <Image source={{ uri: item.uri }} style={styles.productImage} /> */}
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Text style={{ color: '#494949', fontWeight: '200', fontFamily: 'text-bold', fontSize: 16.5 }} adjustsFontSizeToFit={true} numberOfLines={1}>
-                            User Name
-                        </Text>
-                    </View>
-                    <View style={styles.childViewTextStyle}>
-                        <Text style={{ color: 'grey', fontFamily: 'italic', fontSize: 15 }}>
-                            Product Detail
-                        </Text>
-                    </View>
-                    <Text style={{ color: colors.primary, fontWeight: '200' }}>50$ </Text>
-                    <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <TouchableOpacity
-                            style={styles.button}
-                            onPress={() => props.navigation.navigate('AddModifyItems', { isEdit: true })}
-                        >
-                            <Text adjustsFontSizeToFit={true} style={{ color: "green", fontFamily: 'bold', margin: 5 }}>
-                                Delevered
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.button}>
-                            <Text adjustsFontSizeToFit={true} style={{ color: "red", fontFamily: 'bold', margin: 5 }}>
-                                Picked
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
 
-                <View style={styles.Acard}>
-                    {/* <Image source={{ uri: item.uri }} style={styles.productImage} /> */}
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Text style={{ color: '#494949', fontWeight: '200', fontFamily: 'text-bold', fontSize: 16.5 }} adjustsFontSizeToFit={true} numberOfLines={1}>
-                            User Name
-                        </Text>
-                    </View>
-                    <View style={styles.childViewTextStyle}>
-                        <Text style={{ color: 'grey', fontFamily: 'italic', fontSize: 15 }}>
-                            Product Detail
-                        </Text>
-                    </View>
-                    <Text style={{ color: colors.primary, fontWeight: '200' }}>50$ </Text>
-                    <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <TouchableOpacity style={styles.button}>
-                            <Text adjustsFontSizeToFit={true} style={{ color: "green", fontFamily: 'bold', margin: 5 }}>
-                                Delevered
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.button}>
-                            <Text adjustsFontSizeToFit={true} style={{ color: "red", fontFamily: 'bold', margin: 5 }}>
-                                Picked
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </View>
+            <ScrollView>
+                {
+                    userOrders.map((item, index) => (
+                        <OrderItem
+                            isAdmin={true}
+                            key={index}
+                            inprogress
+                            amount={item.price}
+                            date={new Date(item.startDate).toDateString()}
+                            items={item.items}
+                            status={item.status}
+                            handlePick={handlePick.bind(null, item.id)}
+                            handleDeliver={handleDeliver.bind(null, item.id)}
+                            username={item.username}
+                        />
+                    ))
+                }
+            </ScrollView>
         </View>
     );
 }
@@ -89,11 +93,6 @@ const styles = StyleSheet.create({
         width: 160,
         borderRadius: 15,
     },
-    // productImage: {
-    //     width: '100%',
-    //     height: 120,
-    //     marginVertical: 10
-    // },
     button: {
         backgroundColor: colors.secondary,
         height: 30,

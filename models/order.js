@@ -1,5 +1,6 @@
 class Order {
-    constructor(username, startDate, price, deliveryTime, status, items) {
+    constructor(id, username, startDate, price, deliveryTime, status, items) {
+        this.id = id;
         this.username = username;
         this.startDate = startDate; // unique & number
         this.price = price; // float

@@ -16,12 +16,15 @@ import HeaderButton from '../components/UI/HeaderButton';
 
 const { width } = Dimensions.get('window');
 import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
-import ManageRates from '../screens/admin/managerates/ManageRates';
 import ManageOrders from '../screens/admin/manageorders/ManageOrders';
 import { useEcommerceContext } from '../contexts/ContextProvider';
 import Home from '../screens/user/home/Home';
 
+import template from '../template/initialTemplate';
+import checkAndWriteFile from '../functions/checkAndWriteFile';
+
 function CustomDrawerContent(props) {
+    const { allData, setAllData, auth, setAuth } = useEcommerceContext();
     return (
         <>
             <DrawerContentScrollView {...props}>
@@ -33,8 +36,25 @@ function CustomDrawerContent(props) {
             </DrawerContentScrollView>
 
             <DrawerItem
-                label={`Sign-out`} onPress={() => {
-                    props.navigation.replace('Index')
+                label={`Sign-out`} onPress={async () => {
+
+                    const newAuth = {
+                        ...auth,
+                        whoIsLogin: template.auth.whoIsLogin,
+                        loginUserInfo: template.auth.loginUserInfo
+                    };
+
+                    const newData = {
+                        ...allData,
+                        auth: newAuth
+                    };
+
+                    await checkAndWriteFile(newData);
+                    setAuth(newAuth)
+                    setAllData(newData);
+
+                    props.navigation.replace('Index');
+
                 }}
                 style={{ bottom: 40 }}
 
@@ -116,14 +136,6 @@ export default function MainDrawerNavigator() {
                         {/* Admin Screens */}
                         < Drawer.Screen name="Home" component={AdminHome} options={({ navigation }) => ({
                             drawerIcon: ({ color, size, focused }) => <FontAwesome5 size={size} color={color} name={'house-user'} />
-                        })} />
-                        <Drawer.Screen name="Manage Rates" component={ManageRates} options={({ navigation }) => ({
-                            drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-settings'} />,
-                            headerLeft: () => <HeaderButton navigation={navigation} />,
-                            headerStatusBarHeight: 59,
-                            headerTitle: '',
-                            headerLeftContainerStyle: { paddingLeft: 15 },
-                            headerStyle: { borderBottomWidth: 0, elevation: 0, backgroundColor: colors.offWhite },
                         })} />
                         <Drawer.Screen name="Manage Orders" component={ManageOrders} options={({ navigation }) => ({
                             drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-newspaper'} />,
