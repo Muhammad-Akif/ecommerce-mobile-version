@@ -51,25 +51,31 @@ const LoginModal = props => {
                         }
                     </Text>
                 </View>
-                <View style={{ marginBottom: 30 }}>
+                <View style={{ marginBottom: fromAdmin ? 90 : 30 }}>
                     <Text style={{ letterSpacing: -0.2, fontSize: 14, color: 'grey' }} adjustsFontSizeToFit={true} numberOfLines={1}>
                         {
                             fromAdmin ? 'Sign in back in order to handle different e-commerce items.' : 'Sign in to e-commerce to pick up exactly where you left off.'
                         }
                     </Text>
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-                    <FacebookSignin navigation={props.navigation} />
+                {
+                    !fromAdmin && (
+                        <>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+                                <FacebookSignin navigation={props.navigation} />
 
-                    <GoogleSignin navigation={props.navigation} />
+                                <GoogleSignin navigation={props.navigation} />
 
-                </View>
+                            </View>
 
-                <View style={{ alignItems: 'center', marginBottom: 20 }}>
-                    <Text style={{ letterSpacing: -0.2, fontSize: 14, color: 'grey' }}>
-                        or sign in with email
-                    </Text>
-                </View>
+                            <View style={{ alignItems: 'center', marginBottom: 20 }}>
+                                <Text style={{ letterSpacing: -0.2, fontSize: 14, color: 'grey' }}>
+                                    or sign in with email
+                                </Text>
+                            </View>
+                        </>
+                    )
+                }
 
                 <View style={{ marginBottom: 40 }}>
                     <TextInput

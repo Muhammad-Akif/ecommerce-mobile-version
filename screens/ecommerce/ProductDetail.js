@@ -111,7 +111,7 @@ const ProductDetailScreen = props => {
             {/*  */}
             {product.ratings.map((rating, index) => {
                 if (rating.username == 'shikari') {
-                    return <View />
+                    return <View key={index} />
                 }
                 return <View key={index} style={{ padding: 10, marginVertical: 5 }}>
                     <View style={{ alignItems: 'center', width: '76%', alignSelf: 'center' }}>
