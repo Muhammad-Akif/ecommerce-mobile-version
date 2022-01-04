@@ -11,6 +11,7 @@ export const ContextProvider = ({ children }) => {
         if (!data) {
             return;
         }
+        setAuth(data.auth);
         setCart(data.cart);
         setAllData(data);
         setOrders(data.orders)

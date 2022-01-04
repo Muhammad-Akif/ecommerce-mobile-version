@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Inter_900Black, Inter_800ExtraBold, } from '@expo-google-fonts/inter';
@@ -6,9 +6,25 @@ import Constants from 'expo-constants';
 import { LinearGradient } from 'expo-linear-gradient';
 import colors from '../constants/colors';
 import Button from '../components/UI/Button';
+import { useEcommerceContext } from '../contexts/ContextProvider';
 const { width } = Dimensions.get('window');
 
 export default function OnBoarding(props) {
+
+    const [isShowData, setIsShowData] = useState(false);
+    const { auth } = useEcommerceContext();
+    const process = async () => {
+        if (auth.whoIsLogin) {
+            props.navigation.replace('DrawerCartStackNavigator')
+        } else {
+            setIsShowData(true);
+        }
+    }
+
+    useEffect(() => {
+        process()
+    })
+
     let [fontsLoaded] = useFonts({
         Inter_900Black,
         Inter_800ExtraBold,
@@ -25,7 +41,7 @@ export default function OnBoarding(props) {
         'light': require('../assets/fonts/Lato-Light.ttf'),
     });
 
-    if (!fontsLoaded) {
+    if (!fontsLoaded || !isShowData) {
         return <AppLoading />;
     } else {
         return (
