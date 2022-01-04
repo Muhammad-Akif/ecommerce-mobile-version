@@ -10,35 +10,35 @@ import checkAndWriteFile from '../functions/checkAndWriteFile';
 import Cart from '../models/cart';
 
 export const Card = (props) => {
-  const { cart, setCart, allData, setAllData, auth } = useEcommerceContext();
+    const { cart, setCart, allData, setAllData, auth } = useEcommerceContext();
     const { item, isAdmin, navigation } = props;
 
     if (isAdmin) {
-        const ItemView = ({ item, i }) => {
+        const ItemView = (productItem) => {
+            const product = productItem.item;
             return (
-                // Flat List Item
-                <View key={item.id + i} style={styles.Acard}>
+                <View key={product.id} style={styles.Acard}>
                     <TouchableOpacity
                         style={styles.button2}
                     >
                         <Text style={{ color: 'green', fontSize: 12 }}>20% OFF</Text>
                     </TouchableOpacity>
-                    <Image source={{ uri: item.uri }} style={styles.productImage} />
+                    <Image source={{ uri: product.uri }} style={styles.productImage} />
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Text style={{ color: '#494949', fontWeight: '200', fontFamily: 'text-bold', fontSize: 16.5 }} adjustsFontSizeToFit={true} numberOfLines={1}>
-                            {item.name}
+                            {product.name}
                         </Text>
                     </View>
                     <View style={styles.childViewTextStyle}>
                         <Text style={{ color: 'grey', fontFamily: 'italic', fontSize: 15 }}>
-                            {item.detail}
+                            {product.detail}
                         </Text>
                     </View>
-                    <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {item.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {item.price}</Text> </Text>
+                    <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {product.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {item.price}</Text> </Text>
                     <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={() => props.navigation.navigate('AddModifyItems', {isEdit: true})}
+                            onPress={() => props.navigation.navigate('AddModifyItems', { isEdit: true, category: item.name, product })}
                         >
                             <Text adjustsFontSizeToFit={true} style={{ color: "green", fontFamily: 'bold', margin: 5 }}>
                                 <EditIcon name="edit" style={{ fontSize: 40 }} />

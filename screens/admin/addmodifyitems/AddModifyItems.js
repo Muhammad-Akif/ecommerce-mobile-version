@@ -7,15 +7,20 @@ import checkAndWriteFile from '../../../functions/checkAndWriteFile';
 import Item from '../../../models/item'
 
 const AddModifyItems = props => {
-    const [name, setName] = useState('')
-    const [detail, setDetail] = useState('')
-    const [price, setPrice] = useState(0)
-    const [imageUri, setImageUri] = useState('')
-    const [isUsernameValid, setIsUsernameValid] = useState(true)
-    const [category, setCategory] = useState('');
-    const [categories] = useState(['vagetables', 'Diary', 'Backery'])
+    // is Edit
     const isEdit = props.route.params.isEdit;
+    const categoryParameter = props.route.params.category;
+    const product = props.route.params.product;
 
+    const [name, setName] = useState(isEdit ? product.name : '')
+    const [detail, setDetail] = useState(isEdit ? product.detail : '')
+    const [price, setPrice] = useState(isEdit ? product.price.toString() : 0)
+    const [imageUri, setImageUri] = useState(isEdit ? product.uri.toString() : '')
+    const [isUsernameValid, setIsUsernameValid] = useState(true)
+    const [category, setCategory] = useState();
+
+
+    console.log(product.price, 'assssssssssssssssssssss')
     const { allData, setAllData, items, setItems } = useEcommerceContext();
 
     useEffect(() => {
@@ -41,15 +46,9 @@ const AddModifyItems = props => {
                 category
                 // []   
             }
-            console.log('result --==>> ', newItem)
-            // const newItem = new Item(UID, name, detail, price, imageUri, [])
-
-            // const copyItems = { ...items };
             const copyCategories = [...items.categories];
 
             const indexOfCategory = copyCategories.findIndex(cat => cat.name == category);
-
-            console.log(indexOfCategory, 'aaaaaaaaaaaaa');
 
             copyCategories[indexOfCategory].items.push(new Item(UID, name, detail, parseFloat(price), imageUri, []));
 
@@ -73,8 +72,29 @@ const AddModifyItems = props => {
 
     }
 
-    const editItemHandler = () => {
+    const editItemHandler = async () => {
         const UID = generateID()
+
+        const copyCategories = [...items.categories];
+
+        const indexOfCategory = copyCategories.findIndex(cat => cat.name == categoryParameter);
+
+        const itemIndex = copyCategories[indexOfCategory].items.findIndex(item => item.id == product.id);
+
+        copyCategories[indexOfCategory].items.splice(itemIndex, 1, new Item(UID, name, detail, parseFloat(price), imageUri, []));
+
+        const copyItems = { ...items, categories: copyCategories };
+
+        setItems(copyItems);
+
+        const newAllData = {
+            ...allData,
+            items: copyItems
+        }
+
+        setAllData(newAllData);
+
+        await checkAndWriteFile(newAllData);
 
     }
 
@@ -146,12 +166,12 @@ const AddModifyItems = props => {
                     onValueChange={val => setCategory(val)}
                 >
                     {
-                        items.categories.map(cat => <Picker.Item label={cat.name} value={cat.name} />)
+                        <Picker.Item label={categoryParameter} value={categoryParameter} />
                     }
                 </Picker>
                 {
                     isEdit ?
-                        <Button title="Edit Item" onPress={editItemHandler} />
+                        <Button title="Modify" onPress={editItemHandler} />
                         :
                         <Button title="Add Item" onPress={addItemHandler} />
 
