@@ -46,7 +46,7 @@ export const Card = (props) => {
                         </Text>
                     </View>
                     <View style={styles.childViewTextStyle}>
-                        <Text style={{ color: 'grey', fontFamily: 'italic', fontSize: 15 }}>
+                        <Text style={{ color: 'grey', fontFamily: 'italic', fontSize: 13 }}>
                             {product.detail}
                         </Text>
                     </View>
@@ -78,7 +78,7 @@ export const Card = (props) => {
                     columnWrapperStyle={{ width: "100%" }}
                     data={item.items}
                     numColumns={2}
-                    keyExtractor={(item, index) => index.toString()}
+                    listKey={(item, index) => index.toString()}
                     renderItem={ItemView}
                 />
             </View>
