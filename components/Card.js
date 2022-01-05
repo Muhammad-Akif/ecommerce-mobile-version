@@ -46,7 +46,7 @@ export const Card = (props) => {
                         </Text>
                     </View>
                     <View style={styles.childViewTextStyle}>
-                        <Text style={{ color: 'grey', fontFamily: 'italic', fontSize: 15 }}>
+                        <Text style={{ color: 'grey', fontFamily: 'italic', fontSize: 13 }}>
                             {product.detail}
                         </Text>
                     </View>
