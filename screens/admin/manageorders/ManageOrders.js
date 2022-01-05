@@ -71,6 +71,15 @@ const ManageOrders = props => {
                         />
                     ))
                 }
+                {
+                    userOrders.length == 0 && (
+                        <View style={{ width: '100%', alignItems: 'center', marginTop: '50%' }}>
+                            <Text style={{ fontFamily: 'italic', fontSize: 18 }}>
+                                No orders yet to Manage!
+                            </Text>
+                        </View>
+                    )
+                }
             </ScrollView>
         </View>
     );

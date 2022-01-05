@@ -110,6 +110,15 @@ const weeklyDeals = props => {
                         </View>
                     ))
                 }
+                {
+                    weeklyDeals.length == 0 && (
+                        <View style={{ width: '100%', alignItems: 'center', marginTop: '50%' }}>
+                            <Text style={{ fontFamily: 'italic', fontSize: 18 }}>
+                                No Offers created Yet!
+                            </Text>
+                        </View>
+                    )
+                }
             </ScrollView>
             {
                 !props.user && (
