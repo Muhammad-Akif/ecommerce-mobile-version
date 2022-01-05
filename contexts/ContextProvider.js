@@ -39,10 +39,15 @@ export const ContextProvider = ({ children }) => {
         categories: defaultItems
     });
 
-    const [savedItems, setSavedItems] = useState({});
+    const [savedItems, setSavedItems] = useState({
+        lastId: 16,
+        categories: defaultItems
+    });
+
+    const [priceFilter, setPriceFilter] = useState('nothing');
 
     return (
-        <AuthContext.Provider value={{ savedItems, setSavedItems, weeklyDeals, setWeeklyDeals, items, setItems, auth, setAuth, cart, setCart, allData, setAllData, orders, setOrders, favoriteItems, setFavoriteItems }}>
+        <AuthContext.Provider value={{ priceFilter, setPriceFilter, savedItems, setSavedItems, weeklyDeals, setWeeklyDeals, items, setItems, auth, setAuth, cart, setCart, allData, setAllData, orders, setOrders, favoriteItems, setFavoriteItems }}>
             {children}
         </AuthContext.Provider>
     )

@@ -163,7 +163,13 @@ const AddModifyItems = props => {
                     onValueChange={val => setCategory(val)}
                 >
                     {
-                        <Picker.Item label={categoryParameter} value={categoryParameter} />
+                        isEdit ? (
+                            <Picker.Item label={categoryParameter} value={categoryParameter} />
+                        ) : (
+                            items.categories.map((item, index) => (
+                                <Picker.Item label={item.name} value={item.name} key={index} />
+                            ))
+                        )
                     }
                 </Picker>
                 {

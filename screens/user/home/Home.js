@@ -10,8 +10,15 @@ export default function Home(props) {
     const { items } = useEcommerceContext();
 
     const [search, setSearch] = useState('');
+
+
     const [filteredDataSource, setFilteredDataSource] = useState(items.categories);
     const [masterDataSource, setMasterDataSource] = useState(items.categories);
+
+    useEffect(() => {
+        setFilteredDataSource(items.categories);
+        setMasterDataSource(items.categories);
+    }, [items]);
 
     const searchFilterFunction = (text) => {
         if (text) {

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Text, View, StyleSheet, FlatList, Image, ScrollView, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import colors from '../constants/colors';
 import EditIcon from 'react-native-vector-icons/FontAwesome'
 import DeleteIcon from 'react-native-vector-icons/AntDesign'
@@ -10,7 +9,7 @@ import checkAndWriteFile from '../functions/checkAndWriteFile';
 import Cart from '../models/cart';
 
 export const Card = (props) => {
-    const { cart, setCart, allData, setAllData, auth, items, setItems } = useEcommerceContext();
+    const { cart, setCart, allData, setAllData, auth, items, setItems, priceFilter } = useEcommerceContext();
     const { item, isAdmin, navigation } = props;
 
     const handleDeletePress = async id => {
@@ -40,11 +39,6 @@ export const Card = (props) => {
             const product = productItem.item;
             return (
                 <View key={product.id} style={styles.Acard}>
-                    <TouchableOpacity
-                        style={styles.button2}
-                    >
-                        <Text style={{ color: 'green', fontSize: 12 }}>20% OFF</Text>
-                    </TouchableOpacity>
                     <Image source={{ uri: product.uri }} style={styles.productImage} />
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Text style={{ color: '#494949', fontWeight: '200', fontFamily: 'text-bold', fontSize: 16.5 }} adjustsFontSizeToFit={true} numberOfLines={1}>
@@ -56,7 +50,7 @@ export const Card = (props) => {
                             {product.detail}
                         </Text>
                     </View>
-                    <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {product.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {item.price}</Text> </Text>
+                    <Text style={{ color: colors.primary, fontWeight: '200' }}>${product.price}</Text>
                     <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                         <TouchableOpacity
                             style={styles.button}
@@ -91,6 +85,26 @@ export const Card = (props) => {
         )
     }
 
+    const filterItems = item.items.filter(product => {
+
+        if (priceFilter == 'nothing') {
+            return true;
+        }
+        else if (priceFilter == 'price > 1000' && product.price > 1000) {
+            return true;
+        } else if (priceFilter == 'price < 500' && product.price < 500) {
+            return true;
+        } else if (priceFilter == 'price > 500' && product.price > 500) {
+            return true;
+        } else if (priceFilter == 'price < 100' && product.price < 100) {
+            return true;
+        } else if (priceFilter == 'price < 50' && product.price < 50) {
+            return true;
+
+        }
+        return false;
+    })
+
     return (
         <View style={styles.cardStyle}>
             <View style={styles.cardHeadingStyle}>
@@ -98,13 +112,8 @@ export const Card = (props) => {
             </View>
             <View style={{ flexDirection: 'row', width: '100%' }}>
                 <ScrollView horizontal={!isAdmin} showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingRight: 20 }}>
-                    {item.items.map((product) => (
+                    {filterItems.map((product) => (
                         <TouchableOpacity key={product.id} style={styles.card} onPress={() => navigation.navigate('ProductDetails', { item: product, category: item.name })}>
-                            <View
-                                style={styles.button2}
-                            >
-                                <Text style={{ color: 'green', fontSize: 12 }}>20% OFF</Text>
-                            </View>
                             <Image source={{ uri: product.uri }} style={styles.productImage} />
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <Text style={{ color: '#494949', fontWeight: '200', fontFamily: 'text-bold', fontSize: 16.5 }} adjustsFontSizeToFit={true} numberOfLines={1}>
@@ -116,7 +125,7 @@ export const Card = (props) => {
                                     {product.detail}
                                 </Text>
                             </View>
-                            <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {product.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {product.price}</Text> </Text>
+                            <Text style={{ color: colors.primary, fontWeight: '200' }}>${product.price} </Text>
                             <TouchableOpacity style={styles.button} onPress={async () => {
                                 const cartIndex = cart.findIndex(cartItem => cartItem.username == auth.loginUserInfo.username);
                                 if (cartIndex == -1) {
@@ -156,6 +165,13 @@ export const Card = (props) => {
                             </TouchableOpacity>
                         </TouchableOpacity>
                     ))}
+                    {
+                        filterItems.length == 0 && (
+                            <View style={{ marginTop: 20, marginLeft: 30 }}>
+                                <Text style={{ fontFamily: 'italic', textAlign: 'center' }}>No Items Available!</Text>
+                            </View>
+                        )
+                    }
                 </ScrollView>
             </View>
         </View >
@@ -242,8 +258,3 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
 })
-
-
-
-
-
