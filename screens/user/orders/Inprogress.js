@@ -13,14 +13,17 @@ const Inprogress = props => {
             <ScrollView>
                 {
                     userOrders.map((item, index) => (
-                        <OrderItem
-                            key={index}
-                            inprogress
-                            amount={item.price}
-                            date={new Date(item.startDate).toDateString()}
-                            items={item.items}
-                            status={item.status}
-                        />
+                        <View key={index}>
+                            <OrderItem
+                                key={index}
+                                inprogress
+                                amount={item.price}
+                                date={new Date(item.startDate).toDateString()}
+                                items={item.items}
+                                order={item}
+                                status={item.status}
+                            />
+                        </View>
                     ))
                 }
             </ScrollView>

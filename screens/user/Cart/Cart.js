@@ -98,7 +98,7 @@ const Cart = props => {
                 auth.loginUserInfo.username,
                 new Date().toUTCString(),
                 totalPrice,
-                'not defined yet',
+                new Date(new Date(). getTime() + 24 * 60 * 60 * 1000).toUTCString(),
                 'not picked yet',
                 cart[cartIndex].items
             )

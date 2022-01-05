@@ -8,8 +8,15 @@ import Badge from '../../UI/Badge';
 import Button from '../../UI/Button';
 import Ratings from '../../UI/Ratings';
 import CartItem from './CartItem';
+import CountDown from 'react-native-countdown-component';
+import getDifferenceInSeconds from '../../../functions/getTimeInSeconds';
+import getDifferenceInDays from '../../../functions/getDifferenceInDays';
 
 const OrderItem = props => { // inprogress
+
+    console.log(getDifferenceInDays(new Date(props.order.startDate), new Date()))
+
+    const [time, setTime] = useState();
 
     const { items, setItems, allData, setAllData, orders, setOrders, auth } = useEcommerceContext();
 
@@ -104,13 +111,25 @@ const OrderItem = props => { // inprogress
 
             {
                 props.status != 'rated' && (
-                    <Button
-                        normalText
-                        textStyle={{ fontWeight: 'normal', fontSize: 13 }}
-                        style={{ width: '35%', height: 30 }}
-                        title={props.inprogress ? (isShowDetail ? 'HIDE DETAILS' : 'SHOW DETAILS') : (isShowDetail ? 'Close' : 'Rate Items')}
-                        onPress={() => setIsShowDetail(prevState => !prevState)}
-                    />
+                    <>
+                        {
+                            props.inprogress && !props.isAdmin && (
+                                <CountDown
+                                    until={getDifferenceInDays(new Date(props.order.startDate), new Date()) < 1 ? getDifferenceInSeconds(new Date(props.order.deliveryTime), new Date()) : 0}
+                                    onFinish={() => alert('I hope you received your Order')}
+                                    size={20}
+                                    timeLabelStyle={{}}
+                                />
+                            )
+                        }
+                        <Button
+                            normalText
+                            textStyle={{ fontWeight: 'normal', fontSize: 13 }}
+                            style={{ width: '35%', height: 30 }}
+                            title={props.inprogress ? (isShowDetail ? 'HIDE DETAILS' : 'SHOW DETAILS') : (isShowDetail ? 'Close' : 'Rate Items')}
+                            onPress={() => setIsShowDetail(prevState => !prevState)}
+                        />
+                    </>
                 )
             }
 
