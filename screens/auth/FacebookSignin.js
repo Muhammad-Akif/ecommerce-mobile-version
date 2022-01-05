@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Facebook from 'expo-facebook';
 import { useEcommerceContext } from '../../contexts/ContextProvider';
 import checkAndWriteFile from '../../functions/checkAndWriteFile';
+import { Ionicons } from '@expo/vector-icons';
 
 const FacebookSignin = propss => {
     const { setAuth, auth, allData, setAllData } = useEcommerceContext();
@@ -51,9 +52,12 @@ const FacebookSignin = propss => {
 
     return (
         <TouchableOpacity style={styles.container} onPress={logIn}>
-            <View style={styles.button}>
+            <View style={{ alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                 <Text style={{ color: 'white', fontWeight: 'bold' }}>
                     Facebook
+                </Text>
+                <Text style={{ marginLeft: 10 }}>
+                    <Ionicons name={'logo-facebook'} size={20} color={'white'} />
                 </Text>
             </View>
         </TouchableOpacity>

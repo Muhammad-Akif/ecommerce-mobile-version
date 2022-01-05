@@ -6,7 +6,6 @@ import CloseButton from '../../components/UI/CloseButton';
 import FullScreenIndicator from '../../components/UI/FullScreenIndicator';
 import colors from '../../constants/colors';
 import { useEcommerceContext } from '../../contexts/ContextProvider';
-import checkAndReadFile from '../../functions/checkAndReadFile';
 import GoogleSignin from './GoogleSignin'
 import FacebookSignin from './FacebookSignin'
 import checkAndWriteFile from '../../functions/checkAndWriteFile';

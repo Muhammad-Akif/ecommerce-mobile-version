@@ -11,6 +11,8 @@ import validatePassword from '../../functions/validatePassword';
 import validateUsername from '../../functions/validateUsername';
 
 const Signup = props => {
+    const { auth, setAuth, allData, setAllData } = useEcommerceContext();
+
     const [selected, setSelected] = useState('email');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -19,8 +21,6 @@ const Signup = props => {
     const [isUsernameValid, setIsUsernameValid] = useState(true);
     const [isPasswordValid, setIsPasswordValid] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
-
-    const { auth, setAuth, allData, setAllData } = useEcommerceContext();
 
     const emailRef = useRef(null);
     const usernameRef = useRef(null);
@@ -49,34 +49,22 @@ const Signup = props => {
             }
             Keyboard.dismiss();
 
-
             const newAuth = {
                 ...auth,
                 users: [...auth.users, { email: email.trim(), username: username.trim(), password: password.trim() }],
-                whoIsLogin: 'user',
-                loginUserInfo: {
-                    email: email.trim(),
-                    username: username.trim(),
-                    password: password.trim(),
-                    loginFromWhere: 'app'
-                }
             }
 
             const newData = {
                 ...allData,
                 auth: newAuth
             }
-
+            alert('Sign up Successfully!')
             await checkAndWriteFile(newData)
             setAllData(newData);
 
             setIsLoading(false);
-            props.navigation.popToTop();
-            props.navigation.replace('DrawerCartStackNavigator')
-            setAuth({
-                ...auth,
-                auth: newAuth
-            })
+
+            setAuth(newAuth)
             return;
         }
         setIsLoading(false);

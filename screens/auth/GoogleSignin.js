@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Google from "expo-google-app-auth";
 import { useEcommerceContext } from '../../contexts/ContextProvider';
 import checkAndWriteFile from '../../functions/checkAndWriteFile';
+import { Ionicons } from '@expo/vector-icons';
 
 const GoogleSignin = props => {
 
@@ -48,9 +49,12 @@ const GoogleSignin = props => {
 
     return (
         <TouchableOpacity onPress={_handleGoogleLogin} style={styles.container}>
-            <View style={styles.button}>
+            <View style={{ alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                 <Text style={{ color: 'white', fontWeight: 'bold' }}>
                     Google
+                </Text>
+                <Text style={{ marginLeft: 10 }}>
+                    <Ionicons name={'logo-google'} size={20} color={'white'} />
                 </Text>
             </View>
         </TouchableOpacity>
