@@ -17,11 +17,10 @@ const AddModifyItems = props => {
 
     const [name, setName] = useState(isEdit ? product.name : '')
     const [detail, setDetail] = useState(isEdit ? product.detail : '')
-    const [price, setPrice] = useState(isEdit ? product.price.toString() : 0)
+    const [price, setPrice] = useState(isEdit ? product.price.toString() : '')
     const [imageUri, setImageUri] = useState(isEdit ? product.uri.toString() : '')
     const [isUsernameValid, setIsUsernameValid] = useState(true)
     const [category, setCategory] = useState();
-
 
     const { allData, setAllData, items, setItems } = useEcommerceContext();
 

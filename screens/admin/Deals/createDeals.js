@@ -12,14 +12,11 @@ const AddModifyItems = props => {
 
     const [name, setName] = useState('')
     const [detail, setDetail] = useState('')
-    const [price, setPrice] = useState(0)
-    const [discount, setDiscount] = useState(0)
-    const [quantity, setQuantity] = useState(0)
+    const [price, setPrice] = useState('')
+    const [discount, setDiscount] = useState('')
+    const [quantity, setQuantity] = useState('')
     const [imageUri, setImageUri] = useState('')
     const [isUsernameValid, setIsUsernameValid] = useState(true)
-    // const [category, setCategory] = useState('');
-
-
 
     const addDealsHandler = async () => {
         const UID = generateID()
@@ -33,18 +30,7 @@ const AddModifyItems = props => {
                 quantity,
                 discount,
             }
-            console.log(' deal created ==> ', newDeal)
 
-
-            // const copyCategories = [...items.categories];
-
-            // const indexOfCategory = copyCategories.findIndex(cat => cat.name == category);
-
-            // copyCategories[indexOfCategory].items.push(new Item(UID, name, detail, parseFloat(price), imageUri, []));
-
-            // const copyItems = { ...items, categories: copyCategories };
-
-            // setItems(copyItems);
             const weeklyDealsData = [...weeklyDeals, new weeklyDeal(UID, name, detail, parseFloat(price), imageUri, quantity, discount)]
             const newAllData = {
                 ...allData,
@@ -154,16 +140,6 @@ const AddModifyItems = props => {
                             }
                         </Text>
                     </View>
-                    {/* <Picker
-                        style={{ marginBottom: 20, color: isUsernameValid ? colors.primary : 'grey' }}
-                        selectedValue={category}
-                        onValueChange={val => setCategory(val)}
-                    >
-                        {
-                            items.categories.map(each => <Picker.Item label={each.name} value={each.name} />)
-                        }
-                    </Picker> */}
-
                     <Button title="Create Deal" onPress={addDealsHandler} />
 
                 </View>

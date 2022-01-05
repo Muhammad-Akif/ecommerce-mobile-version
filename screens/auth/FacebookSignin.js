@@ -53,11 +53,11 @@ const FacebookSignin = propss => {
     return (
         <TouchableOpacity style={styles.container} onPress={logIn}>
             <View style={{ alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                <Text style={{ marginRight: 10 }}>
+                    <Ionicons name={'logo-facebook'} size={20} color={'white'} />
+                </Text>
                 <Text style={{ color: 'white', fontWeight: 'bold' }}>
                     Facebook
-                </Text>
-                <Text style={{ marginLeft: 10 }}>
-                    <Ionicons name={'logo-facebook'} size={20} color={'white'} />
                 </Text>
             </View>
         </TouchableOpacity>

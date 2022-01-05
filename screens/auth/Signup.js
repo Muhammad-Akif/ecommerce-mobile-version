@@ -58,7 +58,8 @@ const Signup = props => {
                 ...allData,
                 auth: newAuth
             }
-            alert('Sign up Successfully!')
+            Alert.alert('Operation Success', 'You can now Login!', [{ text: 'Ok', style: 'destructive', onPress: () => props.navigation.goBack() }])
+
             await checkAndWriteFile(newData)
             setAllData(newData);
 
@@ -141,6 +142,7 @@ const Signup = props => {
                     placeholder='Password'
                     value={password}
                     onChangeText={setPassword}
+                    secureTextEntry={true}
                     style={{ color: 'black', borderBottomWidth: 1, borderColor: isPasswordValid ? selected == 'password' ? colors.primary : 'grey' : 'red', paddingBottom: 0, paddingLeft: 0, }}
                     placeholderTextColor={isPasswordValid ? selected == 'password' ? colors.primary : 'grey' : 'red'}
                     onFocus={setSelected.bind(null, 'password')}
