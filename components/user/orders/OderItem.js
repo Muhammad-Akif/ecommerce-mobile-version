@@ -13,14 +13,12 @@ import getDifferenceInSeconds from '../../../functions/getTimeInSeconds';
 import getDifferenceInDays from '../../../functions/getDifferenceInDays';
 
 const OrderItem = props => { // inprogress
-    let times = 0;
-    try {
+    let times;
+    if (props.order) {
         times = getDifferenceInDays(new Date(props.order.startDate), new Date()) <= 1.1 ? getDifferenceInSeconds(new Date(props.order.deliveryTime), new Date()) : 0
-    } catch (err) {
-
     }
 
-    const [time, setTime] = useState(times ? 0 : 0);
+    const [time, setTime] = useState(times);
 
     const { items, setItems, allData, setAllData, orders, setOrders, auth } = useEcommerceContext();
 

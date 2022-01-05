@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, Picker } from 'react-native';
-// import Button from '../../../componsents/UI/Button';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { Picker } from '@react-native-picker/picker'
 import FilterSwitch from '../../../components/user/filter/FilterSwitch';
 import colors from '../../../constants/colors';
 import { useEcommerceContext } from '../../../contexts/ContextProvider';
@@ -88,8 +88,10 @@ const Filters = props => {
                     <Picker
                         style={{ marginBottom: 20, color: isUsernameValid ? colors.primary : 'grey' }}
                         selectedValue={category}
-                        onValueChange={val => setPrice(val)}
-                    >
+                        onValueChange={(val) => {
+                            setPrice(val)
+                            setCategory(val);
+                        }}>
 
                         <Picker.Item label={'Apply Items Price Filter'} value={'nothing'} />
                         <Picker.Item label={'price > 1000'} value={'price > 1000'} />

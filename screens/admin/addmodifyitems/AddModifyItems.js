@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, TextInput, StyleSheet, Picker } from 'react-native';
+import { Text, View, TextInput, StyleSheet } from 'react-native';
 import Button from '../../../components/UI/Button';
 import colors from '../../../constants/colors';
 import { useEcommerceContext } from '../../../contexts/ContextProvider';
 import checkAndWriteFile from '../../../functions/checkAndWriteFile';
 import generateID from '../../../functions/generateId';
 import Item from '../../../models/item'
+import { Picker } from '@react-native-picker/picker'
+
 
 const AddModifyItems = props => {
     // is Edit
