@@ -1,6 +1,8 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import colors from '../../../constants/colors';
+import AddIcon from 'react-native-vector-icons/AntDesign'
+
 
 const weeklyDeals = props => {
     return (
@@ -22,6 +24,14 @@ const weeklyDeals = props => {
                     </Text>
                 </View>
             </View>
+            <TouchableOpacity
+                style={styles.floatingButton}
+                onPress={() => props.navigation.navigate('createDeals')}
+            >
+                <Text style={styles.btnText}>
+                    <AddIcon name="plus" style={{ fontSize: 28 }} />
+                </Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -34,5 +44,22 @@ const styles = StyleSheet.create({
         backgroundColor: colors.offWhite,
         paddingHorizontal: 36,
         height: '100%'
+    },
+    btnText: {
+        color: colors.primary,
+        // paddingBottom: 3,
+    },
+    floatingButton: {
+        width: 50,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 50,
+        borderRadius: 25,
+        elevation: 8,
+        backgroundColor: "#fff",
+        position: 'absolute',
+        bottom: 30,
+        right: 30,
     }
 })

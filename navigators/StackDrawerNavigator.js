@@ -5,6 +5,7 @@ import MainDrawerNavigator from './MainDrawerNavigator';
 import ProductDetailScreen from '../screens/ecommerce/ProductDetail';
 import AddModifyItems from '../screens/admin/addmodifyitems/AddModifyItems';
 import Ratings from '../screens/user/Ratings/Ratings';
+import createDeals from '../screens/admin/Deals/createDeals'
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,7 @@ function StackDrawerNavigator() {
             <Stack.Screen name="Cart" component={Cart} />
             <Stack.Screen name="ProductDetails" component={ProductDetailScreen} />
             <Stack.Screen name="AddModifyItems" component={AddModifyItems} options={{ headerTitle: 'Add Item' }} />
+            <Stack.Screen name="createDeals" component={createDeals} options={{ headerTitle: 'Create new Deal' }} />
             {/* <Stack.Screen name="Ratings" component={Ratings} options={{ headerTitle: 'Rate Items' }} /> */}
         </Stack.Navigator>
     );
