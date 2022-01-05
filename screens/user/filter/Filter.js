@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 // import Button from '../../../componsents/UI/Button';
 import FilterSwitch from '../../../components/user/filter/FilterSwitch';
@@ -7,34 +7,40 @@ import { useEcommerceContext } from '../../../contexts/ContextProvider';
 
 const Filters = props => {
     const { items, setItems, savedItems, setSavedItems } = useEcommerceContext();
-    const catNames = items.categories.map(cat => cat.name);
 
-    const [filter, setFilter] = useState(catNames);
+    const [filter, setFilter] = useState([]);
+    const catNames = savedItems.categories.map(cat => cat.name)
+
+    useEffect(() => {
+        setSavedItems({
+            ...items
+        })
+    }, [])
 
     const setFilters = (name) => {
         const index = filter.findIndex(cat => cat == name);
-
+        console.log(index)
         if (index == -1) {
             setFilter([...filter, name])
 
-            // setSavedItems({ ...items });
+            const filteredCategory = items.categories.filter(cat => cat.name != name);
+            setItems({
+                lastId: 16,
+                categories: filteredCategory
+            })
 
         } else {
+            setFilter(filter.filter(names => names != name))
 
-            // const filteredCategory = items.categories.filter(cat => cat.name != name);
-            // console.log(filteredCategory)
-            // setItems({
-            //     lastId: 16,
-            //     categories: filteredCategory
-            // })
-
-            setFilter(
-                filter.filter(names => names != name)
-            )
+            const categoryIndex = savedItems.categories.findIndex(cat => cat.name == name);
+            setItems({
+                lastId: 16,
+                categories: [...items.categories, { ...savedItems.categories[categoryIndex] }]
+            })
         }
 
     }
-
+    console.log(filter)
     return (
         <View style={styles.screen}>
             <ScrollView contentContainerStyle={{ alignItems: 'center', width: '100%' }}>
@@ -42,7 +48,7 @@ const Filters = props => {
                 {
                     catNames.map(name => (
                         <FilterSwitch
-                            label={`Show ${name} Food`}
+                            label={`Hide ${name} Food`}
                             state={filter.includes(name)}
                             onChange={setFilters.bind(null, name)} />
                     ))
