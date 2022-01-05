@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         position: 'absolute',
         bottom: 30,
-        right: 30,
+        right: 12,
     },
     cardStyle: {
         backgroundColor: colors.secondary,
