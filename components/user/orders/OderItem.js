@@ -16,7 +16,8 @@ const OrderItem = props => { // inprogress
 
     console.log(getDifferenceInDays(new Date(props.order.startDate), new Date()))
 
-    const [time, setTime] = useState();
+
+    const [time, setTime] = useState(getDifferenceInDays(new Date(props.order.startDate), new Date()) <= 1.1 ? getDifferenceInSeconds(new Date(props.order.deliveryTime), new Date()) : 0);
 
     const { items, setItems, allData, setAllData, orders, setOrders, auth } = useEcommerceContext();
 
@@ -115,7 +116,7 @@ const OrderItem = props => { // inprogress
                         {
                             props.inprogress && !props.isAdmin && (
                                 <CountDown
-                                    until={getDifferenceInDays(new Date(props.order.startDate), new Date()) < 1 ? getDifferenceInSeconds(new Date(props.order.deliveryTime), new Date()) : 0}
+                                    until={time}
                                     onFinish={() => alert('I hope you received your Order')}
                                     size={20}
                                     timeLabelStyle={{}}
