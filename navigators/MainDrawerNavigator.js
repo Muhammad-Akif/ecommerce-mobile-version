@@ -16,7 +16,7 @@ import HeaderButton from '../components/UI/HeaderButton';
 import weeklyDeals from '../components/admin/deals/weeklyDeals';
 
 const { width } = Dimensions.get('window');
-import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome5, MaterialIcons, Entypo } from '@expo/vector-icons';
 import ManageOrders from '../screens/admin/manageorders/ManageOrders';
 import { useEcommerceContext } from '../contexts/ContextProvider';
 import Home from '../screens/user/home/Home';
@@ -147,7 +147,7 @@ export default function MainDrawerNavigator() {
                             headerStyle: { borderBottomWidth: 0, elevation: 0, backgroundColor: colors.offWhite },
                         })} />
                            <Drawer.Screen name="Create Weekly Deals" component={weeklyDeals} options={({ navigation }) => ({
-                            drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-newspaper'} />,
+                            drawerIcon: ({ color, size, focused }) => <Entypo size={size} color={color} name={'shopping-bag'} />,
                             headerLeft: () => <HeaderButton navigation={navigation} />,
                             headerStatusBarHeight: 59,
                             headerTitle: '',

@@ -1,13 +1,24 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 import colors from '../../../constants/colors';
 import AddIcon from 'react-native-vector-icons/AntDesign'
 import DeleteIcon from 'react-native-vector-icons/AntDesign'
 import { useEcommerceContext } from '../../../contexts/ContextProvider'
+import checkAndWriteFile from '../../../functions/checkAndWriteFile'
 
 
 const weeklyDeals = props => {
-    const { allData, setAllData, items, setItems, weeklyDeals, setWeeklyDeals } = useEcommerceContext();
+    const { allData, setAllData, weeklyDeals, setWeeklyDeals } = useEcommerceContext();
+    const handleDeletePress = async (id) => {
+        const newWeeklyDeals = weeklyDeals.filter((weeklyDeal) => weeklyDeal.id != id)
+        const newAllData = {
+            ...allData,
+            weeklyDeals: newWeeklyDeals
+        }
+        setWeeklyDeals(newWeeklyDeals)
+        setAllData(newAllData);
+        await checkAndWriteFile(newAllData);
+    }
     return (
         <View style={styles.screen}>
 
@@ -27,7 +38,7 @@ const weeklyDeals = props => {
                                 >
                                     <Text style={{ color: 'green', fontSize: 12 }}>{deal.off}% OFF</Text>
                                 </TouchableOpacity>
-                                {/* <Image source={{ uri: deal.uri }} style={styles.productImage} /> */}
+                                <Image source={{ uri: deal.uri }} style={styles.productImage} />
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Text style={{ color: '#494949', fontWeight: '200', fontFamily: 'text-bold', fontSize: 16.5 }} adjustsFontSizeToFit={true} numberOfLines={1}>
                                         {deal.name}
@@ -38,10 +49,11 @@ const weeklyDeals = props => {
                                         {deal.detail}
                                     </Text>
                                 </View>
-                                <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {deal.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {deal.price}</Text> </Text>
+                                <Text style={{ color: "green", fontWeight: '600' }}>Quantity: {deal.quantity}</Text>
+                                <Text style={{ color: colors.primary, fontWeight: '200',paddingVertical: 5}}>${deal.price * Number(deal.off)/100}     <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>${deal.price}</Text> </Text>
                                 <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                                     <TouchableOpacity style={styles.button}
-                                    // onPress={handleDeletePress.bind(null, product.id)}
+                                    onPress={handleDeletePress.bind(null, deal.id)}
                                     >
                                         <Text adjustsFontSizeToFit={true} style={{ color: "red", fontFamily: 'bold', margin: 5 }}>
                                             <DeleteIcon name='delete' style={{ fontSize: 40 }} />
@@ -103,13 +115,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: 8,
         paddingTop: 2,
         elevation: 5,
-        width: '90%',
+        width: '80%',
         borderRadius: 15,
         paddingBottom: 8,
     },
     productImage: {
         width: '100%',
-        height: 120,
+        height: 140,
         marginVertical: 10
     },
     button: {
