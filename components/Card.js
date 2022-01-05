@@ -10,7 +10,7 @@ import checkAndWriteFile from '../functions/checkAndWriteFile';
 import Cart from '../models/cart';
 
 export const Card = (props) => {
-    const { cart, setCart, allData, setAllData, auth, items, setItems } = useEcommerceContext();
+    const { cart, setCart, allData, setAllData, auth, items, setItems, priceFilter } = useEcommerceContext();
     const { item, isAdmin, navigation } = props;
 
     const handleDeletePress = async id => {
@@ -91,6 +91,26 @@ export const Card = (props) => {
         )
     }
 
+    const filterItems = item.items.filter(product => {
+
+        if (priceFilter == 'nothing') {
+            return true;
+        }
+        else if (priceFilter == 'price > 1000' && product.price > 1000) {
+            return true;
+        } else if (priceFilter == 'price < 500' && product.price < 500) {
+            return true;
+        } else if (priceFilter == 'price > 500' && product.price > 500) {
+            return true;
+        } else if (priceFilter == 'price < 100' && product.price < 100) {
+            return true;
+        } else if (priceFilter == 'price < 50' && product.price < 50) {
+            return true;
+
+        }
+        return false;
+    })
+
     return (
         <View style={styles.cardStyle}>
             <View style={styles.cardHeadingStyle}>
@@ -98,7 +118,7 @@ export const Card = (props) => {
             </View>
             <View style={{ flexDirection: 'row', width: '100%' }}>
                 <ScrollView horizontal={!isAdmin} showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingRight: 20 }}>
-                    {item.items.map((product) => (
+                    {filterItems.map((product) => (
                         <TouchableOpacity key={product.id} style={styles.card} onPress={() => navigation.navigate('ProductDetails', { item: product, category: item.name })}>
                             <View
                                 style={styles.button2}
@@ -156,6 +176,13 @@ export const Card = (props) => {
                             </TouchableOpacity>
                         </TouchableOpacity>
                     ))}
+                    {
+                        filterItems.length == 0 && (
+                            <View style={{ marginTop: 20, marginLeft: 30 }}>
+                                <Text style={{ fontFamily: 'italic', textAlign: 'center' }}>No Items Available!</Text>
+                            </View>
+                        )
+                    }
                 </ScrollView>
             </View>
         </View >
