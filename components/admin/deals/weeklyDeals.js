@@ -5,10 +5,13 @@ import AddIcon from 'react-native-vector-icons/AntDesign'
 import DeleteIcon from 'react-native-vector-icons/AntDesign'
 import { useEcommerceContext } from '../../../contexts/ContextProvider'
 import checkAndWriteFile from '../../../functions/checkAndWriteFile'
+import Cart from '../../../models/cart';
+import CartItem from '../../../models/cartItem';
 
 
 const weeklyDeals = props => {
-    const { allData, setAllData, weeklyDeals, setWeeklyDeals } = useEcommerceContext();
+    const { allData, setAllData, weeklyDeals, setWeeklyDeals, cart, setCart, auth } = useEcommerceContext();
+
     const handleDeletePress = async (id) => {
         const newWeeklyDeals = weeklyDeals.filter((weeklyDeal) => weeklyDeal.id != id)
         const newAllData = {
@@ -66,13 +69,13 @@ const weeklyDeals = props => {
                                         :
                                         (
                                             <View style={{ display: 'flex', flexDirection: 'row', paddingBottom: 5, justifyContent: 'center', alignItems: 'center' }}>
-                                                {/* <TouchableOpacity style={styles.button} onPress={async () => {
-                                                    // const cartIndex = cart.findIndex(cartItem => cartItem.username == auth.loginUserInfo.username);
+                                                <TouchableOpacity style={styles.button} onPress={async () => {
+                                                    const cartIndex = cart.findIndex(cartItem => cartItem.username == auth.loginUserInfo.username);
                                                     if (cartIndex == -1) {
                                                         const newCart = [...cart, new Cart(
-                                                            // auth.loginUserInfo.username,
-                                                            product.price,
-                                                            [new CartItem(deal.id, deal.name, deal.detail, deal.price, deal.uri, '', 1, deal.price)]
+                                                            auth.loginUserInfo.username,
+                                                            deal.price,
+                                                            [new CartItem(deal.id, deal.name, deal.detail, deal.price, deal.uri, category, 1, deal.price)]
                                                         )]
                                                         setCart(newCart);
                                                         const newData = {
@@ -83,14 +86,15 @@ const weeklyDeals = props => {
                                                         setAllData(newData)
                                                         return;
                                                     }
-                                                    // const index = cart[cartIndex].items.findIndex(cartItem => cartItem.id == product.id);
+                                                    const index = cart[cartIndex].items.findIndex(cartItem => cartItem.id == deal.id);
                                                     if (index != -1) return;
 
                                                     const newCart = [...cart]
+
                                                     newCart.splice(cartIndex, 1, new Cart(
                                                         auth.loginUserInfo.username,
-                                                        product.price,
-                                                        [...cart[cartIndex].items, new CartItem(deal.id, deal.name, deal.detail, deal.price, deal.uri, '', 1, deal.price)]
+                                                        deal.price,
+                                                        [...cart[cartIndex].items, new CartItem(deal.id, deal.name, deal.detail, deal.price, deal.uri, 'no category', 1, deal.price)]
                                                     ))
 
                                                     setCart(newCart);
@@ -101,8 +105,8 @@ const weeklyDeals = props => {
                                                     await checkAndWriteFile(newData);
                                                     setAllData(newData)
                                                 }}>
-                                                    <Text style={{ color: colors.primary, fontFamily: 'bold',margin: 5 }}>Add to cart</Text>
-                                                </TouchableOpacity> */}
+                                                    <Text style={{ color: colors.primary, fontFamily: 'bold', margin: 5 }}>Add to cart</Text>
+                                                </TouchableOpacity>
                                             </View>
                                         )
                                 }
