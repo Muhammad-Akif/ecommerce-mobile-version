@@ -22,7 +22,6 @@ const AddModifyItems = props => {
     const [isUsernameValid, setIsUsernameValid] = useState(true)
     const [category, setCategory] = useState();
 
-
     const { allData, setAllData, items, setItems } = useEcommerceContext();
 
     useEffect(() => {

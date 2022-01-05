@@ -17,7 +17,6 @@ function StackDrawerNavigator() {
             <Stack.Screen name="ProductDetails" component={ProductDetailScreen} />
             <Stack.Screen name="AddModifyItems" component={AddModifyItems} options={{ headerTitle: 'Add Item' }} />
             <Stack.Screen name="createDeals" component={createDeals} options={{ headerTitle: 'Create new Deal' }} />
-            {/* <Stack.Screen name="Ratings" component={Ratings} options={{ headerTitle: 'Rate Items' }} /> */}
         </Stack.Navigator>
     );
 }
