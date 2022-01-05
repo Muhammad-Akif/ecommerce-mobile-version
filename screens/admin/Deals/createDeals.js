@@ -3,13 +3,12 @@ import { Text, View, TextInput, StyleSheet, Picker, ScrollView } from 'react-nat
 import Button from '../../../components/UI/Button';
 import colors from '../../../constants/colors';
 import { useEcommerceContext } from '../../../contexts/ContextProvider';
-// import checkAndWriteFile from '../../../functions/checkAndWriteFile';
+import checkAndWriteFile from '../../../functions/checkAndWriteFile';
 import generateID from '../../../functions/generateId';
-import category from '../../../models/category'
 import weeklyDeal from '../../../models/weeklyDeals';
 
 const AddModifyItems = props => {
-    const { allData, setAllData, items, setItems } = useEcommerceContext();
+    const { allData, setAllData, items, setItems, weeklyDeals, setWeeklyDeals } = useEcommerceContext();
 
     const [name, setName] = useState('')
     const [detail, setDetail] = useState('')
@@ -18,23 +17,21 @@ const AddModifyItems = props => {
     const [quantity, setQuantity] = useState(0)
     const [imageUri, setImageUri] = useState('')
     const [isUsernameValid, setIsUsernameValid] = useState(true)
-    const [category, setCategory] = useState('');
+    // const [category, setCategory] = useState('');
 
 
 
     const addDealsHandler = async () => {
         const UID = generateID()
-        if (name.length > 2 && detail.length > 10 && imageUri.length > 10 && price.length > 1 && category.length > 2 && discount.length > 0 && quantity.length > 0) {
+        if (name.length > 2 && detail.length > 10 && imageUri.length > 10 && price.length > 1 && discount.length > 0 && quantity.length > 0) {
             const newDeal = {
                 UID,
                 name,
                 detail,
-                price: parseFloat(price),
+                price: parseFloat(price), // str -> num
                 imageUri,
-                discount,
                 quantity,
-                category
-                // []   
+                discount,
             }
             console.log(' deal created ==> ', newDeal)
 
@@ -48,16 +45,15 @@ const AddModifyItems = props => {
             // const copyItems = { ...items, categories: copyCategories };
 
             // setItems(copyItems);
-
+            const weeklyDealsData = [...weeklyDeals, new weeklyDeal(UID, name, detail, parseFloat(price), imageUri, quantity, discount)]
             const newAllData = {
                 ...allData,
-                weeklyDeals: weeklyDeals.push(weeklyDeal(UID, name, detail, price = parseFloat(price), imageUri, discount, category))
+                weeklyDeals: weeklyDealsData
             }
-
-            // setAllData(newAllData);
-
-            // await checkAndWriteFile(newAllData);
-            // props.navigation.goBack();
+            setWeeklyDeals(weeklyDealsData)
+            setAllData(newAllData);
+            await checkAndWriteFile(newAllData);
+            props.navigation.goBack();
 
         }
         else {
@@ -151,14 +147,14 @@ const AddModifyItems = props => {
                         placeholderTextColor={isUsernameValid ? colors.primary : 'grey'}
                         onChangeText={(text) => setDiscount(text)}
                     />
-                    <View style={{ marginVertical: 10, marginBottom: 20 }}>
+                    <View style={{ marginVertical: 10, marginBottom: 40 }}>
                         <Text style={{ color: isUsernameValid ? 'grey' : 'red', fontSize: 12, letterSpacing: -0.2 }}>
                             {
                                 isUsernameValid ? "Discount in percentage like 10 20..." : "At least have 1 digit number."
                             }
                         </Text>
                     </View>
-                    <Picker
+                    {/* <Picker
                         style={{ marginBottom: 20, color: isUsernameValid ? colors.primary : 'grey' }}
                         selectedValue={category}
                         onValueChange={val => setCategory(val)}
@@ -166,7 +162,7 @@ const AddModifyItems = props => {
                         {
                             items.categories.map(each => <Picker.Item label={each.name} value={each.name} />)
                         }
-                    </Picker>
+                    </Picker> */}
 
                     <Button title="Create Deal" onPress={addDealsHandler} />
 
