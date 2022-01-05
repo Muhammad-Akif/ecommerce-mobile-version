@@ -14,10 +14,10 @@ import getDifferenceInDays from '../../../functions/getDifferenceInDays';
 
 const OrderItem = props => { // inprogress
 
-    console.log(getDifferenceInDays(new Date(props.order.startDate), new Date()))
+    // console.log(getDifferenceInDays(new Date(props?.order?.startDate), new Date()))
 
 
-    const [time, setTime] = useState(getDifferenceInDays(new Date(props.order.startDate), new Date()) <= 1.1 ? getDifferenceInSeconds(new Date(props.order.deliveryTime), new Date()) : 0);
+    // const [time, setTime] = useState(getDifferenceInDays(new Date(props.order.startDate), new Date()) <= 1.1 ? getDifferenceInSeconds(new Date(props.order.deliveryTime), new Date()) : 0);
 
     const { items, setItems, allData, setAllData, orders, setOrders, auth } = useEcommerceContext();
 

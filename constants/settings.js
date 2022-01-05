@@ -1,4 +1,4 @@
-export const fileName = 'khaotiasasdasddasds.txt';
+export const fileName = 'khaotiasasasddasddasds.txt';
 export const folderName = 'ecommerce-mobile';
 export const initialAdmin = { // Only one Admin!
     email: 'abc@gmail.com',
