@@ -50,7 +50,7 @@ const weeklyDeals = props => {
                                     </Text>
                                 </View>
                                 <Text style={{ color: "green", fontWeight: '600' }}>Quantity: {deal.quantity}</Text>
-                                <Text style={{ color: colors.primary, fontWeight: '200', paddingVertical: 5 }}>${deal.price * Number(deal.off) / 100}     <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>${deal.price}</Text> </Text>
+                                <Text style={{ color: colors.primary, fontWeight: '200', paddingVertical: 5 }}>${(deal.price * deal.quantity) * Number(deal.off) / 100}     <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>${deal.price * deal.quantity}</Text> </Text>
                                 {
                                     !props.user ? (
                                         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
