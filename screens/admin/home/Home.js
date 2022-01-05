@@ -52,13 +52,22 @@ const Home = props => {
     return (
         <View style={styles.container}>
             <Search search={search} searchFilterFunction={searchFilterFunction} />
-            <FlatList
-                columnWrapperStyle={{ flexWrap: 'wrap' }}
-                data={filteredDataSource}
-                numColumns={2}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={ItemView}
-            />
+            {
+                filteredDataSource.length > 0 ? (
+                    <FlatList
+                        columnWrapperStyle={{ flexWrap: 'wrap' }}
+                        data={filteredDataSource}
+                        numColumns={2}
+                        keyExtractor={(item, index) => index.toString()}
+                        renderItem={ItemView}
+                    />
+                ) :
+                    (
+                        <View style={{ display: 'flex', height: '80%', justifyContent: 'center', alignItems: 'center' }}>
+                            <Text>Oops! No Match Results...</Text>
+                        </View>
+                    )
+            }
             <TouchableOpacity
                 style={styles.floatingButton}
                 onPress={() => props.navigation.navigate('AddModifyItems', { isEdit: false })}
