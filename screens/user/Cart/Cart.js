@@ -9,6 +9,7 @@ import checkAndWriteFile from '../../../functions/checkAndWriteFile';
 import Button from '../../../components/UI/Button';
 import generateID from '../../../functions/generateId';
 
+
 const Cart = props => {
     const { auth, cart, setCart, allData, setAllData, setOrders, orders } = useEcommerceContext();
     const cartIndex = cart.findIndex(cartItem => cartItem.username == auth.loginUserInfo.username);
