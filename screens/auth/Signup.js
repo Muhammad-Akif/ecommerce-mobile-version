@@ -5,7 +5,6 @@ import CloseButton from '../../components/UI/CloseButton';
 import FullScreenIndicator from '../../components/UI/FullScreenIndicator';
 import colors from '../../constants/colors';
 import { useEcommerceContext } from '../../contexts/ContextProvider';
-import checkAndReadFile from '../../functions/checkAndReadFile';
 import checkAndWriteFile from '../../functions/checkAndWriteFile';
 import validateEmail from '../../functions/validateEmail';
 import validatePassword from '../../functions/validatePassword';

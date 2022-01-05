@@ -31,7 +31,7 @@ const weeklyDeals = props => {
                 {
                     weeklyDeals.map((deal, index) => (
 
-                        <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <View key={index} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <View key={deal.id + index} style={styles.Acard}>
                                 <TouchableOpacity
                                     style={styles.button2}
