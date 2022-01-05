@@ -17,6 +17,7 @@ export const ContextProvider = ({ children }) => {
         setOrders(data.orders)
         setFavoriteItems(data.favoriteItems)
         setItems(data.items)
+        setWeeklyDeals(data.weeklyDeals)
     }
     useEffect(() => {
         fetchData();
@@ -26,6 +27,8 @@ export const ContextProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
 
     const [orders, setOrders] = useState([]);
+
+    const [weeklyDeals, setWeeklyDeals] = useState([]);
 
     const [favoriteItems, setFavoriteItems] = useState([]);
 
@@ -44,7 +47,7 @@ export const ContextProvider = ({ children }) => {
     const [priceFilter, setPriceFilter] = useState('nothing');
 
     return (
-        <AuthContext.Provider value={{ priceFilter, setPriceFilter, savedItems, setSavedItems, items, setItems, auth, setAuth, cart, setCart, allData, setAllData, orders, setOrders, favoriteItems, setFavoriteItems }}>
+        <AuthContext.Provider value={{ priceFilter, setPriceFilter, savedItems, setSavedItems, weeklyDeals, setWeeklyDeals, items, setItems, auth, setAuth, cart, setCart, allData, setAllData, orders, setOrders, favoriteItems, setFavoriteItems }}>
             {children}
         </AuthContext.Provider>
     )
