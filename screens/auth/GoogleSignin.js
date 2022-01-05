@@ -50,11 +50,11 @@ const GoogleSignin = props => {
     return (
         <TouchableOpacity onPress={_handleGoogleLogin} style={styles.container}>
             <View style={{ alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                <Text style={{ marginRight: 10 }}>
+                    <Ionicons name={'logo-google'} size={20} color={'white'} />
+                </Text>
                 <Text style={{ color: 'white', fontWeight: 'bold' }}>
                     Google
-                </Text>
-                <Text style={{ marginLeft: 10 }}>
-                    <Ionicons name={'logo-google'} size={20} color={'white'} />
                 </Text>
             </View>
         </TouchableOpacity>
