@@ -13,9 +13,10 @@ import Filters from '../screens/user/filter/Filter';
 import Favorites from '../screens/user/favorites/Favorites';
 import OffersAndDeals from '../screens/user/offersanddeals/OfferAndDeals';
 import HeaderButton from '../components/UI/HeaderButton';
+import weeklyDeals from '../components/admin/deals/weeklyDeals';
 
 const { width } = Dimensions.get('window');
-import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome5, MaterialIcons, Entypo } from '@expo/vector-icons';
 import ManageOrders from '../screens/admin/manageorders/ManageOrders';
 import { useEcommerceContext } from '../contexts/ContextProvider';
 import Home from '../screens/user/home/Home';
@@ -127,6 +128,7 @@ export default function MainDrawerNavigator() {
                             headerLeft: () => <HeaderButton navigation={navigation} />,
                             headerStatusBarHeight: 59,
                             headerTitle: '',
+                            
                             headerLeftContainerStyle: { paddingLeft: 15 },
                             headerStyle: { borderBottomWidth: 0, elevation: 0, backgroundColor: colors.offWhite },
                         })} />
@@ -139,6 +141,14 @@ export default function MainDrawerNavigator() {
                         })} />
                         <Drawer.Screen name="Manage Orders" component={ManageOrders} options={({ navigation }) => ({
                             drawerIcon: ({ color, size, focused }) => <Ionicons size={size} color={color} name={'md-newspaper'} />,
+                            headerLeft: () => <HeaderButton navigation={navigation} />,
+                            headerStatusBarHeight: 59,
+                            headerTitle: '',
+                            headerLeftContainerStyle: { paddingLeft: 15 },
+                            headerStyle: { borderBottomWidth: 0, elevation: 0, backgroundColor: colors.offWhite },
+                        })} />
+                           <Drawer.Screen name="Create Weekly Deals" component={weeklyDeals} options={({ navigation }) => ({
+                            drawerIcon: ({ color, size, focused }) => <Entypo size={size} color={color} name={'shopping-bag'} />,
                             headerLeft: () => <HeaderButton navigation={navigation} />,
                             headerStatusBarHeight: 59,
                             headerTitle: '',
