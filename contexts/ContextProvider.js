@@ -41,8 +41,14 @@ export const ContextProvider = ({ children }) => {
         categories: defaultItems
     });
 
+    const [priceFilter, setPriceFilter] = useState({
+        isFilter: false,
+        isLess: false,
+        price: 0
+    });
+
     return (
-        <AuthContext.Provider value={{ savedItems, setSavedItems, items, setItems, auth, setAuth, cart, setCart, allData, setAllData, orders, setOrders, favoriteItems, setFavoriteItems }}>
+        <AuthContext.Provider value={{ priceFilter, setPriceFilter, savedItems, setSavedItems, items, setItems, auth, setAuth, cart, setCart, allData, setAllData, orders, setOrders, favoriteItems, setFavoriteItems }}>
             {children}
         </AuthContext.Provider>
     )

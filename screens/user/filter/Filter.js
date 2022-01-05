@@ -6,7 +6,7 @@ import colors from '../../../constants/colors';
 import { useEcommerceContext } from '../../../contexts/ContextProvider';
 
 const Filters = props => {
-    const { items, setItems, savedItems, setSavedItems } = useEcommerceContext();
+    const { items, setItems, savedItems, setSavedItems, priceFilter, setPriceFilter } = useEcommerceContext();
 
     const [filter, setFilter] = useState([]);
     const catNames = savedItems.categories.map(cat => cat.name)
@@ -53,8 +53,25 @@ const Filters = props => {
                             onChange={setFilters.bind(null, name)} />
                     ))
                 }
+
+                <View style={{ height: 2.2, width: '70%', backgroundColor: 'grey', marginVertical: 14, borderRadius: 10 }} />
+                {/* <View style={{ width: '100%', marginLeft: '20%' }}>
+                    <Text style={{ fontFamily: "bold", marginTop: 28, fontSize: 20, textAlign: 'left' }}>Price Filters</Text>
+                </View> */}
+
+                <FilterSwitch
+                    label={`Items Less Than 500`}
+                    state={true}
+                    onChange={() => { }} />
+
+                <FilterSwitch
+                    label={`Items Greater Than 500`}
+                    state={true}
+                    onChange={() => { }} />
+
             </ScrollView>
-            {/* <Button title={'Apply Filters'} style={{ marginBottom: 20, marginHorizontal: 10 }} /> */}
+
+
         </View>
     );
 }
