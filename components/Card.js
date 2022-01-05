@@ -39,11 +39,6 @@ export const Card = (props) => {
             const product = productItem.item;
             return (
                 <View key={product.id} style={styles.Acard}>
-                    <TouchableOpacity
-                        style={styles.button2}
-                    >
-                        <Text style={{ color: 'green', fontSize: 12 }}>20% OFF</Text>
-                    </TouchableOpacity>
                     <Image source={{ uri: product.uri }} style={styles.productImage} />
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Text style={{ color: '#494949', fontWeight: '200', fontFamily: 'text-bold', fontSize: 16.5 }} adjustsFontSizeToFit={true} numberOfLines={1}>
@@ -55,7 +50,7 @@ export const Card = (props) => {
                             {product.detail}
                         </Text>
                     </View>
-                    <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {product.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {item.price}</Text> </Text>
+                    <Text style={{ color: colors.primary, fontWeight: '200' }}>${product.price}</Text>
                     <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                         <TouchableOpacity
                             style={styles.button}
@@ -119,11 +114,6 @@ export const Card = (props) => {
                 <ScrollView horizontal={!isAdmin} showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingRight: 20 }}>
                     {filterItems.map((product) => (
                         <TouchableOpacity key={product.id} style={styles.card} onPress={() => navigation.navigate('ProductDetails', { item: product, category: item.name })}>
-                            <View
-                                style={styles.button2}
-                            >
-                                <Text style={{ color: 'green', fontSize: 12 }}>20% OFF</Text>
-                            </View>
                             <Image source={{ uri: product.uri }} style={styles.productImage} />
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <Text style={{ color: '#494949', fontWeight: '200', fontFamily: 'text-bold', fontSize: 16.5 }} adjustsFontSizeToFit={true} numberOfLines={1}>
@@ -135,7 +125,7 @@ export const Card = (props) => {
                                     {product.detail}
                                 </Text>
                             </View>
-                            <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {product.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {product.price}</Text> </Text>
+                            <Text style={{ color: colors.primary, fontWeight: '200' }}>${product.price} </Text>
                             <TouchableOpacity style={styles.button} onPress={async () => {
                                 const cartIndex = cart.findIndex(cartItem => cartItem.username == auth.loginUserInfo.username);
                                 if (cartIndex == -1) {
