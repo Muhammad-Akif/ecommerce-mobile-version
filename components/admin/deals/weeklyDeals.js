@@ -27,11 +27,11 @@ const weeklyDeals = props => {
                     My offers
                 </Text>
             </View>
-            <ScrollView style={{width: '100%'}}>
+            <ScrollView style={{ width: '100%' }}>
                 {
                     weeklyDeals.map((deal, index) => (
 
-                        <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                        <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <View key={deal.id + index} style={styles.Acard}>
                                 <TouchableOpacity
                                     style={styles.button2}
@@ -50,29 +50,79 @@ const weeklyDeals = props => {
                                     </Text>
                                 </View>
                                 <Text style={{ color: "green", fontWeight: '600' }}>Quantity: {deal.quantity}</Text>
-                                <Text style={{ color: colors.primary, fontWeight: '200',paddingVertical: 5}}>${deal.price * Number(deal.off)/100}     <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>${deal.price}</Text> </Text>
-                                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                                    <TouchableOpacity style={styles.button}
-                                    onPress={handleDeletePress.bind(null, deal.id)}
-                                    >
-                                        <Text adjustsFontSizeToFit={true} style={{ color: "red", fontFamily: 'bold', margin: 5 }}>
-                                            <DeleteIcon name='delete' style={{ fontSize: 40 }} />
-                                        </Text>
-                                    </TouchableOpacity>
-                                </View>
+                                <Text style={{ color: colors.primary, fontWeight: '200', paddingVertical: 5 }}>${deal.price * Number(deal.off) / 100}     <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>${deal.price}</Text> </Text>
+                                {
+                                    !props.user ? (
+                                        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                                            <TouchableOpacity style={styles.button}
+                                                onPress={handleDeletePress.bind(null, deal.id)}
+                                            >
+                                                <Text adjustsFontSizeToFit={true} style={{ color: "red", fontFamily: 'bold', margin: 5 }}>
+                                                    <DeleteIcon name='delete' style={{ fontSize: 40 }} />
+                                                </Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    )
+                                        :
+                                        (
+                                            <View style={{ display: 'flex', flexDirection: 'row', paddingBottom: 5, justifyContent: 'center', alignItems: 'center' }}>
+                                                {/* <TouchableOpacity style={styles.button} onPress={async () => {
+                                                    // const cartIndex = cart.findIndex(cartItem => cartItem.username == auth.loginUserInfo.username);
+                                                    if (cartIndex == -1) {
+                                                        const newCart = [...cart, new Cart(
+                                                            // auth.loginUserInfo.username,
+                                                            product.price,
+                                                            [new CartItem(deal.id, deal.name, deal.detail, deal.price, deal.uri, '', 1, deal.price)]
+                                                        )]
+                                                        setCart(newCart);
+                                                        const newData = {
+                                                            ...allData,
+                                                            cart: newCart
+                                                        }
+                                                        await checkAndWriteFile(newData);
+                                                        setAllData(newData)
+                                                        return;
+                                                    }
+                                                    // const index = cart[cartIndex].items.findIndex(cartItem => cartItem.id == product.id);
+                                                    if (index != -1) return;
+
+                                                    const newCart = [...cart]
+                                                    newCart.splice(cartIndex, 1, new Cart(
+                                                        auth.loginUserInfo.username,
+                                                        product.price,
+                                                        [...cart[cartIndex].items, new CartItem(deal.id, deal.name, deal.detail, deal.price, deal.uri, '', 1, deal.price)]
+                                                    ))
+
+                                                    setCart(newCart);
+                                                    const newData = {
+                                                        ...allData,
+                                                        cart: newCart
+                                                    }
+                                                    await checkAndWriteFile(newData);
+                                                    setAllData(newData)
+                                                }}>
+                                                    <Text style={{ color: colors.primary, fontFamily: 'bold',margin: 5 }}>Add to cart</Text>
+                                                </TouchableOpacity> */}
+                                            </View>
+                                        )
+                                }
                             </View>
                         </View>
                     ))
                 }
             </ScrollView>
-            <TouchableOpacity
-                style={styles.floatingButton}
-                onPress={() => props.navigation.navigate('createDeals')}
-            >
-                <Text style={styles.btnText}>
-                    <AddIcon name="plus" style={{ fontSize: 28 }} />
-                </Text>
-            </TouchableOpacity>
+            {
+                !props.user && (
+                    <TouchableOpacity
+                        style={styles.floatingButton}
+                        onPress={() => props.navigation.navigate('createDeals')}
+                    >
+                        <Text style={styles.btnText}>
+                            <AddIcon name="plus" style={{ fontSize: 28 }} />
+                        </Text>
+                    </TouchableOpacity>
+                )
+            }
         </View >
     );
 }

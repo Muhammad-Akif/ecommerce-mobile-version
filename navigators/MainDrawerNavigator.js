@@ -128,6 +128,7 @@ export default function MainDrawerNavigator() {
                             headerLeft: () => <HeaderButton navigation={navigation} />,
                             headerStatusBarHeight: 59,
                             headerTitle: '',
+                            
                             headerLeftContainerStyle: { paddingLeft: 15 },
                             headerStyle: { borderBottomWidth: 0, elevation: 0, backgroundColor: colors.offWhite },
                         })} />
