@@ -1,53 +1,58 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import colors from '../../../constants/colors';
 import AddIcon from 'react-native-vector-icons/AntDesign'
 import DeleteIcon from 'react-native-vector-icons/AntDesign'
+import { useEcommerceContext } from '../../../contexts/ContextProvider'
 
 
 const weeklyDeals = props => {
+    const { allData, setAllData, items, setItems, weeklyDeals, setWeeklyDeals } = useEcommerceContext();
     return (
         <View style={styles.screen}>
-            <View style={{ marginTop: '4%', paddingHorizontal: 7, height: '7%' }}>
+
+            <View style={{ marginTop: '4%', paddingHorizontal: 100, height: '10%' }}>
                 <Text style={{ fontSize: 35, fontWeight: 'bold' }} numberOfLines={1} adjustsFontSizeToFit={true}>
                     My offers
                 </Text>
             </View>
-            <View style={{ height: '93%', justifyContent: 'center', alignItems: 'center' }}>
-                <View key={product.id} style={styles.Acard}>
-                    <TouchableOpacity
-                        style={styles.button2}
-                    >
-                        <Text style={{ color: 'green', fontSize: 12 }}>20% OFF</Text>
-                    </TouchableOpacity>
-                    <Image source={{ uri: product.uri }} style={styles.productImage} />
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Text style={{ color: '#494949', fontWeight: '200', fontFamily: 'text-bold', fontSize: 16.5 }} adjustsFontSizeToFit={true} numberOfLines={1}>
-                            {product.name}
-                        </Text>
-                    </View>
-                    <View style={styles.childViewTextStyle}>
-                        <Text style={{ color: 'grey', fontFamily: 'italic', fontSize: 15 }}>
-                            {product.detail}
-                        </Text>
-                    </View>
-                    <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {product.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {item.price}</Text> </Text>
-                    <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <TouchableOpacity style={styles.button} 
-                        // onPress={handleDeletePress.bind(null, product.id)}
-                        >
-                            <Text adjustsFontSizeToFit={true} style={{ color: "red", fontFamily: 'bold', margin: 5 }}>
-                                <DeleteIcon name='delete' style={{ fontSize: 40 }} />
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                <View style={{ width: '55%' }}>
-                    <Text style={{ textAlign: 'center', color: 'grey', fontFamily: 'italic', fontSize: 16 }} numberOfLines={2} adjustsFontSizeToFit={true}>
-                        You dose't have any offers {"\n"} yet please check again.
-                    </Text>
-                </View>
-            </View>
+            <ScrollView style={{width: '100%'}}>
+                {
+                    weeklyDeals.map((deal, index) => (
+
+                        <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                            <View key={deal.id + index} style={styles.Acard}>
+                                <TouchableOpacity
+                                    style={styles.button2}
+                                >
+                                    <Text style={{ color: 'green', fontSize: 12 }}>{deal.off}% OFF</Text>
+                                </TouchableOpacity>
+                                {/* <Image source={{ uri: deal.uri }} style={styles.productImage} /> */}
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={{ color: '#494949', fontWeight: '200', fontFamily: 'text-bold', fontSize: 16.5 }} adjustsFontSizeToFit={true} numberOfLines={1}>
+                                        {deal.name}
+                                    </Text>
+                                </View>
+                                <View style={styles.childViewTextStyle}>
+                                    <Text style={{ color: 'grey', fontFamily: 'italic', fontSize: 15 }}>
+                                        {deal.detail}
+                                    </Text>
+                                </View>
+                                <Text style={{ color: colors.primary, fontWeight: '200' }}>Rs. {deal.price} <Text style={{ textDecorationLine: 'line-through', color: '#000' }}>Rs. {deal.price}</Text> </Text>
+                                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                                    <TouchableOpacity style={styles.button}
+                                    // onPress={handleDeletePress.bind(null, product.id)}
+                                    >
+                                        <Text adjustsFontSizeToFit={true} style={{ color: "red", fontFamily: 'bold', margin: 5 }}>
+                                            <DeleteIcon name='delete' style={{ fontSize: 40 }} />
+                                        </Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    ))
+                }
+            </ScrollView>
             <TouchableOpacity
                 style={styles.floatingButton}
                 onPress={() => props.navigation.navigate('createDeals')}
@@ -56,7 +61,7 @@ const weeklyDeals = props => {
                     <AddIcon name="plus" style={{ fontSize: 28 }} />
                 </Text>
             </TouchableOpacity>
-        </View>
+        </View >
     );
 }
 
@@ -66,8 +71,8 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         backgroundColor: colors.offWhite,
-        paddingHorizontal: 36,
-        height: '100%'
+        height: '100%',
+        width: '100%',
     },
     btnText: {
         color: colors.primary,
@@ -85,5 +90,54 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 30,
         right: 30,
-    }
+    },
+    cardStyle: {
+        backgroundColor: colors.secondary,
+        paddingVertical: 10,
+        marginTop: 0
+    },
+    Acard: {
+        marginVertical: 10,
+        marginHorizontal: 9,
+        backgroundColor: colors.secondary,
+        paddingHorizontal: 8,
+        paddingTop: 2,
+        elevation: 5,
+        width: '90%',
+        borderRadius: 15,
+        paddingBottom: 8,
+    },
+    productImage: {
+        width: '100%',
+        height: 120,
+        marginVertical: 10
+    },
+    button: {
+        backgroundColor: colors.secondary,
+        height: 30,
+        borderRadius: 5,
+        borderWidth: 0.8,
+        marginTop: 5,
+        borderColor: "gray",
+        justifyContent: 'center',
+        fontFamily: 'Inter_800ExtraBold',
+        alignItems: 'center'
+    },
+    button2: {
+        backgroundColor: colors.secondary,
+        height: 20,
+        width: 60,
+        borderRadius: 5,
+        fontFamily: 'Inter_800ExtraBold',
+        borderWidth: 0.4,
+        marginTop: 5,
+        borderColor: "green",
+        alignSelf: 'flex-end',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    childViewTextStyle: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
 })
