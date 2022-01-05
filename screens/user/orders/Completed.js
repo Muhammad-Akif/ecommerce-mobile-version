@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, ScrollView } from 'react-native';
 import OrderItem from '../../../components/user/orders/OderItem';
 import { useEcommerceContext } from '../../../contexts/ContextProvider';
 
@@ -10,7 +10,7 @@ const Completed = props => {
 
     return (
         <View style={style.screen}>
-            <ScrollView>
+            <ScrollView >
                 {
                     userOrders.map((item, index) => (
                         <OrderItem
@@ -24,6 +24,14 @@ const Completed = props => {
                     ))
                 }
             </ScrollView>
+
+            {
+                userOrders.length == 0 && (
+                    <View>
+                        <Text>You have no Orders yet!</Text>
+                    </View>
+                )
+            }
         </View>
     );
 }

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Text, View, StyleSheet, FlatList, Image, ScrollView, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import colors from '../constants/colors';
 import EditIcon from 'react-native-vector-icons/FontAwesome'
 import DeleteIcon from 'react-native-vector-icons/AntDesign'
@@ -269,8 +268,3 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
 })
-
-
-
-
-
