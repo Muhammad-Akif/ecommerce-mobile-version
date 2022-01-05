@@ -78,7 +78,7 @@ export const Card = (props) => {
                     columnWrapperStyle={{ width: "100%" }}
                     data={item.items}
                     numColumns={2}
-                    keyExtractor={(item, index) => index.toString()}
+                    listKey={(item, index) => index.toString()}
                     renderItem={ItemView}
                 />
             </View>
