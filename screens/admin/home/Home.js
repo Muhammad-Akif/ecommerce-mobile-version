@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Search from '../../../components/user/home/Search'
 import { TouchableOpacity, Text, StyleSheet, View, FlatList } from 'react-native';
 import colors from '../../../constants/colors';
@@ -10,9 +10,15 @@ import itemsData from '../../../data/items';
 const Home = props => {
     const { items } = useEcommerceContext();
 
+
     const [search, setSearch] = useState('');
     const [filteredDataSource, setFilteredDataSource] = useState(items.categories);
     const [masterDataSource, setMasterDataSource] = useState(items.categories);
+
+    useEffect(() => {
+        setFilteredDataSource(items.categories);
+        setMasterDataSource(items.categories);
+    }, [items])
 
     const searchFilterFunction = (text) => {
         if (text) {
