@@ -3,15 +3,13 @@ import { Text, View, TextInput, StyleSheet, Picker } from 'react-native';
 import Button from '../../../components/UI/Button';
 import colors from '../../../constants/colors';
 import { useEcommerceContext } from '../../../contexts/ContextProvider';
-import checkAndWriteFile from '../../../functions/checkAndWriteFile';
+// import checkAndWriteFile from '../../../functions/checkAndWriteFile';
 import generateID from '../../../functions/generateId';
-import Item from '../../../models/item'
+import deal from '../../../models/deal'
+import category from '../../../models/category'
 
 const AddModifyItems = props => {
-    // is Edit
-    // const isEdit = props.route.params.isEdit;
-    const categoryParameter = props.route.params.category;
-    const product = props.route.params.product;
+    const { allData, setAllData, items, setItems } = useEcommerceContext();
 
     const [name, setName] = useState('')
     const [detail, setDetail] = useState('')
@@ -19,43 +17,43 @@ const AddModifyItems = props => {
     const [discount, setDiscount] = useState(0)
     const [imageUri, setImageUri] = useState('')
     const [isUsernameValid, setIsUsernameValid] = useState(true)
-    const [category, setCategory] = useState();
+    const [category, setCategory] = useState('');
 
 
-    const { allData, setAllData, items, setItems } = useEcommerceContext();
 
     const addDealsHandler = async () => {
         const UID = generateID()
-        console.log('level one seller', name.length > 2, detail.length > 10, imageUri.length > 10), price.length > 1
-        if (name.length > 2 && detail.length > 10 && imageUri.length > 10 && price.length > 1 && category.length > 2) {
-            const newItem = {
+        if (name.length > 2 && detail.length > 10 && imageUri.length > 10 && price.length > 1 && category.length > 2 && discount.length > 0) {
+            const newDeal = {
                 UID,
                 name,
                 detail,
                 price: parseFloat(price),
+                discount,
                 imageUri,
                 category
                 // []   
             }
-            const copyCategories = [...items.categories];
+            console.log(' deal created ==> ', newDeal)
+            // const copyCategories = [...items.categories];
 
-            const indexOfCategory = copyCategories.findIndex(cat => cat.name == category);
+            // const indexOfCategory = copyCategories.findIndex(cat => cat.name == category);
 
-            copyCategories[indexOfCategory].items.push(new Item(UID, name, detail, parseFloat(price), imageUri, []));
+            // copyCategories[indexOfCategory].items.push(new Item(UID, name, detail, parseFloat(price), imageUri, []));
 
-            const copyItems = { ...items, categories: copyCategories };
+            // const copyItems = { ...items, categories: copyCategories };
 
-            setItems(copyItems);
+            // setItems(copyItems);
 
-            const newAllData = {
-                ...allData,
-                items: copyItems
-            }
+            // const newAllData = {
+            //     ...allData,
+            //     items: copyItems
+            // }
 
-            setAllData(newAllData);
+            // setAllData(newAllData);
 
-            await checkAndWriteFile(newAllData);
-            props.navigation.goBack();
+            // await checkAndWriteFile(newAllData);
+            // props.navigation.goBack();
 
         }
         else {
@@ -127,7 +125,7 @@ const AddModifyItems = props => {
                 </View>
                 <TextInput
                     keyboardType='numeric'
-                    placeholder='Price'
+                    placeholder='Discount'
                     value={discount}
                     style={{ color: 'black', borderBottomWidth: 1, borderColor: isUsernameValid ? discount == 'username' ? colors.primary : 'grey' : 'red', paddingBottom: 0, paddingLeft: 0, }}
                     placeholderTextColor={isUsernameValid ? colors.primary : 'grey'}
@@ -146,7 +144,7 @@ const AddModifyItems = props => {
                     onValueChange={val => setCategory(val)}
                 >
                     {
-                        <Picker.Item label={categoryParameter} value={categoryParameter} />
+                        items.categories.map( each => <Picker.Item label={each.name} value={each.name} />)
                     }
                 </Picker>
 
