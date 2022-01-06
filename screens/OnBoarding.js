@@ -49,13 +49,13 @@ export default function OnBoarding(props) {
                 <View style={{ flex: 1 }}>
                     <View style={styles.circle} />
                     <View>
-                        <Text style={styles.text} numberOfLines={1} adjustsFontSizeToFit={true}>Find Your</Text>
+                        <Text style={styles.text} numberOfLines={1} adjustsFontSizeToFit={true}>Groceries For</Text>
                     </View>
-                    <View style={{ top: -25 }}>
-                        <Text style={styles.text} numberOfLines={1} adjustsFontSizeToFit={true}>Gadget</Text>
+                    <View style={{ top: -16 }}>
+                        <Text style={styles.text} numberOfLines={1} adjustsFontSizeToFit={true}>Everyone</Text>
                     </View>
 
-                    <View style={{ alignItems: 'center', top: -27, zIndex: 99 }}>
+                    <View style={{ alignItems: 'center', top: -20, zIndex: 99 }}>
                         <Image source={require('../assets/images/ecommerce.png')} style={{ width: width, height: width / 1.1, borderRadius: 20 }} resizeMode={'contain'} />
                     </View>
                 </View>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         marginBottom: 12
     },
     text: {
-        fontSize: 60,
+        fontSize: 48,
         fontFamily: 'Inter_900Black',
         color: 'white'
     }
