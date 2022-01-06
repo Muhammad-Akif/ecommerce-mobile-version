@@ -75,7 +75,7 @@ const weeklyDeals = props => {
                                                         const newCart = [...cart, new Cart(
                                                             auth.loginUserInfo.username,
                                                             deal.price,
-                                                            [new CartItem(deal.id, deal.name, deal.detail, deal.price, deal.uri, category, 1, deal.price)]
+                                                            [new CartItem(deal.id, deal.name, deal.detail, ((parseFloat(deal.price)) * (100 - Number(deal.off))) / 100, deal.uri, 'no category', parseInt(deal.quantity), ((parseFloat(deal.price)) * (100 - Number(deal.off))) / 100)]
                                                         )]
                                                         setCart(newCart);
                                                         const newData = {
@@ -94,7 +94,7 @@ const weeklyDeals = props => {
                                                     newCart.splice(cartIndex, 1, new Cart(
                                                         auth.loginUserInfo.username,
                                                         deal.price,
-                                                        [...cart[cartIndex].items, new CartItem(deal.id, deal.name, deal.detail, deal.price, deal.uri, 'no category', 1, deal.price)]
+                                                        [...cart[cartIndex].items, new CartItem(deal.id, deal.name, deal.detail, ((parseFloat(deal.price)) * (100 - Number(deal.off))) / 100, deal.uri, 'no category', parseInt(deal.quantity), ((parseFloat(deal.price)) * (100 - Number(deal.off))) / 100)]
                                                     ))
 
                                                     setCart(newCart);

@@ -56,7 +56,7 @@ export default function OnBoarding(props) {
                     </View>
 
                     <View style={{ alignItems: 'center', top: -27, zIndex: 99 }}>
-                        <Image source={require('../assets/images/ecommerce3.jpeg')} style={{ width: width - 10, height: width / 1.1, borderRadius: 20 }} resizeMode={'contain'} />
+                        <Image source={require('../assets/images/ecommerce.png')} style={{ width: width, height: width / 1.1, borderRadius: 20 }} resizeMode={'contain'} />
                     </View>
                 </View>
                 <LinearGradient

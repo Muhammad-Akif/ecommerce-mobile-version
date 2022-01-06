@@ -131,10 +131,14 @@ const Cart = props => {
                     {cart[cartIndex].items.map((item) => (
                         <View key={item.id} style={{}}>
                             <CartItem title={item.name} price={item.totalPrice} quantity={item.quantity} deleteButton onDeleteItem={handleDeleteItem.bind(null, item.id)} />
-                            <View style={{ flexDirection: 'row' }}>
-                                <RoundButton up style={{ marginLeft: '6%' }} onPress={handleIncrementDecrement.bind(null, item.id, item.category, 'decrement', item)} />
-                                <RoundButton down style={{ marginLeft: 5 }} onPress={handleIncrementDecrement.bind(null, item.id, item.category, 'increment', item)} />
-                            </View>
+                            {
+                                item.category != 'no category' && (
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <RoundButton up style={{ marginLeft: '6%' }} onPress={handleIncrementDecrement.bind(null, item.id, item.category, 'decrement', item)} />
+                                        <RoundButton down style={{ marginLeft: 5 }} onPress={handleIncrementDecrement.bind(null, item.id, item.category, 'increment', item)} />
+                                    </View>
+                                )
+                            }
                         </View>
                     ))}
                 </ScrollView>
