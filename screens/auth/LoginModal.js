@@ -99,6 +99,7 @@ const LoginModal = props => {
                     <TextInput
                         placeholder='Password'
                         value={password}
+                        secureTextEntry={true}
                         onChangeText={setPassword}
                         style={{ color: 'black', borderBottomWidth: 1, borderColor: isInIncorrect ? 'red' : selected == 'password' ? colors.primary : 'grey', paddingBottom: 0, paddingLeft: 0, fontSize: 16 }}
                         placeholderTextColor={isInIncorrect ? 'red' : selected == 'password' ? colors.primary : 'grey'}
