@@ -33,7 +33,7 @@ const ProductDetailScreen = props => {
                     product.price,
                     product.uri,
                     category,
-                    []
+                    [...product.ratings]
                 )
             ];
         }

@@ -101,7 +101,7 @@ const OrderItem = props => { // inprogress
                 )
             }
 
-            <View style={styles.firstRow}>
+            <View style={{ ...styles.firstRow, marginBottom: props.isAdmin ? 0 : 15 }}>
                 <View style={{ flex: 1 }}>
                     <Text style={styles.totalAmount} adjustsFontSizeToFit={true} numberOfLines={1}>${props.amount.toFixed(2)}</Text>
                 </View>
@@ -110,6 +110,18 @@ const OrderItem = props => { // inprogress
                     <Text style={styles.date} adjustsFontSizeToFit={true} numberOfLines={1}>{props.date}</Text>
                 </View>
             </View>
+            {
+                props.isAdmin && (
+                    <View style={{ marginVertical: 6, width: '100%', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                        <View style={{flex: 0.7}}>
+                            <Text style={{ fontFamily: 'text-bold' }}>User Address: </Text>
+                        </View>
+                        <View style={{flex: 0.3}}>
+                            <Text style={{ fontFamily: 'italic' }} numberOfLines={3} adjustsFontSizeToFit={true}>{props.address}</Text>
+                        </View>
+                    </View>
+                )
+            }
 
             {
                 props.status != 'rated' && (
