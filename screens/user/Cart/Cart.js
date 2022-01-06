@@ -109,6 +109,8 @@ const Cart = props => {
             )
         ]
 
+        alert('Please check your email for order confirmation!')
+
         setOrders(newOrders);
 
         const newFileData = {
