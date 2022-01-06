@@ -99,7 +99,7 @@ const Cart = props => {
                 auth.loginUserInfo.username,
                 new Date().toUTCString(),
                 totalPrice,
-                new Date(new Date(). getTime() + 24 * 60 * 60 * 1000).toUTCString(),
+                new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toUTCString(),
                 'not picked yet',
                 cart[cartIndex].items
             )
@@ -115,7 +115,6 @@ const Cart = props => {
         await checkAndWriteFile(newFileData);
         setAllData(newFileData);
     }
-
 
 
     return (
