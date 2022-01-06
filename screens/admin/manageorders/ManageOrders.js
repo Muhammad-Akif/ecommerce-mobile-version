@@ -68,6 +68,7 @@ const ManageOrders = props => {
                             handlePick={handlePick.bind(null, item.id)}
                             handleDeliver={handleDeliver.bind(null, item.id)}
                             username={item.username}
+                            address={item.address}
                         />
                     ))
                 }

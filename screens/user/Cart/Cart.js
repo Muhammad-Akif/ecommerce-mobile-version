@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Text, ScrollView, View, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, ScrollView, View, StyleSheet, Alert } from 'react-native';
 import colors from '../../../constants/colors';
 import { useEcommerceContext } from '../../../contexts/ContextProvider';
 import CartItem from '../../../components/user/orders/CartItem';
@@ -10,11 +10,14 @@ import checkAndWriteFile from '../../../functions/checkAndWriteFile';
 import Button from '../../../components/UI/Button';
 import generateID from '../../../functions/generateId';
 import RoundButton from '../../../components/UI/RoundButtton';
-
+import Dialog from "react-native-dialog";
 
 const Cart = props => {
     const { auth, cart, setCart, allData, setAllData, setOrders, orders } = useEcommerceContext();
     const cartIndex = cart.findIndex(cartItem => cartItem.username == auth.loginUserInfo.username);
+
+    const [isDialogVisible, setIsDialogVisible] = useState(false);
+    const [address, setAddress] = useState('');
 
     let totalPrice = 0;
     try {
@@ -101,7 +104,8 @@ const Cart = props => {
                 totalPrice,
                 new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toUTCString(),
                 'not picked yet',
-                cart[cartIndex].items
+                cart[cartIndex].items,
+                address
             )
         ]
 
@@ -134,8 +138,28 @@ const Cart = props => {
                 </ScrollView>
             </View>
             <View style={{ flex: 0.1, justifyContent: 'flex-end', marginHorizontal: 20, marginBottom: 20 }}>
-                <Button title={'Order Now'} onPress={handleOrder} />
+                <Button title={'Order Now'} onPress={setIsDialogVisible.bind(null, true)} />
             </View>
+            {
+                isDialogVisible && (
+                    <Dialog.Container visible>
+                        <Dialog.Title>Provide us your Address!</Dialog.Title>
+                        <Dialog.Input
+                            value={address}
+                            onChangeText={setAddress}
+                            autoFocus
+                        />
+                        <Dialog.Button label="Cancel" onPress={() => {
+                            setIsDialogVisible(false);
+                        }} />
+                        <Dialog.Button label="Done" onPress={() => {
+                            if (!address) return
+                            setIsDialogVisible(false);
+                            handleOrder();
+                        }} />
+                    </Dialog.Container>
+                )
+            }
         </View>
     );
 }
