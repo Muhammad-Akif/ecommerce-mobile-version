@@ -32,7 +32,6 @@ const AddModifyItems = props => {
 
     const addItemHandler = async () => {
         const UID = generateID()
-        console.log('level one seller', name.length > 2, detail.length > 10, imageUri.length > 10), price.length > 1
         if (name.length > 2 && detail.length > 10 && imageUri.length > 10 && price.length > 1 && category.length > 2) {
             const newItem = {
                 UID,

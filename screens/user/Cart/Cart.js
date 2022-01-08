@@ -45,7 +45,6 @@ const Cart = props => {
     }
 
     const handleIncrementDecrement = async (id, category, increDecre, product) => {
-        console.log(id, category, increDecre)
 
         const cartIndex = cart.findIndex(cartItem => cartItem.username == auth.loginUserInfo.username);
         if (cartIndex == -1) return;

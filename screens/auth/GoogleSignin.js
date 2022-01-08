@@ -16,7 +16,6 @@ const GoogleSignin = props => {
             });
 
             if (type === "success") {
-                console.log("Success ==> ", user);
 
                 props.navigation.popToTop();
                 props.navigation.replace('DrawerCartStackNavigator')
@@ -43,7 +42,6 @@ const GoogleSignin = props => {
             }
         }
         catch (error) {
-            console.log("Reject ==> ", error);
         }
     }
 

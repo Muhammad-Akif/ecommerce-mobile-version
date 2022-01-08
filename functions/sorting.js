@@ -12,7 +12,6 @@ const sorting = (category, ascOrDesc) => {
                 return 0;
             });
         }
-        // here sort desending
         if (ascOrDesc == 'D') {
             cat.items.sort(function (a, b) {
                 if (a.name > b.name) {

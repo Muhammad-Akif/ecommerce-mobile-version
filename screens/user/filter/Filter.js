@@ -41,7 +41,6 @@ const Filters = props => {
 
     const setFilters = (name) => {
         const index = filter.findIndex(cat => cat == name);
-        console.log(index)
         if (index == -1) {
             setFilter([...filter, name])
 
@@ -62,7 +61,6 @@ const Filters = props => {
         }
 
     }
-    console.log(filter)
     return (
         <View style={styles.screen}>
             <ScrollView contentContainerStyle={{ alignItems: 'center', width: '100%' }}>

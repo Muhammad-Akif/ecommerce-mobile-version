@@ -6,7 +6,6 @@ const checkAndCreateFolder = async () => {
     const folder_path = FileSystem.documentDirectory + folderName;
     const folder_info = await FileSystem.getInfoAsync(folder_path);
     if (!folder_info.exists) {
-        console.log("checkAndCreateFolder: Making " + folder_path);
         try {
             await FileSystem.makeDirectoryAsync(folder_path, {
                 intermediates: true
