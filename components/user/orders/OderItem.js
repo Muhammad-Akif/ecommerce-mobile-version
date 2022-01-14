@@ -15,7 +15,7 @@ import getDifferenceInDays from '../../../functions/getDifferenceInDays';
 const OrderItem = props => { // inprogress
     let times;
     if (props.order) {
-        times = getDifferenceInDays(new Date(props.order.startDate), new Date()) <= 1.1 ? getDifferenceInSeconds(new Date(props.order.deliveryTime), new Date()) : 0
+        times = getDifferenceInDays(new Date(props.order.startDate), new Date()) <= 3 ? getDifferenceInSeconds(new Date(props.order.deliveryTime), new Date()) : 0
     }
 
     const [time, setTime] = useState(times);
