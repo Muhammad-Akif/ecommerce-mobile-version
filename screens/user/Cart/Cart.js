@@ -94,6 +94,10 @@ const Cart = props => {
         ));
         setCart(cartDuplicate);
 
+        var minutesToAdd = 3;
+        var currentDate = new Date();
+        var futureDate = new Date(currentDate.getTime() + minutesToAdd * 60000).toUTCString();
+
         const newOrders = [
             ...orders,
             new OrderModel(
@@ -101,7 +105,7 @@ const Cart = props => {
                 auth.loginUserInfo.username,
                 new Date().toUTCString(),
                 totalPrice,
-                new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toUTCString(),
+                futureDate,
                 'not picked yet',
                 cart[cartIndex].items,
                 address
